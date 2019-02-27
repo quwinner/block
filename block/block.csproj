@@ -69,6 +69,7 @@
     <Compile Include="SQLClass.cs" />
     <EmbeddedResource Include="BlockForm.resx">
       <DependentUpon>BlockForm.cs</DependentUpon>
+	</EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

@@ -37,9 +37,11 @@ namespace block
             _moving = false;
         }
 
+        /// <summary>
+        /// Код для двиганья чего-то
+        /// </summary>
         public void pictureBoxPoint_MouseMove(Control sender, MouseEventArgs e)
         {
-           
             if (_moving)
             {
                 //PictureBox sender = (PictureBox)sender;
@@ -62,7 +64,6 @@ namespace block
                 {
                     sender.Location = new Point(sender.Location.X, this.Size.Height - 10);
                 }
-
             }
         }
 
@@ -74,7 +75,6 @@ namespace block
         private void pictureBoxPoint_MouseMove(object sender, MouseEventArgs e)
         {
             pictureBoxPoint_MouseMove((Control)sender, e);
-
         }
     }
 }

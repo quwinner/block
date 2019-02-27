@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,24 +29,27 @@ namespace block
 
         private void BlockForm_Load(object sender, EventArgs e)
         {
-            label1.Text = (LoadFromDB("block1"));
+            //File.WriteAllText("test.json", SQLClass.Select("SELECT * FROM `block_blocks` WHERE 1")[1]);
+            //label1.Text = (LoadFromDB("block1"));
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
-            Tex
             var test_block = new BlockData() {
-                pos = new List<int>() {0, 0},
-                name = "block2",
-                distance_x = 0,
-                distance_y = 0,
-                objects = new List<BlockObj>() {new StringData() {
-                    text = "1234 test",
-                    pos = new List<int>() {0, 0}
-                }}
+                Location = new int[] { 0, 0 },
+                Name = "block2",
+                Distance = new int[] {0, 0},
+                Objects = new List<dynamic>() {new BlockObj(new TextBox() {
+                    Text = "testing"
+                }), new BlockObj(new TextBox() {
+                    Text = "red text",
+                    BackColor = Color.Red
+                })}
             };
-            SQLClass.Insert(string.Format("INSERT INTO `block_blocks`(`block1`, `json`) VALUES ('{0}','{1}')", "block2", 
-                ""))
+            var test_block_json = JsonConvert.SerializeObject(test_block);
+            SQLClass.Insert(string.Format("INSERT INTO `block_blocks`(`block1`, `json`) VALUES ('{0}','{1}')", "block2",
+                test_block_json));
+            File.WriteAllText("1234.json", test_block_json);
         }
     }
 }
