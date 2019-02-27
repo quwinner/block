@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace block
 {
@@ -32,7 +33,19 @@ namespace block
 
         private void label1_Click(object sender, EventArgs e)
         {
-
+            Tex
+            var test_block = new BlockData() {
+                pos = new List<int>() {0, 0},
+                name = "block2",
+                distance_x = 0,
+                distance_y = 0,
+                objects = new List<BlockObj>() {new StringData() {
+                    text = "1234 test",
+                    pos = new List<int>() {0, 0}
+                }}
+            };
+            SQLClass.Insert(string.Format("INSERT INTO `block_blocks`(`block1`, `json`) VALUES ('{0}','{1}')", "block2", 
+                ""))
         }
     }
 }
