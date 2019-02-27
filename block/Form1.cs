@@ -8,73 +8,78 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using MySql.Data;
+using MySql.Data.MySqlClient;
+
 namespace block
 {
-   
     public partial class Form1 : Form
     {
-        public bool _moving;
-        public Point _startLocation;
         public Form1()
         {
             InitializeComponent();
+            SQLClass.OpenConnection();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        public void button1_Click(object sender, EventArgs e)
         {
-
+            button1_Click((Control)sender);
         }
-        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        public static void button1_Click(Control c)
         {
-            
-            _moving = true;
-            _startLocation = e.Location;
-           
-        }
-
-        public void pictureBoxPoint_MouseUp(object sender, MouseEventArgs e)
-        {
-            _moving = false;
+            SQLClass.Delete("DELETE FROM block WHERE name = '" + c.Name + "'");
+            SQLClass.Insert("INSERT INTO block(`form`, `x`, `y`, `name`) VALUES"+
+              "('" + c.FindForm().Name + "','" + c.Location.X + "','" + c.Location.Y + "','" + c.Name + "')");
+          
         }
 
-        public void pictureBoxPoint_MouseMove(Control sender, MouseEventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-           
-            if (_moving)
-            {
-                //PictureBox sender = (PictureBox)sender;
-                int r = 25;
-                sender.Left += e.Location.X - _startLocation.X;
-                sender.Top += e.Location.Y - _startLocation.Y;
-                if (sender.Location.X < 0)
-                {
-                    sender.Location = new Point(0, sender.Location.Y);
-                }
-                else if (sender.Location.X > this.Size.Width - 10)
-                {
-                    sender.Location = new Point(this.Size.Width - 10, sender.Location.Y);
-                }
-                if (sender.Location.Y < 0)
-                {
-                    sender.Location = new Point(sender.Location.X, 0);
-                }
-                else if (sender.Location.Y > this.Size.Height - 10)
-                {
-                    sender.Location = new Point(sender.Location.X, this.Size.Height - 10);
-                }
+            List<String> block = SQLClass.Select("SELECT `form`, `x`, `y`, `name` FROM `block`");
+            for (int i = 0; i < block.Count; i+= 4)
+           {
+               if (block[i].Contains(FindForm().Name))
+               {
+                   int x = Convert.ToInt32(block[i + 1]);
+                   int y = Convert.ToInt32(block[i + 2]);
 
-            }
-        }
+                   if(block[i + 3].Contains("pictureBox"))
+                   {
+                       PictureBox pictureBox = new PictureBox();
+                       pictureBox = new System.Windows.Forms.PictureBox();
+                       // 
+                       // pictureBox3
+                       // 
+                       pictureBox.Load("https://st.depositphotos.com/1617983/5167/i/450/depositphotos_51675177-stock-photo-digital-background-with-cybernetic-particles.jpg");
+                       pictureBox.Location = new System.Drawing.Point(x, y);
+                       pictureBox.Name = block[i + 3];
+                       pictureBox.Size = new System.Drawing.Size(142, 153);
+                       pictureBox.TabIndex = 2;
+                       pictureBox.TabStop = false;
+                       pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                       pictureBox.Click += new System.EventHandler(button1_Click);
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
 
-        }
+                       this.Controls.Add(pictureBox);
+                   }
 
-        private void pictureBoxPoint_MouseMove(object sender, MouseEventArgs e)
-        {
-            pictureBoxPoint_MouseMove((Control)sender, e);
+                   if (block[i + 3].Contains("button"))
+                   {
+                       Button button = new Button();
+                       button.Location = new System.Drawing.Point(x, y);
+                       button.Name = block[i + 3];
+                       button.Size = new System.Drawing.Size(75, 23);
+                       button.TabIndex = 3;
+                       button.Text = "button1";
+                       button.UseVisualStyleBackColor = true;
+                       button.Click += new System.EventHandler(button1_Click);
 
+                       this.Controls.Add(button);
+                   }
+                   
+               }
+           }
+            button1_Click((Control)sender);  
         }
     }
 }
