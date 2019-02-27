@@ -1,0 +1,1 @@
+{"Name":"block2","Location":[0,0],"Distance":[0,0],"Objects":[{"Type":"TextBox","Data":{"Text":"testing","Color":[255,255,255,255],"Location":[0,0]}},{"Type":"TextBox","Data":{"Text":"red text","Color":[255,255,0,0],"Location":[0,0]}}]}

@@ -1,1 +1,15 @@
 c:\users\student\documents\visual studio 2013\Projects\block\block\bin\Debug\block.exe.config
+C:\Users\winner\Desktop\рррр\block-block-data\block\bin\Debug\block.exe.config
+C:\Users\winner\Desktop\рррр\block-block-data\block\bin\Debug\block.exe
+C:\Users\winner\Desktop\рррр\block-block-data\block\bin\Debug\block.pdb
+C:\Users\winner\Desktop\рррр\block-block-data\block\bin\Debug\MySql.Data.dll
+C:\Users\winner\Desktop\рррр\block-block-data\block\bin\Debug\Newtonsoft.Json.dll
+C:\Users\winner\Desktop\рррр\block-block-data\block\obj\Debug\block.csprojAssemblyReference.cache
+C:\Users\winner\Desktop\рррр\block-block-data\block\obj\Debug\block.BlockForm.resources
+C:\Users\winner\Desktop\рррр\block-block-data\block\obj\Debug\block.Form1.resources
+C:\Users\winner\Desktop\рррр\block-block-data\block\obj\Debug\block.Properties.Resources.resources
+C:\Users\winner\Desktop\рррр\block-block-data\block\obj\Debug\block.csproj.GenerateResource.cache
+C:\Users\winner\Desktop\рррр\block-block-data\block\obj\Debug\block.csproj.CoreCompileInputs.cache
+C:\Users\winner\Desktop\рррр\block-block-data\block\obj\Debug\block.csproj.CopyComplete
+C:\Users\winner\Desktop\рррр\block-block-data\block\obj\Debug\block.exe
+C:\Users\winner\Desktop\рррр\block-block-data\block\obj\Debug\block.pdb

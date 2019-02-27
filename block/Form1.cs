@@ -18,6 +18,7 @@ namespace block
         public Form1()
         {
             InitializeComponent();
+            SQLClass.OpenConnection();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -37,9 +38,11 @@ namespace block
             _moving = false;
         }
 
+        /// <summary>
+        /// Код для двиганья чего-то
+        /// </summary>
         public void pictureBoxPoint_MouseMove(Control sender, MouseEventArgs e)
         {
-           
             if (_moving)
             {
                 //PictureBox sender = (PictureBox)sender;
@@ -62,7 +65,6 @@ namespace block
                 {
                     sender.Location = new Point(sender.Location.X, this.Size.Height - 10);
                 }
-
             }
         }
 
@@ -74,7 +76,147 @@ namespace block
         private void pictureBoxPoint_MouseMove(object sender, MouseEventArgs e)
         {
             pictureBoxPoint_MouseMove((Control)sender, e);
+        }
 
+        void reg(string sasdasd)
+        {
+            DockStyle sdsasd = new DockStyle();
+            string[] sad = sasdasd.Split('&');
+            switch (sad[1])
+            {
+                case "Right":
+                    sdsasd = DockStyle.Right;
+                    break;
+                case "Top":
+                    sdsasd = DockStyle.Top;
+                    break;
+                case "Left":
+                    sdsasd = DockStyle.Left;
+                    break;
+                case "Fill":
+                    sdsasd = DockStyle.Fill;
+                    break;
+                case "Bottom":
+                    sdsasd = DockStyle.Bottom;
+                    break;
+                default:
+                    break;
+            }
+
+            string[] sdf = sad[2].Split(';');
+            string[] sdfg = sad[3].Split(';');
+            Point mesto = new Point(Convert.ToInt32(sdf[0]), Convert.ToInt32(sdf[1]));
+            Size razmer = new Size(Convert.ToInt32(sdfg[0]), Convert.ToInt32(sdfg[1]));
+
+            Panel panel = new System.Windows.Forms.Panel();
+            Button button = new System.Windows.Forms.Button();
+            TextBox textBox1 = new TextBox();
+
+            button.Location = new System.Drawing.Point(66, 89);
+            button.Name = "button4";
+            button.Size = new System.Drawing.Size(75, 23);
+            button.Dock = DockStyle.Bottom;
+            button.TabIndex = 0;
+            button.Text = "button4";
+            button.UseVisualStyleBackColor = true;
+            button.Click += new System.EventHandler(button1_Click);
+
+            textBox1.Location = new System.Drawing.Point(401, 305);
+            textBox1.Name = "textBox1";
+            textBox1.Dock = DockStyle.Top;
+            textBox1.Size = new System.Drawing.Size(100, 20);
+            textBox1.TabIndex = 0;
+
+
+            panel.BackColor = System.Drawing.Color.Yellow;
+            panel.Controls.Add(button);
+            panel.Controls.Add(textBox1);
+            panel.Location = mesto;
+            panel.Name = "panel4";
+            panel.Dock = sdsasd;
+            panel.Size = razmer;
+            panel.TabIndex = 3;
+
+            this.Controls.Add(panel);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            Panel dfdfs = (Panel)button.Parent;
+            foreach (Control ahggh in dfdfs.Controls)
+            {
+                if (ahggh.Name == "textBox1")
+                {
+                    MessageBox.Show(ahggh.Text);
+                }
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        public void button1_Click1(object sender, EventArgs e)
+        {
+            button1_Click1((Control)sender);
+        }
+        public static void button1_Click1(Control c)
+        {
+            SQLClass.Delete("DELETE FROM block WHERE name = '" + c.Name + "'");
+            SQLClass.Insert("INSERT INTO block(`form`, `x`, `y`, `name`) VALUES" +
+              "('" + c.FindForm().Name + "','" + c.Location.X + "','" + c.Location.Y + "','" + c.Name + "')");
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            List<String> block = SQLClass.Select("SELECT `form`, `x`, `y`, `name` FROM `block`");
+            for (int i = 0; i < block.Count; i += 4)
+            {
+                if (block[i].Contains(FindForm().Name))
+                {
+                    int x = Convert.ToInt32(block[i + 1]);
+                    int y = Convert.ToInt32(block[i + 2]);
+
+                    if (block[i + 3].Contains("pictureBox"))
+                    {
+                        PictureBox pictureBox = new PictureBox();
+                        pictureBox = new System.Windows.Forms.PictureBox();
+                        // 
+                        // pictureBox3
+                        // 
+                        pictureBox.Load("https://st.depositphotos.com/1617983/5167/i/450/depositphotos_51675177-stock-photo-digital-background-with-cybernetic-particles.jpg");
+                        pictureBox.Location = new System.Drawing.Point(x, y);
+                        pictureBox.Name = block[i + 3];
+                        pictureBox.Size = new System.Drawing.Size(142, 153);
+                        pictureBox.TabIndex = 2;
+                        pictureBox.TabStop = false;
+                        pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                        pictureBox.Click += new System.EventHandler(button1_Click);
+
+
+                        this.Controls.Add(pictureBox);
+                    }
+
+                    if (block[i + 3].Contains("button"))
+                    {
+                        Button button = new Button();
+                        button.Location = new System.Drawing.Point(x, y);
+                        button.Name = block[i + 3];
+                        button.Size = new System.Drawing.Size(75, 23);
+                        button.TabIndex = 3;
+                        button.Text = "button1";
+                        button.UseVisualStyleBackColor = true;
+                        button.Click += new System.EventHandler(button1_Click);
+
+                        this.Controls.Add(button);
+                    }
+
+                }
+            }
+            button1_Click1((Control)sender);
         }
     }
 }
