@@ -16,7 +16,8 @@ namespace block
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            SQLClass.OpenConnection();
+            Application.Run(new BlockForm("form2"));
         }
     }
 }
