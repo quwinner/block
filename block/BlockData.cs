@@ -8,8 +8,6 @@ using System.Windows.Forms;
 
 namespace block
 {
-    
-
     /// <summary>
     /// Базовый класс для всех объектов
     /// </summary>
@@ -21,7 +19,6 @@ namespace block
     {
         public string Text;
         public int[] Color;
-
     }
 
     public class PictureBoxData : ObjBase
@@ -118,6 +115,4 @@ namespace block
         /// </summary>
         public List<dynamic> Objects;
     }
-
-
 }

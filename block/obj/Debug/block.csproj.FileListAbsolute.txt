@@ -13,3 +13,15 @@ C:\Users\winner\Desktop\рррр\block-block-data\block\obj\Debug\block.csproj.C
 C:\Users\winner\Desktop\рррр\block-block-data\block\obj\Debug\block.csproj.CopyComplete
 C:\Users\winner\Desktop\рррр\block-block-data\block\obj\Debug\block.exe
 C:\Users\winner\Desktop\рррр\block-block-data\block\obj\Debug\block.pdb
+C:\Users\student.ATIAM\Downloads\Вебинары\block\block\bin\Debug\block.exe.config
+C:\Users\student.ATIAM\Downloads\Вебинары\block\block\obj\Debug\block.exe
+C:\Users\student.ATIAM\Downloads\Вебинары\block\block\obj\Debug\block.pdb
+C:\Users\student.ATIAM\Downloads\Вебинары\block\block\bin\Debug\block.exe
+C:\Users\student.ATIAM\Downloads\Вебинары\block\block\bin\Debug\block.pdb
+C:\Users\student.ATIAM\Downloads\Вебинары\block\block\bin\Debug\MySql.Data.dll
+C:\Users\student.ATIAM\Downloads\Вебинары\block\block\bin\Debug\Newtonsoft.Json.dll
+C:\Users\student.ATIAM\Downloads\Вебинары\block\block\obj\Debug\block.csprojResolveAssemblyReference.cache
+C:\Users\student.ATIAM\Downloads\Вебинары\block\block\obj\Debug\block.BlockForm.resources
+C:\Users\student.ATIAM\Downloads\Вебинары\block\block\obj\Debug\block.Properties.Resources.resources
+C:\Users\student.ATIAM\Downloads\Вебинары\block\block\obj\Debug\block.csproj.GenerateResource.Cache
+C:\Users\student.ATIAM\Downloads\Вебинары\block\block\obj\Debug\block.NaperstkiForm.resources
