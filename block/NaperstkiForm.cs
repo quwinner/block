@@ -15,6 +15,8 @@ namespace block
     {
         public bool _moving;
         public Point _startLocation;
+        string saddsa = "reg&ff&386;55&200;234";
+
         public NaperstkiForm()
         {
             InitializeComponent();
@@ -23,7 +25,8 @@ namespace block
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            reg(saddsa);
+            reg("reg&Left&6;5&200;234");
         }
 
         #region Drag-n-drop для картинок
@@ -160,16 +163,20 @@ namespace block
             }
         }
 
-        public void button1_Click1(object sender, EventArgs e)
+        #region Работа с БД
+        /// <summary>
+        /// Сохранение расположения блока в БД
+        /// </summary>
+        public void SaveBlockData(object sender, EventArgs e)
         {
-            button1_Click1((Control)sender);
+            SaveBlockData((Control)sender);
         }
 
         /// <summary>
         /// Сохранение расположения блока в БД
         /// </summary>
         /// <param name="c"></param>
-        public static void button1_Click1(Control c)
+        public static void SaveBlockData(Control c)
         {
             SQLClass.Delete("DELETE FROM block WHERE name = '" + c.Name + "'");
             SQLClass.Insert("INSERT INTO block(`form`, `x`, `y`, `name`) VALUES" +
@@ -179,7 +186,7 @@ namespace block
         /// <summary>
         /// Запрашиваем из базы расположение блока
         /// </summary>
-        private void button2_Click(object sender, EventArgs e)
+        private void getBlockDataFromDB(object sender, EventArgs e)
         {
             List<String> block = SQLClass.Select("SELECT `form`, `x`, `y`, `name` FROM `block`");
             for (int i = 0; i < block.Count; i += 4)
@@ -196,7 +203,7 @@ namespace block
                         pictureBox.Location = new Point(x, y);
                         pictureBox.Size = new Size(142, 153);
                         pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                        pictureBox.Click += new System.EventHandler(button1_Click1);
+                        pictureBox.Click += new System.EventHandler(SaveBlockData);
 
                         this.Controls.Add(pictureBox);
                     }
@@ -207,14 +214,16 @@ namespace block
                         button.Location = new Point(x, y);
                         button.Name = block[i + 3];
                         button.Size = new Size(75, 23);
-                        button.Click += new System.EventHandler(button1_Click1);
+                        button.Click += new System.EventHandler(SaveBlockData);
 
                         this.Controls.Add(button);
                     }
-
                 }
             }
-            button1_Click1((Control)sender);
+
+            SaveBlockData((Control)sender);
         }
+        
+        #endregion
     }
 }
