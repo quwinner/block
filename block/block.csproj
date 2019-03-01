@@ -51,12 +51,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutMeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutMeForm.Designer.cs">
+      <DependentUpon>AboutMeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="BlockData.cs" />
     <Compile Include="BlockForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="BlockForm.Designer.cs">
       <DependentUpon>BlockForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyPromotionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyPromotionsForm.Designer.cs">
+      <DependentUpon>MyPromotionsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="NaperstkiForm.cs">
       <SubType>Form</SubType>
@@ -66,9 +78,21 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadArticleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReadArticleForm.Designer.cs">
+      <DependentUpon>ReadArticleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SQLClass.cs" />
+    <EmbeddedResource Include="AboutMeForm.resx">
+      <DependentUpon>AboutMeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BlockForm.resx">
       <DependentUpon>BlockForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyPromotionsForm.resx">
+      <DependentUpon>MyPromotionsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NaperstkiForm.resx">
       <DependentUpon>NaperstkiForm.cs</DependentUpon>
@@ -83,6 +107,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ReadArticleForm.resx">
+      <DependentUpon>ReadArticleForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

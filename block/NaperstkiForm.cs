@@ -152,15 +152,7 @@ namespace block
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Button button = (Button)sender;
-            Panel dfdfs = (Panel)button.Parent;
-            foreach (Control ahggh in dfdfs.Controls)
-            {
-                if (ahggh.Name == "textBox1")
-                {
-                    MessageBox.Show(ahggh.Text);
-                }
-            }
+
         }
 
         #region Работа с БД
