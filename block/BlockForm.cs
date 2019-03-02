@@ -52,9 +52,12 @@ namespace block
             File.WriteAllText("1234.json", test_block_json);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Открываем форму наперстков
+        /// </summary>
+        private void naperstki_Click(object sender, EventArgs e)
         {
-            Form1 df = new Form1();
+            NaperstkiForm df = new NaperstkiForm();
             df.ShowDialog();
         }
     }
