@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace block
 {
@@ -39,17 +40,14 @@ namespace block
                 Location = new int[] { 0, 0 },
                 Name = "block2",
                 Distance = new int[] {0, 0},
-                Objects = new List<dynamic>() {new BlockObj(new TextBox() {
-                    Text = "testing"
-                }), new BlockObj(new TextBox() {
-                    Text = "red text",
-                    BackColor = Color.Red
-                })}
+                Objects = new List<dynamic>() {
+                    new BlockObj(textBox1),
+                    new BlockObj(pictureBox1)
+                }
             };
             var test_block_json = JsonConvert.SerializeObject(test_block);
-            SQLClass.Insert(string.Format("INSERT INTO `block_blocks`(`block1`, `json`) VALUES ('{0}','{1}')", "block2",
+            SQLClass.Insert(string.Format("INSERT INTO `block_blocks`(`name`, `json`) VALUES ('{0}','{1}')", "block2",
                 test_block_json));
-            File.WriteAllText("1234.json", test_block_json);
         }
 
         /// <summary>
@@ -59,6 +57,24 @@ namespace block
         {
             NaperstkiForm df = new NaperstkiForm();
             df.ShowDialog();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            var res = SQLClass.Select(string.Format("SELECT json FROM `block_blocks` WHERE name='{0}'", "block2"));
+            var res_decoded = JsonConvert.DeserializeObject<BlockData>(res[0]);
+            foreach (JObject abc1 in res_decoded.Objects)
+            {
+                BlockObj abc = abc1.ToObject<BlockObj>();
+                //BlockObj abc = JsonConvert.DeserializeObject < BlockObj >( abc1);
+                if (abc.Data.Name == "pictureBox1")
+                {
+                    pictureBox1.Location = new Point(abc.Data.Location[0], abc.Data.Location[1]);
+                    PictureBoxData pbd = abc.ToObject<PictureBoxData>();
+                    pictureBox1.Image = PictureBoxData.GetActualControl(pbd).Image;
+                    //pictureBox1 = ((PictureBoxData)(abc.Data)).GetActualControl();
+                }
+            }
         }
     }
 }
