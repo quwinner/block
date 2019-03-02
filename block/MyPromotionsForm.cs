@@ -16,5 +16,10 @@ namespace block
         {
             InitializeComponent();
         }
+
+        private void MyPromotionsForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace block
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            reg(saddsa);
+            //reg(saddsa);
             reg("reg&Left&6;5&200;234");
         }
 
@@ -118,10 +118,17 @@ namespace block
             Point mesto = new Point(Convert.ToInt32(sdf[0]), Convert.ToInt32(sdf[1]));
             Size razmer = new Size(Convert.ToInt32(sdfg[0]), Convert.ToInt32(sdfg[1]));
 
-            Panel panel = new System.Windows.Forms.Panel();
-            Button button = new System.Windows.Forms.Button();
-            TextBox textBox1 = new TextBox();
+            Panel panel1 = CreateAuthorizationPanel();
+            this.Controls.Add(panel1);
+        }
 
+
+        public static Panel CreateAuthorizationPanel()
+        {
+
+            Panel panel = new System.Windows.Forms.Panel();
+
+            Button button = new System.Windows.Forms.Button();
             button.Location = new System.Drawing.Point(66, 89);
             button.Name = "button4";
             button.Size = new System.Drawing.Size(75, 23);
@@ -131,28 +138,81 @@ namespace block
             button.UseVisualStyleBackColor = true;
             button.Click += new System.EventHandler(button1_Click);
 
-            textBox1.Location = new System.Drawing.Point(401, 305);
-            textBox1.Name = "textBox1";
-            textBox1.Dock = DockStyle.Top;
-            textBox1.Size = new System.Drawing.Size(100, 20);
-            textBox1.TabIndex = 0;
+            Label login = new Label();
+            login.Location = new System.Drawing.Point(401, 305);
+            login.BackColor = Color.Transparent;
+            login.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            login.Name = "LoginLabel";
+            login.Text = "Login";
+            login.Dock = DockStyle.Top;
+            login.Size = new System.Drawing.Size(100, 20);
+            login.TabIndex = 1;
+
+            TextBox loginTextBox = new TextBox();
+            loginTextBox.Location = new System.Drawing.Point(401, 330);
+            loginTextBox.Name = "loginTextBox";
+            loginTextBox.Dock = DockStyle.Top;
+            loginTextBox.Size = new System.Drawing.Size(100, 20);
+            loginTextBox.TabIndex = 2;
+
+            Label password = new Label();
+            password.BackColor = Color.Transparent;
+            password.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            password.Location = new System.Drawing.Point(401, 360);
+            password.Name = "passwordLabel";
+            password.Text = "Password";
+            password.Dock = DockStyle.Top;
+            password.Size = new System.Drawing.Size(100, 20);
+            password.TabIndex = 3;
 
 
-            panel.BackColor = System.Drawing.Color.Yellow;
-            panel.Controls.Add(button);
-            panel.Controls.Add(textBox1);
-            panel.Location = mesto;
+            TextBox passTextBox = new TextBox();
+            passTextBox.Location = new System.Drawing.Point(401, 400);
+            passTextBox.Name = "passTextBox";
+            passTextBox.Dock = DockStyle.Top;
+            passTextBox.Size = new System.Drawing.Size(100, 20);
+            passTextBox.TabIndex = 4;
+
+
+            PictureBox pb = new PictureBox();
+            pb.Load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDIg4TNoQGKlIqG7rvgNr0nRKb41tejx8mpGaiqkHqEHrNG12-");
+           
+            //panel.BackColor = System.Drawing.Color.Yellow;
+            panel.BackgroundImage = pb.Image;
+            panel.Location = new System.Drawing.Point(6, 5);
             panel.Name = "panel4";
-            panel.Dock = sdsasd;
-            panel.Size = razmer;
+            panel.Dock = DockStyle.Left;
+            panel.Size = new System.Drawing.Size(200, 234);
             panel.TabIndex = 3;
 
-            this.Controls.Add(panel);
+            panel.Controls.Add(button);
+            panel.Controls.Add(passTextBox);
+            panel.Controls.Add(password);
+            panel.Controls.Add(loginTextBox);
+            panel.Controls.Add(login);
+            
+            return panel;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
 
+        public static void button1_Click(object sender, EventArgs e)
+        {
+            String login = "";
+            String parol = "";
+            Button button = (Button)sender;
+            Panel dfdfs = (Panel)button.Parent;
+            foreach (Control ahggh in dfdfs.Controls)
+            {
+                if (ahggh.Name == "loginTextBox")
+                {
+                    login = "Login " + ahggh.Text;
+                }
+                if (ahggh.Name == "passTextBox")
+                {
+                    parol = " Password " + ahggh.Text;
+                }
+            }
+            MessageBox.Show(login + parol);
         }
 
         #region Работа с БД
