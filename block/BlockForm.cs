@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace block
 {
@@ -33,54 +34,6 @@ namespace block
             //label1.Text = (LoadFromDB("block1"));
             Panel panel1 = CreateStatPanel();
             flowLayoutPanel1.Controls.Add(panel1);
-            
-            Panel panel_osnov = reklama(4, 5);
-            flowLayoutPanel1.Controls.Add(panel_osnov);
-        }
-
-        /// <summary>
-        /// Создание блока рекламы
-        /// </summary>
-        /// <param name="kol_vo">Сколько реклам</param>
-        /// <param name="rastoy">Расстояние между PictureBox</param>
-        /// <param name="d">Адреса картинок</param>
-        /// <returns></returns>
-        static public Panel reklama(int kol_vo = 1, int rastoy = 0, string d = "")
-        {
-            string[,] dany = {
-                              {"https://dodopizza.ru/ulyanovsk?utm_source=yandex&utm_medium=YaPepP445&utm_campaign=35015617&yclid=940349662605377322" , "http://s1.1zoom.me/b5050/594/Fast_food_Pizza_Tomatoes_489103_2880x1800.jpg"},
-                              {"https://ru.wikipedia.org/wiki/%D0%96%D1%83%D0%BA%D0%BE%D0%B2,_%D0%93%D0%B5%D0%BE%D1%80%D0%B3%D0%B8%D0%B9_%D0%9A%D0%BE%D0%BD%D1%81%D1%82%D0%B0%D0%BD%D1%82%D0%B8%D0%BD%D0%BE%D0%B2%D0%B8%D1%87", "https://www.colors.life/upload/blogs/6b/15/6b155cc2566442f616c9676557adc62c_RSZ_690.jpeg"},
-                              {"http://www.actualinstaller.ru", "http://www.actualinstaller.ru/images/box.jpg"},
-                              {"https://ru.wikipedia.org/wiki/%D0%9D%D0%B5%D1%87%D1%82%D0%BE_(%D1%84%D0%B8%D0%BB%D1%8C%D0%BC,_1982)", "https://citifox.ru/wp-content/uploads/2017/01/Screenshot_3-9.png"},
-                              };
-            Panel panel_osnov = new Panel();
-            panel_osnov.Location = new System.Drawing.Point(125, 3);
-            panel_osnov.Name = "panel1";
-            panel_osnov.AutoScroll = true;
-            panel_osnov.Size = new System.Drawing.Size(250, 300);
-            panel_osnov.TabIndex = 2;
-
-            for (int i = 0; i < kol_vo; i++)
-            {
-                PictureBox rek = new PictureBox();
-                rek.Location = new System.Drawing.Point(0, (120 + rastoy) * i);
-                rek.Name = i.ToString();
-                rek.Tag = dany[i, 0];
-                rek.Load(dany[i, 1]);
-                rek.SizeMode = PictureBoxSizeMode.StretchImage;
-                rek.Click += new System.EventHandler(BlockForm.nash_na_rekl);
-                rek.Size = new System.Drawing.Size(250, 120);
-                rek.TabStop = false;
-                panel_osnov.Controls.Add(rek);
-            }
-
-            return panel_osnov;
-        }
-
-        static public void nash_na_rekl(object sender, EventArgs e)
-        {
-            PictureBox sa = (PictureBox)sender;
-            System.Diagnostics.Process.Start(sa.Tag.ToString());
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -89,17 +42,14 @@ namespace block
                 Location = new int[] { 0, 0 },
                 Name = "block2",
                 Distance = new int[] {0, 0},
-                Objects = new List<dynamic>() {new BlockObj(new TextBox() {
-                    Text = "testing"
-                }), new BlockObj(new TextBox() {
-                    Text = "red text",
-                    BackColor = Color.Red
-                })}
+                Objects = new List<dynamic>() {
+                    new BlockObj(textBox1),
+                    new BlockObj(pictureBox1)
+                }
             };
             var test_block_json = JsonConvert.SerializeObject(test_block);
-            SQLClass.Insert(string.Format("INSERT INTO `block_blocks`(`block1`, `json`) VALUES ('{0}','{1}')", "block2",
+            SQLClass.Insert(string.Format("INSERT INTO `block_blocks`(`name`, `json`) VALUES ('{0}','{1}')", "block2",
                 test_block_json));
-            File.WriteAllText("1234.json", test_block_json);
         }
 
         /// <summary>
@@ -176,5 +126,27 @@ namespace block
 
             return panel;
         }
-}
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            var res = SQLClass.Select(string.Format("SELECT json FROM `block_blocks` WHERE name='{0}'", "block2"));
+            var res_decoded = JsonConvert.DeserializeObject<BlockData>(res[0]);
+            foreach (JObject abc1 in res_decoded.Objects)
+            {
+                BlockObj abc = abc1.ToObject<BlockObj>();
+                //BlockObj abc = JsonConvert.DeserializeObject < BlockObj >( abc1);
+                if (abc.Data.Name == "pictureBox1")
+                {
+
+                    PictureBoxData pbd = abc1["Data"].ToObject<PictureBoxData>();
+                    PictureBox pbd2 = abc1["Data"].ToObject<PictureBox>();
+
+                    pictureBox1.Location = new Point(abc.Data.Location[0], abc.Data.Location[1]);
+                    //PictureBoxData pbd = abc.ToObject<PictureBoxData>();
+                    //pictureBox1.Image = PictureBoxData.GetActualControl(pbd).Image;
+                    //pictureBox1 = ((PictureBoxData)(abc.Data)).GetActualControl();
+                }
+            }
+        }
+    }
 }

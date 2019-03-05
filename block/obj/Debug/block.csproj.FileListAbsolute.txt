@@ -42,6 +42,3 @@ C:\Users\Abra\1\block\block\obj\Debug\block.csproj.CoreCompileInputs.cache
 C:\Users\Abra\1\block\block\obj\Debug\block.csproj.CopyComplete
 C:\Users\Abra\1\block\block\obj\Debug\block.exe
 C:\Users\Abra\1\block\block\obj\Debug\block.pdb
-C:\Users\student.ATIAM\Downloads\Вебинары\block\block\obj\Debug\block.AboutMeForm.resources
-C:\Users\student.ATIAM\Downloads\Вебинары\block\block\obj\Debug\block.MyPromotionsForm.resources
-C:\Users\student.ATIAM\Downloads\Вебинары\block\block\obj\Debug\block.ReadArticleForm.resources
