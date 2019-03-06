@@ -57,12 +57,6 @@
     <Compile Include="AboutMeForm.Designer.cs">
       <DependentUpon>AboutMeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ArticlePreviewPicture.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ArticlePreviewPicture.Designer.cs">
-      <DependentUpon>ArticlePreviewPicture.cs</DependentUpon>
-    </Compile>
     <Compile Include="BlockData.cs" />
     <Compile Include="BlockForm.cs">
       <SubType>Form</SubType>
@@ -93,9 +87,6 @@
     <Compile Include="SQLClass.cs" />
     <EmbeddedResource Include="AboutMeForm.resx">
       <DependentUpon>AboutMeForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ArticlePreviewPicture.resx">
-      <DependentUpon>ArticlePreviewPicture.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BlockForm.resx">
       <DependentUpon>BlockForm.cs</DependentUpon>
@@ -134,6 +125,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Безымянный.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dislike.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\disLike2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\like.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\like2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
