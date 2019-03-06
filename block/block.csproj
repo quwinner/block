@@ -57,6 +57,12 @@
     <Compile Include="AboutMeForm.Designer.cs">
       <DependentUpon>AboutMeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ArticlePreviewPicture.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ArticlePreviewPicture.Designer.cs">
+      <DependentUpon>ArticlePreviewPicture.cs</DependentUpon>
+    </Compile>
     <Compile Include="BlockData.cs" />
     <Compile Include="BlockForm.cs">
       <SubType>Form</SubType>
@@ -87,6 +93,9 @@
     <Compile Include="SQLClass.cs" />
     <EmbeddedResource Include="AboutMeForm.resx">
       <DependentUpon>AboutMeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ArticlePreviewPicture.resx">
+      <DependentUpon>ArticlePreviewPicture.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BlockForm.resx">
       <DependentUpon>BlockForm.cs</DependentUpon>

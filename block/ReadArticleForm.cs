@@ -16,5 +16,17 @@ namespace block
         {
             InitializeComponent();
         }
+
+        public static List<string> GetLikesDislikes(string Article)
+        {
+            var test = SQLClass.Select(string.Format("SELECT `LikesCount`, `DisCount` FROM `Likes` WHERE `Article`='{0}'", Article));
+            return test;
+        }
+
+        public static Panel SearchArticles(string query, int max_articles = 5)
+        {
+            GetLikesDislikes(query);
+            return null;
+        }
     }
 }
