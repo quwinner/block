@@ -38,7 +38,7 @@ namespace block
 
         private void label1_Click(object sender, EventArgs e)
         {
-            var test_block = new BlockData() {
+            /*var test_block = new BlockData() {
                 Location = new int[] { 0, 0 },
                 Name = "block2",
                 Distance = new int[] {0, 0},
@@ -49,7 +49,7 @@ namespace block
             };
             var test_block_json = JsonConvert.SerializeObject(test_block);
             SQLClass.Insert(string.Format("INSERT INTO `block_blocks`(`name`, `json`) VALUES ('{0}','{1}')", "block2",
-                test_block_json));
+                test_block_json));*/
         }
 
         /// <summary>
@@ -129,24 +129,37 @@ namespace block
 
         private void label2_Click(object sender, EventArgs e)
         {
-            var res = SQLClass.Select(string.Format("SELECT json FROM `block_blocks` WHERE name='{0}'", "block2"));
+            /*var res = SQLClass.Select(string.Format("SELECT json FROM `block_blocks` WHERE name='{0}'", "block2"));
             var res_decoded = JsonConvert.DeserializeObject<BlockData>(res[0]);
             foreach (JObject abc1 in res_decoded.Objects)
             {
                 BlockObj abc = abc1.ToObject<BlockObj>();
                 //BlockObj abc = JsonConvert.DeserializeObject < BlockObj >( abc1);
-                if (abc.Data.Name == "pictureBox1")
+                if (abc.Data.Type == "System.Windows.Forms.PictureBox")
                 {
+                    if (abc.Data.Name == "pictureBox1")
+                    {
+                        PictureBoxData pbd = abc1["Data"].ToObject<PictureBoxData>();
 
-                    PictureBoxData pbd = abc1["Data"].ToObject<PictureBoxData>();
-                    PictureBox pbd2 = abc1["Data"].ToObject<PictureBox>();
+                        pictureBox1.Load(pbd.URL);
 
-                    pictureBox1.Location = new Point(abc.Data.Location[0], abc.Data.Location[1]);
-                    //PictureBoxData pbd = abc.ToObject<PictureBoxData>();
-                    //pictureBox1.Image = PictureBoxData.GetActualControl(pbd).Image;
-                    //pictureBox1 = ((PictureBoxData)(abc.Data)).GetActualControl();
+                        pictureBox1.Location = new Point(abc.Data.Location[0], abc.Data.Location[1]);
+                        //PictureBoxData pbd = abc.ToObject<PictureBoxData>();
+                        //pictureBox1.Image = PictureBoxData.GetActualControl(pbd).Image;
+                        //pictureBox1 = ((PictureBoxData)(abc.Data)).GetActualControl();
+                    }
                 }
-            }
+            }*/
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            SQLClass.Delete("DELETE FROM `block_blocks` WHERE 1");
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            flowLayoutPanel1.Controls.Add(new ArticlePreviewPicture("Война и мир"));
         }
     }
 }
