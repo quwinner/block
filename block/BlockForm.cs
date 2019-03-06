@@ -11,6 +11,10 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+using MySql.Data;
+using MySql.Data.MySqlClient;
+using System.Reflection;
+
 namespace block
 {
     public partial class BlockForm : Form
@@ -32,8 +36,10 @@ namespace block
         {
             //File.WriteAllText("test.json", SQLClass.Select("SELECT * FROM `block_blocks` WHERE 1")[1]);
             //label1.Text = (LoadFromDB("block1"));
-            Panel panel1 = CreateStatPanel();
-            flowLayoutPanel1.Controls.Add(panel1);
+            //Panel panel1 = CreateStatPanel();
+            //flowLayoutPanel1.Controls.Add(panel1);
+            Panel shit = shenie_statey("тест випки");
+            flowLayoutPanel1.Controls.Add(shit);
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -160,6 +166,125 @@ namespace block
         private void label4_Click(object sender, EventArgs e)
         {
             flowLayoutPanel1.Controls.Add(new ArticlePreviewPicture("Война и мир"));
+        }
+        public static Panel shenie_statey(string text_N)
+        {
+
+            MySqlCommand cmd = new MySqlCommand("SELECT Header, Author, Category, Text, Picture FROM " + "Articles1" + " WHERE `Header` = '" + text_N + "'", SQLClass.CONN);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            rdr.Read();
+
+
+            Panel osnov = new Panel();
+            TableLayoutPanel osnov2 = new TableLayoutPanel();
+            Panel golova = new Panel();
+            Panel dly_text = new Panel();
+            PictureBox kartinka = new PictureBox();
+            Label avtor = new Label();
+            Label kategor = new Label();
+            Label oglavlenie = new Label();
+            Label text_stati = new Label();
+
+
+            osnov.Controls.Add(osnov2);
+            osnov.Location = new System.Drawing.Point(383, 3);
+            osnov.Name = "panel1";
+            osnov.Size = new System.Drawing.Size(294, 836);
+            osnov.TabIndex = 6;
+            osnov.BackColor = Color.Azure;
+            //osnov.Dock = System.Windows.Forms.DockStyle.Fill;
+
+            kartinka.Dock = System.Windows.Forms.DockStyle.Fill;
+            kartinka.Location = new System.Drawing.Point(3, 83);
+            kartinka.Name = "pictureBox2";
+            kartinka.Size = new System.Drawing.Size(288, 160);
+            kartinka.SizeMode = PictureBoxSizeMode.Zoom;
+            kartinka.TabIndex = 2;
+            kartinka.TabStop = false;
+            if (rdr[4].ToString() != "")
+            {
+                try
+                {
+                    kartinka.Load(rdr[4].ToString());
+                }
+                catch(Exception)
+                {
+                    kartinka.Load("https://travel-vse.ru/wp-content/uploads/2018/12/10-7.jpg");
+                }
+            }
+            else
+            {
+                kartinka.Load("https://whatzup.com/content/viewer/web/images/loading.gif");
+            }
+
+            osnov2.ColumnCount = 1;
+            osnov2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            osnov2.Controls.Add(golova, 0, 0);
+            osnov2.Controls.Add(kartinka, 0, 1);
+            osnov2.Controls.Add(dly_text, 0, 2);
+            osnov2.Dock = System.Windows.Forms.DockStyle.Fill;
+            osnov2.Location = new System.Drawing.Point(0, 0);
+            osnov2.Name = "tableLayoutPanel1";
+            osnov2.RowCount = 3;
+            osnov2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            osnov2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65F));
+            osnov2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
+            osnov2.Size = new System.Drawing.Size(294, 336);
+            osnov2.TabIndex = 0;
+
+
+            golova.Controls.Add(avtor);
+            golova.Controls.Add(oglavlenie);
+            golova.Controls.Add(kategor);
+            golova.Dock = System.Windows.Forms.DockStyle.Fill;
+            golova.Location = new System.Drawing.Point(3, 3);
+            golova.Name = "panel2";
+            golova.Size = new System.Drawing.Size(288, 74);
+            golova.TabIndex = 0;
+
+
+            kategor.AutoSize = true;
+            kategor.Location = new System.Drawing.Point(18, 7);
+            kategor.Name = "label3";
+            kategor.Size = new System.Drawing.Size(35, 13);
+            kategor.TabIndex = 0;
+            kategor.Text = rdr[2].ToString();
+
+
+            oglavlenie.AutoSize = true;
+            oglavlenie.Location = new System.Drawing.Point(18, 43);
+            oglavlenie.Name = "label4";
+            oglavlenie.Size = new System.Drawing.Size(35, 13);
+            oglavlenie.TabIndex = 1;
+            oglavlenie.Text = rdr[0].ToString();
+
+
+            avtor.AutoSize = true;
+            avtor.Location = new System.Drawing.Point(232, 7);
+            avtor.Name = "label5";
+            avtor.Size = new System.Drawing.Size(35, 13);
+            avtor.TabIndex = 2;
+            avtor.Text = rdr[1].ToString();
+
+
+            dly_text.Controls.Add(text_stati);
+            dly_text.Dock = System.Windows.Forms.DockStyle.Fill;
+            dly_text.Location = new System.Drawing.Point(3, 249);
+            dly_text.Name = "panel3";
+            dly_text.AutoScroll = true;
+            dly_text.Size = new System.Drawing.Size(288, 84);
+            dly_text.TabIndex = 1;
+
+
+            text_stati.Dock = System.Windows.Forms.DockStyle.Fill;
+            text_stati.Location = new System.Drawing.Point(0, 0);
+            text_stati.Name = "label6";
+            text_stati.AutoSize = true;
+            text_stati.TabIndex = 0;
+            text_stati.Text = rdr[3].ToString();
+
+            rdr.Close();
+            return osnov;
         }
     }
 }
