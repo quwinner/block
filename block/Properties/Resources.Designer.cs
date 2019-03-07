@@ -73,9 +73,9 @@ namespace block.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap disLike2 {
+        internal static System.Drawing.Bitmap dislike_pressed {
             get {
-                object obj = ResourceManager.GetObject("disLike2", resourceCulture);
+                object obj = ResourceManager.GetObject("dislike_pressed", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace block.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap like2 {
+        internal static System.Drawing.Bitmap like_pressed {
             get {
-                object obj = ResourceManager.GetObject("like2", resourceCulture);
+                object obj = ResourceManager.GetObject("like_pressed", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

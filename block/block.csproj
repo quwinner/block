@@ -57,11 +57,23 @@
     <Compile Include="AboutMeForm.Designer.cs">
       <DependentUpon>AboutMeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ArticleDetailsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ArticleDetailsUserControl.Designer.cs">
+      <DependentUpon>ArticleDetailsUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ArticlePreviewPicture.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ArticlePreviewPicture.Designer.cs">
       <DependentUpon>ArticlePreviewPicture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AuthenticationUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AuthenticationUserControl.Designer.cs">
+      <DependentUpon>AuthenticationUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="BlockData.cs" />
     <Compile Include="BlockForm.cs">
@@ -94,8 +106,14 @@
     <EmbeddedResource Include="AboutMeForm.resx">
       <DependentUpon>AboutMeForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ArticleDetailsUserControl.resx">
+      <DependentUpon>ArticleDetailsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ArticlePreviewPicture.resx">
       <DependentUpon>ArticlePreviewPicture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AuthenticationUserControl.resx">
+      <DependentUpon>AuthenticationUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BlockForm.resx">
       <DependentUpon>BlockForm.cs</DependentUpon>
