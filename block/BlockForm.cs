@@ -20,6 +20,9 @@ namespace block
     public partial class BlockForm : Form
     {
         string FormName = "form_main";
+        public static int like = 89;
+        public static int dislike = 89;
+
         public BlockForm(string FormName)
         {
             InitializeComponent();
@@ -32,7 +35,7 @@ namespace block
             return aaa[0];
         }
 
-        private void BlockForm_Load(object sender, EventArgs e)
+        public void BlockForm_Load(object sender, EventArgs e)
         {
             //File.WriteAllText("test.json", SQLClass.Select("SELECT * FROM `block_blocks` WHERE 1")[1]);
             //label1.Text = (LoadFromDB("block1"));
@@ -74,6 +77,8 @@ namespace block
         }
         public static Panel CreateStatPanel()
         {
+            
+
             Panel panel = new System.Windows.Forms.Panel();
             panel.Size = new System.Drawing.Size(300, 300);
 
@@ -87,11 +92,6 @@ namespace block
             fon.TabIndex = 0;
             fon.Image = pb.Image;
 
-            PictureBox like = new PictureBox();
-            like.Load("http://zabavnik.club/wp-content/uploads/2018/05/like_9_14194312.png");
-
-            PictureBox dislike = new PictureBox();
-            dislike.Load("https://image.freepik.com/icones-gratis/nao-gosto-no-facebook-polegar-para-baixo-simbolo-de-destaque_318-37193.jpg");
 
 
             LinkLabel label1 = new LinkLabel();
@@ -102,24 +102,32 @@ namespace block
             PictureBox likesPB = new PictureBox();
             likesPB.Size = new Size(20, 20);
             likesPB.Location = new Point(110, 210);
-            likesPB.Image = like.Image;
+            likesPB.Image = Properties.Resources.like;
+            likesPB.Name = "likesPB";
             likesPB.SizeMode = PictureBoxSizeMode.StretchImage;
+            likesPB.Click += new System.EventHandler(like_click);
+            likesPB.Tag = "like";
 
             Label likesLabel = new Label();
             likesLabel.Location = new Point(135, 210);
             likesLabel.Size = new Size(20, 20);
-            likesLabel.Text = "89";
+            likesLabel.Text = like.ToString();
+            likesLabel.Name = "likesLabel";
 
             PictureBox dislikesPB = new PictureBox();
             dislikesPB.Size = new Size(20, 20);
             dislikesPB.Location = new Point(155, 210);
-            dislikesPB.Image = dislike.Image;
+            dislikesPB.Image = Properties.Resources.dislike;
+            dislikesPB.Name = "dislikesPB";
             dislikesPB.SizeMode = PictureBoxSizeMode.StretchImage;
+            dislikesPB.Click += new System.EventHandler(like_click);
+            dislikesPB.Tag = "dislike";
 
             Label dislikesLabel = new Label();
             dislikesLabel.Location = new Point(180, 210);
             dislikesLabel.Size = new Size(20, 20);
-            dislikesLabel.Text = "89";
+            dislikesLabel.Text = dislike.ToString();
+            dislikesLabel.Name = "dislikesLabel";
 
 
 
@@ -285,6 +293,82 @@ namespace block
 
             rdr.Close();
             return osnov;
+        }
+
+        static void like_click(object sender, EventArgs e)
+        {
+            if (((PictureBox)sender).Name == "likesPB")
+            {
+                Panel dfdfs = (Panel)(((PictureBox)sender).Parent);
+
+                if (((PictureBox)sender).Tag.ToString() == "like")
+                {
+                    ((PictureBox)sender).Image = Properties.Resources.like2;
+                    ((PictureBox)sender).Tag = "like2";
+                    like = like + 1;
+
+                    foreach (Control ahggh in dfdfs.Controls)
+                    {
+                        if (ahggh.Name == "dislikesPB" && ahggh.Tag == "disLike2")
+                        {
+                            ((PictureBox)ahggh).Image = Properties.Resources.dislike;
+                            ((PictureBox)ahggh).Tag = "dislike";
+                            dislike = dislike - 1;
+                        }
+                    }
+                }
+                else
+                {
+                    ((PictureBox)sender).Image = Properties.Resources.like;
+                    ((PictureBox)sender).Tag = "like";
+                    like = like - 1;
+                }
+
+                foreach (Control ahggh in dfdfs.Controls)
+                {
+                    if (ahggh.Name == "likesLabel")
+                    {
+                        ahggh.Text = like.ToString();
+                    }
+                }
+            }
+
+            else if (((PictureBox)sender).Name == "dislikesPB")
+            {
+                Panel dfdfs = (Panel)(((PictureBox)sender).Parent);
+
+                if (((PictureBox)sender).Tag.ToString() == "dislike")
+                {
+                    ((PictureBox)sender).Image = Properties.Resources.disLike2;
+                    ((PictureBox)sender).Tag = "dislike2";
+                    dislike = dislike + 1;
+
+                    foreach (Control ahggh in dfdfs.Controls)
+                    {
+                        if (ahggh.Name == "likesPB" && ahggh.Tag == "like2")
+                        {
+                            ((PictureBox)ahggh).Image = Properties.Resources.like;
+                            ((PictureBox)ahggh).Tag = "like";
+                            like = like - 1;
+                        }
+                    }
+                }
+                else
+                {
+                    ((PictureBox)sender).Image = Properties.Resources.dislike;
+                    ((PictureBox)sender).Tag = "dislike";
+                    dislike = dislike - 1;
+                }
+                foreach (Control ahggh in dfdfs.Controls)
+                {
+                    if (ahggh.Name == "dislikesLabel")
+                    {
+                        ahggh.Text = dislike.ToString();
+                    }
+                }
+            }
+
+
         }
     }
 }
