@@ -135,6 +135,18 @@
   <ItemGroup>
     <None Include="Properties\Безымянный.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dislike.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\disLike2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\like.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\like2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
