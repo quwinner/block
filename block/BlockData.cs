@@ -12,7 +12,7 @@ namespace block
 {
     public class BlockObj
     {
-        BlockObj(ArticlePreviewPicture ctr)
+        BlockObj(ArticlePreviewUserControl ctr)
         {
             this.Type = "ArticlePreviewPicture";
             Data = ctr.Data;

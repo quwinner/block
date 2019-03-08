@@ -28,5 +28,10 @@ namespace block
             GetLikesDislikes(query);
             return null;
         }
+
+        private void ReadArticleForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

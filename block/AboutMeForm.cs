@@ -19,11 +19,13 @@ namespace block
 
         private void AboutMeForm_Load(object sender, EventArgs e)
         {
-            Panel panel1 = NaperstkiForm.CreateAuthorizationPanel();
-            this.Controls.Add(panel1);
-            Panel panel2 = BlockForm.CreateStatPanel();
-            panel2.Location = new Point(300, 0);
-            this.Controls.Add(panel2);
+            AuthenticationUserControl abc = new AuthenticationUserControl();
+            this.Controls.Add(abc);
+            ArticlePreviewUserControl preview = new ArticlePreviewUserControl("Война и мир")
+            {
+                Location = new Point(300, 0)
+            };
+            this.Controls.Add(preview);
         }
     }
 }
