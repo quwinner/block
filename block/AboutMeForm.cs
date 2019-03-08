@@ -21,7 +21,7 @@ namespace block
         {
             AuthenticationUserControl abc = new AuthenticationUserControl();
             this.Controls.Add(abc);
-            ArticlePreviewPicture preview = new ArticlePreviewPicture("Война и мир")
+            ArticlePreviewUserControl preview = new ArticlePreviewUserControl("Война и мир")
             {
                 Location = new Point(300, 0)
             };

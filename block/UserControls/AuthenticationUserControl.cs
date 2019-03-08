@@ -3,6 +3,9 @@ using System.Windows.Forms;
 
 namespace block
 {
+    /// <summary>
+    /// UserControl авторизации
+    /// </summary>
     public partial class AuthenticationUserControl : UserControl
     {
         public AuthenticationUserControl()

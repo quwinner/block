@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "ReadArticleForm";
             this.Text = "Читаем статью";
+            this.Load += new System.EventHandler(this.ReadArticleForm_Load);
             this.ResumeLayout(false);
 
         }

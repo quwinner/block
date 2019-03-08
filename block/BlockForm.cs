@@ -88,7 +88,7 @@ namespace block
 
         private void label4_Click(object sender, EventArgs e)
         {
-            flowLayoutPanel1.Controls.Add(new ArticlePreviewPicture("Война и мир"));
+            flowLayoutPanel1.Controls.Add(new ArticlePreviewUserControl("Война и мир"));
         }
     }
 }

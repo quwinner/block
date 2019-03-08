@@ -1,6 +1,6 @@
 ﻿namespace block
 {
-    partial class ArticlePreviewPicture
+    partial class ArticlePreviewUserControl
     {
         /// <summary> 
         /// Требуется переменная конструктора.

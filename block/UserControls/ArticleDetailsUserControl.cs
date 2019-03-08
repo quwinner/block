@@ -16,10 +16,15 @@ namespace block
         {
             InitializeComponent();
 
-            var result = SQLClass.Select("SELECT Author, Category, Text, Picture FROM " + "Articles1" + " WHERE `Header` = '" + Article + "'");
+            List<String> result = SQLClass.Select("SELECT Author, Category, Text, Picture FROM " + "Articles1" + " WHERE `Header` = '" + Article + "'");
             AuthorsNameLabel.Text = result[0];
             ArticleTextLabel.Text = result[2];
             ArticlePicture.Load(result[3]);
+        }
+
+        private void ArticlePicture_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

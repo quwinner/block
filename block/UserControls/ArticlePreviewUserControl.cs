@@ -11,7 +11,10 @@ using Newtonsoft.Json.Linq;
 
 namespace block
 {
-    public partial class ArticlePreviewPicture : UserControl
+    /// <summary>
+    /// UserControl статьи в режиме предпросмотра
+    /// </summary>
+    public partial class ArticlePreviewUserControl : UserControl
     {
         private int like = 0;
         private int dislike = 0;
@@ -21,7 +24,7 @@ namespace block
 
 
         private string URL_;
-        public ArticlePreviewPicture(string URL, string Article, int Likes, int DisLikes)
+        public ArticlePreviewUserControl(string URL, string Article, int Likes, int DisLikes)
         {
             InitializeComponent();
             like = Likes;
@@ -36,15 +39,20 @@ namespace block
             LikePB.Image = Properties.Resources.like;
         }
 
-        public ArticlePreviewPicture(string Article)
+        public ArticlePreviewUserControl(string Article)
         {
             InitializeComponent();
-            var url_pic = SQLClass.Select(string.Format("SELECT `Picture` FROM `Articles1` WHERE `Header`='{0}'", Article));
+
+            List<String> url_pic = SQLClass.Select(string.Format("SELECT `Picture` FROM `Articles1` WHERE `Header`='{0}'", Article));
             pictureBox1.Load(url_pic[0]);
-            var likes_dislikes = SQLClass.Select(string.Format("SELECT `LikesCount`, `DisCount` FROM `Likes` WHERE `Article`='{0}'", Article));
+
+            List<String> likes_dislikes = SQLClass.Select(string.Format("SELECT `LikesCount`, `DisCount` FROM `Likes` WHERE `Article`='{0}'", Article));
             like = Int32.Parse(likes_dislikes[0]);
             dislike = Int32.Parse(likes_dislikes[1]);
+
             linkLabel1.Text = Article;
+            LikeCount.Text = like.ToString();
+            DisLikeCount.Text = dislike.ToString();
         }
 
         public JObject Data
@@ -82,7 +90,6 @@ namespace block
                     like_pressed = true;
                     LikePB.Image = Properties.Resources.like_pressed;
                     like += 1;
-                    LikeCount.Text = like.ToString();
                 }
                 else
                 {
@@ -91,11 +98,9 @@ namespace block
 
                     LikePB.Image = Properties.Resources.like_pressed;
                     like += 1;
-                    LikeCount.Text = like.ToString();
 
                     DisLikePB.Image = Properties.Resources.dislike;
                     dislike -= 1;
-                    DisLikeCount.Text = dislike.ToString();
                     changed = false;
                 }
             }
@@ -103,9 +108,10 @@ namespace block
             {
                 LikePB.Image = Properties.Resources.like;
                 like -= 1;
-                LikeCount.Text = like.ToString();
-                return;
             }
+
+            LikeCount.Text = like.ToString();
+            DisLikeCount.Text = dislike.ToString();
         }
 
         private void DisLikePB_Click(object sender, EventArgs e)
@@ -117,8 +123,6 @@ namespace block
                     dislike_pressed = true;
                     DisLikePB.Image = Properties.Resources.dislike_pressed;
                     dislike += 1;
-                    DisLikeCount.Text = dislike.ToString();
-                    return;
                 }
 
                 like_pressed = false;
@@ -126,20 +130,18 @@ namespace block
 
                 DisLikePB.Image = Properties.Resources.dislike_pressed;
                 dislike += 1;
-                DisLikeCount.Text = dislike.ToString();
 
                 LikePB.Image = Properties.Resources.like;
                 like -= 1;
-                LikeCount.Text = like.ToString();
-                return;
             }
             else
             {
                 DisLikePB.Image = Properties.Resources.dislike;
                 dislike -= 1;
-                DisLikeCount.Text = dislike.ToString();
-                return;
             }
+
+            LikeCount.Text = like.ToString();
+            DisLikeCount.Text = dislike.ToString();
         }
         #endregion
     }
