@@ -57,10 +57,10 @@
     <Compile Include="AboutMeForm.Designer.cs">
       <DependentUpon>AboutMeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ArticleDetailsUserControl.cs">
+    <Compile Include="UserControls\ArticleDetailsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ArticleDetailsUserControl.Designer.cs">
+    <Compile Include="UserControls\ArticleDetailsUserControl.Designer.cs">
       <DependentUpon>ArticleDetailsUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ArticlePreviewUserControl.cs">
@@ -106,7 +106,7 @@
     <EmbeddedResource Include="AboutMeForm.resx">
       <DependentUpon>AboutMeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ArticleDetailsUserControl.resx">
+    <EmbeddedResource Include="UserControls\ArticleDetailsUserControl.resx">
       <DependentUpon>ArticleDetailsUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ArticlePreviewUserControl.resx">

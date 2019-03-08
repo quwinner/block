@@ -18,11 +18,17 @@ namespace block
 
             List<String> result = SQLClass.Select("SELECT Author, Category, Text, Picture FROM " + "Articles1" + " WHERE `Header` = '" + Article + "'");
             AuthorsNameLabel.Text = result[0];
+            ArticleLabel.Text = Article;
             ArticleTextLabel.Text = result[2];
             ArticlePicture.Load(result[3]);
         }
 
         private void ArticlePicture_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ArticleLabel_Click(object sender, EventArgs e)
         {
 
         }
