@@ -11,6 +11,8 @@ namespace block
         public AuthenticationUserControl()
         {
             InitializeComponent();
+
+            ArticlePreviewUserControl.AddDNDFunctions(this);
         }
 
         private void loginButton_Click(object sender, EventArgs e)

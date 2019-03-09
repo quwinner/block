@@ -12,6 +12,7 @@ namespace block
 {
     public partial class ArticleDetailsUserControl : UserControl
     {
+
         public ArticleDetailsUserControl(string Article)
         {
             InitializeComponent();
@@ -21,6 +22,8 @@ namespace block
             ArticleLabel.Text = Article;
             ArticleTextLabel.Text = result[2];
             ArticlePicture.Load(result[3]);
+
+            ArticlePreviewUserControl.AddDNDFunctions(this);
         }
 
         private void ArticlePicture_Click(object sender, EventArgs e)
@@ -32,5 +35,6 @@ namespace block
         {
 
         }
+        
     }
 }
