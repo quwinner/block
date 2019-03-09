@@ -21,6 +21,7 @@ namespace block
             ArticleLabel.Text = Article;
             ArticleTextLabel.Text = result[2];
             ArticlePicture.Load(result[3]);
+            BlockForm.deletemenu(this);
         }
 
         private void ArticlePicture_Click(object sender, EventArgs e)

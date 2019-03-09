@@ -99,7 +99,7 @@
             this.linkLabel1.Text = "linkLabel1";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
-            // ArticlePreviewPicture
+            // ArticlePreviewUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -109,8 +109,9 @@
             this.Controls.Add(this.DisLikeCount);
             this.Controls.Add(this.LikeCount);
             this.Controls.Add(this.pictureBox1);
-            this.Name = "ArticlePreviewPicture";
+            this.Name = "ArticlePreviewUserControl";
             this.Size = new System.Drawing.Size(330, 190);
+            this.Load += new System.EventHandler(this.ArticlePreviewUserControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LikePB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DisLikePB)).EndInit();

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -36,12 +37,17 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.ArticlecontextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.DeletecontextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.DeletecontextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.ContextMenuStrip = this.ArticlecontextMenuStrip1;
             this.flowLayoutPanel1.Controls.Add(this.label1);
             this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Controls.Add(this.button2);
@@ -124,6 +130,26 @@
             this.label5.Text = "label5";
             this.label5.Click += new System.EventHandler(this.label4_Click);
             // 
+            // ArticlecontextMenuStrip1
+            // 
+            this.ArticlecontextMenuStrip1.Name = "ArticlecontextMenuStrip1";
+            this.ArticlecontextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            this.ArticlecontextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.ArticlecontextMenuStrip1_Opening);
+            // 
+            // DeletecontextMenuStrip1
+            // 
+            this.DeletecontextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteToolStripMenuItem});
+            this.DeletecontextMenuStrip1.Name = "DeletecontextMenuStrip1";
+            this.DeletecontextMenuStrip1.Size = new System.Drawing.Size(153, 48);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
             // BlockForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -136,6 +162,7 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.DeletecontextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -152,5 +179,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ContextMenuStrip ArticlecontextMenuStrip1;
+        private System.Windows.Forms.ContextMenuStrip DeletecontextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
     }
 }

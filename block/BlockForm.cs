@@ -22,11 +22,13 @@ namespace block
         string FormName = "form_main";
         public static int like = 89;
         public static int dislike = 89;
+        public static ContextMenuStrip Delete;
 
         public BlockForm(string FormName)
         {
             InitializeComponent();
             this.FormName = FormName;
+            Delete = DeletecontextMenuStrip1;
         }
 
         private string LoadFromDB(string block)
@@ -43,6 +45,39 @@ namespace block
             //flowLayoutPanel1.Controls.Add(panel1);
             ArticleDetailsUserControl test = new ArticleDetailsUserControl("Война и мир");
             flowLayoutPanel1.Controls.Add(test);
+
+            List<Type> forms = new List<Type>();
+            foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                forms.AddRange(from t in asm.GetTypes() where t.IsSubclassOf(typeof(UserControl)) select t);
+            }
+            int i =0;
+            foreach (Type f in forms)
+            {
+                ArticlecontextMenuStrip1.Items.Add(f.Name);
+                if(f.Name == "ArticleDetailsUserControl")
+                {
+                    ArticlecontextMenuStrip1.Items[i].Click += label4_Click;
+                    i++;
+                }
+                if (f.Name == "ArticlePreviewUserControl")
+                {
+                    ArticlecontextMenuStrip1.Items[i].Click += articlePreview_Click;
+                    i++;
+                }
+                if (f.Name == "AuthenticationUserControl")
+                {
+                    ArticlecontextMenuStrip1.Items[i].Click += author_Click;
+                    i++;
+                }
+
+            }
+
+        }
+
+        public static void deletemenu(object sender)
+        {
+            ((UserControl)sender).ContextMenuStrip = BlockForm.Delete;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -59,6 +94,7 @@ namespace block
             var test_block_json = JsonConvert.SerializeObject(test_block);
             SQLClass.Insert(string.Format("INSERT INTO `block_blocks`(`name`, `json`) VALUES ('{0}','{1}')", "block2",
                 test_block_json));*/
+            MessageBox.Show("5");
         }
 
         /// <summary>
@@ -88,7 +124,40 @@ namespace block
 
         private void label4_Click(object sender, EventArgs e)
         {
+            ArticlePreviewUserControl a1 = new ArticlePreviewUserControl("Война и мир");
+            flowLayoutPanel1.Controls.Add(a1);
+            SQLClass.Insert("INSERT INTO `block`(`form`, `x`, `y`, `name`) VALUES ('" + this.Name + "','" + a1.Location.X + "','" + a1.Location.Y + "','"+ a1.Name +"')");
+        }
+
+        private void articlePreview_Click(object sender, EventArgs e)
+        {
+            ArticleDetailsUserControl a1 = new ArticleDetailsUserControl("Война и мир");
+            flowLayoutPanel1.Controls.Add(a1);
+            SQLClass.Insert("INSERT INTO `block`(`form`, `x`, `y`, `name`) VALUES ('" + this.Name + "','" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+        }
+
+        private void author_Click(object sender, EventArgs e)
+        {
+            AuthenticationUserControl a1 = new AuthenticationUserControl();
+            flowLayoutPanel1.Controls.Add(a1);
+            SQLClass.Insert("INSERT INTO `block`(`form`, `x`, `y`, `name`) VALUES ('" + this.Name + "','" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+        }
+
+        private void createBlockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             flowLayoutPanel1.Controls.Add(new ArticlePreviewUserControl("Война и мир"));
+        }
+
+        private void ArticlecontextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UserControl pb = (UserControl)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            pb.Visible = false;
+            SQLClass.Delete("DELETE FROM `block` WHERE `name` = '"+ pb.Name +"' AND 'form' = '"+ pb.FindForm() +"'");
         }
     }
 }

@@ -53,6 +53,8 @@ namespace block
             linkLabel1.Text = Article;
             LikeCount.Text = like.ToString();
             DisLikeCount.Text = dislike.ToString();
+
+            BlockForm.deletemenu(this);
         }
 
         public JObject Data
@@ -144,5 +146,10 @@ namespace block
             DisLikeCount.Text = dislike.ToString();
         }
         #endregion
+
+        private void ArticlePreviewUserControl_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

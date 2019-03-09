@@ -11,12 +11,19 @@ namespace block
         public AuthenticationUserControl()
         {
             InitializeComponent();
+
+            BlockForm.deletemenu(this);
         }
 
         private void loginButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show(loginTextBox.Text);
             MessageBox.Show(passwordTextBox.Text);
+        }
+
+        private void loginLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
