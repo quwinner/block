@@ -16,6 +16,11 @@ namespace block
     /// </summary>
     public partial class ArticlePreviewUserControl : UserControl
     {
+
+        public static bool dragging = false;
+        public static Point dragCursorPoint;
+        public static Point dragFormPoint;
+
         private int like = 0;
         private int dislike = 0;
         private bool changed = false;
@@ -37,6 +42,8 @@ namespace block
             DisLikeCount.Text = DisLikes.ToString();
             DisLikePB.Image = Properties.Resources.dislike;
             LikePB.Image = Properties.Resources.like;
+
+            
         }
 
         public ArticlePreviewUserControl(string Article)
@@ -54,6 +61,7 @@ namespace block
             LikeCount.Text = like.ToString();
             DisLikeCount.Text = dislike.ToString();
 
+            ArticlePreviewUserControl.AddDNDFunctions(this);
             BlockForm.deletemenu(this);
         }
 
@@ -76,6 +84,7 @@ namespace block
                 pictureBox1.Load(value["URL"].ToString());
             }
         }
+
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -147,7 +156,43 @@ namespace block
         }
         #endregion
 
+        public static void FormTest_MouseDown(object sender, MouseEventArgs e)
+        {
+            dragging = true;
+            dragCursorPoint = Cursor.Position;
+            dragFormPoint = ((UserControl)sender).Location;
+        }
+
+        public static void FormTest_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (dragging)
+            {
+                
+                Point dif = Point.Subtract(Cursor.Position, new Size(dragCursorPoint));
+                ((UserControl)sender).Location = Point.Add(dragFormPoint, new Size(dif));
+            }
+        }
+
+        public static void FormTest_MouseUp(object sender, MouseEventArgs e)
+        {
+            dragging = false;
+        }
+
+        public static void AddDNDFunctions(object sender)
+        {
+            ((UserControl)sender).MouseDown += new MouseEventHandler(ArticlePreviewUserControl.FormTest_MouseDown);
+            ((UserControl)sender).MouseMove += new MouseEventHandler(ArticlePreviewUserControl.FormTest_MouseMove);
+            ((UserControl)sender).MouseUp += new MouseEventHandler(ArticlePreviewUserControl.FormTest_MouseUp);
+
+            ((UserControl)sender).ContextMenuStrip = Program.UserControlCMS;
+        }
+
         private void ArticlePreviewUserControl_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }

@@ -39,6 +39,7 @@ namespace block
 
         public void BlockForm_Load(object sender, EventArgs e)
         {
+            Program.UserControlCMS = contextMenuStrip1;
             //File.WriteAllText("test.json", SQLClass.Select("SELECT * FROM `block_blocks` WHERE 1")[1]);
             //label1.Text = (LoadFromDB("block1"));
             //Panel panel1 = CreateStatPanel();
@@ -148,9 +149,11 @@ namespace block
             flowLayoutPanel1.Controls.Add(new ArticlePreviewUserControl("Война и мир"));
         }
 
-        private void ArticlecontextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            UserControl pb = (UserControl)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            MessageBox.Show(pb.Location.X.ToString());
+            SQLClass.Insert("INSERT INTO `block`(`form`, `x`, `y`, `name`) VALUES ('" + pb.Parent.Name + "'," + pb.Location.X + ", " + pb.Location.Y + ",'" + pb.Name + "')");
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
