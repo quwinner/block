@@ -54,26 +54,7 @@ namespace block
         {
             if (_moving)
             {
-                sender.Left += e.Location.X - _startLocation.X;
-                sender.Top += e.Location.Y - _startLocation.Y;
-
-                if (sender.Location.X < 0)
-                {
-                    sender.Location = new Point(0, sender.Location.Y);
-                }
-                else if (sender.Location.X > this.Size.Width - 10)
-                {
-                    sender.Location = new Point(this.Size.Width - 10, sender.Location.Y);
-                }
-
-                if (sender.Location.Y < 0)
-                {
-                    sender.Location = new Point(sender.Location.X, 0);
-                }
-                else if (sender.Location.Y > this.Size.Height - 10)
-                {
-                    sender.Location = new Point(sender.Location.X, this.Size.Height - 10);
-                }
+                
             }
         }
 
@@ -187,6 +168,11 @@ namespace block
         private void button3_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

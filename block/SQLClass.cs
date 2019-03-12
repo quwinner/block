@@ -23,6 +23,9 @@ namespace block
 
         public static MySqlConnection CONN;
 
+        /// <summary>
+        /// Открываем соединение
+        /// </summary>
         public static void OpenConnection()
         {
             CONN = new MySqlConnection(CONNECTION_STRING);
@@ -33,8 +36,6 @@ namespace block
             catch (Exception e)
             {
                 OpenConnection();
-                //SQLParamsForm f1 = new SQLParamsForm();
-                //f1.ShowDialog();
             }
         }
 
