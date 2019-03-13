@@ -22,13 +22,13 @@ namespace block
         string FormName = "form_main";
         public static int like = 89;
         public static int dislike = 89;
-        public static ContextMenuStrip Delete;
+        public static ContextMenuStrip DeleteMenuStrip;
 
         public BlockForm(string FormName)
         {
             InitializeComponent();
             this.FormName = FormName;
-            Delete = DeletecontextMenuStrip1;
+            DeleteMenuStrip = DeletecontextMenuStrip1;
         }
 
         private string LoadFromDB(string block)
@@ -79,9 +79,6 @@ namespace block
                     ArticlecontextMenuStrip1.Items[i].Click += authorsList_Click;
                     i++;
                 }
-
-
-
                 if (f.Name == "CatUserControl")
                 {
                     ArticlecontextMenuStrip1.Items[i].Click += cat_Click;
@@ -92,9 +89,9 @@ namespace block
 
         }
 
-        public static void deletemenu(object sender)
+        public static void AddDeleteMenu(object sender)
         {
-            ((UserControl)sender).ContextMenuStrip = BlockForm.Delete;
+            ((UserControl)sender).ContextMenuStrip = BlockForm.DeleteMenuStrip;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -160,7 +157,7 @@ namespace block
         private void cat_Click(object sender, EventArgs e)
         {
             List<string> paramsArt = new List<string>();
-            CatUserControl a1 = new CatUserControl(paramsArt);
+            CategoriesUserControl a1 = new CategoriesUserControl(paramsArt);
             flowLayoutPanel1.Controls.Add(a1);
             SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }

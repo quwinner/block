@@ -16,7 +16,7 @@ namespace block
         {
             InitializeComponent();
 
-            BlockForm.deletemenu(this);
+            BlockForm.AddDeleteMenu(this);
         }
 
         private void UserControlAutorsList_Load(object sender, EventArgs e)

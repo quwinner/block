@@ -16,6 +16,7 @@ namespace block
     /// </summary>
     public partial class ArticlePreviewUserControl : UserControl
     {
+        public string Article;
 
         public static bool dragging = false;
         public static Point dragCursorPoint;
@@ -50,7 +51,7 @@ namespace block
         {
             InitializeComponent();
 
-            String Article = Articles[0];
+            Article = Articles[0];
 
             List<String> url_pic = SQLClass.Select(string.Format("SELECT `Picture` FROM `Articles1` WHERE `Header`='{0}'", Article));
             pictureBox1.Load(url_pic[0]);
@@ -64,7 +65,7 @@ namespace block
             DisLikeCount.Text = dislike.ToString();
 
             ArticlePreviewUserControl.AddDNDFunctions(this);
-            BlockForm.deletemenu(this);
+            BlockForm.AddDeleteMenu(this);
         }
 
         public JObject Data
@@ -87,10 +88,12 @@ namespace block
             }
         }
 
-
+        /// <summary>
+        /// Показывает детали статьи
+        /// </summary>
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            new DetailsForm(new ArticleDetailsUserControl(new List<string> { Article })).ShowDialog();
         }
 
         #region Логика лайков (не работает пока)
@@ -169,7 +172,6 @@ namespace block
         {
             if (dragging)
             {
-                
                 Point dif = Point.Subtract(Cursor.Position, new Size(dragCursorPoint));
                 ((UserControl)sender).Location = Point.Add(dragFormPoint, new Size(dif));
             }

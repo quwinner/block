@@ -20,7 +20,7 @@ namespace block
         {
             InitializeComponent();
 
-            BlockForm.deletemenu(this);
+            BlockForm.AddDeleteMenu(this);
         }
 
         private void loginButton_Click(object sender, EventArgs e)

@@ -22,7 +22,7 @@ namespace block
             ArticleLabel.Text = Articles[0];
             ArticleTextLabel.Text = result[2];
             ArticlePicture.Load(result[3]);
-            BlockForm.deletemenu(this);
+            BlockForm.AddDeleteMenu(this);
             ArticlePreviewUserControl.AddDNDFunctions(this);
         }
 
