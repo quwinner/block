@@ -71,6 +71,13 @@ namespace block
                     ArticlecontextMenuStrip1.Items[i].Click += author_Click;
                     i++;
                 }
+                if (f.Name == "UserControlAutorsList")
+                {
+                    ArticlecontextMenuStrip1.Items[i].Click += authorsList_Click;
+                    i++;
+                }
+
+
 
             }
 
@@ -140,6 +147,12 @@ namespace block
         private void author_Click(object sender, EventArgs e)
         {
             AuthenticationUserControl a1 = new AuthenticationUserControl();
+            flowLayoutPanel1.Controls.Add(a1);
+            SQLClass.Insert("INSERT INTO `block`(`form`, `x`, `y`, `name`) VALUES ('" + this.Name + "','" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+        }
+        private void authorsList_Click(object sender, EventArgs e)
+        {
+            UserControlAutorsList a1 = new UserControlAutorsList();
             flowLayoutPanel1.Controls.Add(a1);
             SQLClass.Insert("INSERT INTO `block`(`form`, `x`, `y`, `name`) VALUES ('" + this.Name + "','" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
