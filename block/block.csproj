@@ -57,11 +57,23 @@
     <Compile Include="AboutMeForm.Designer.cs">
       <DependentUpon>AboutMeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\CatUserControl.cs">
+	<Compile Include="UserControls\CatUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControls\CatUserControl.Designer.cs">
       <DependentUpon>CatUserControl.cs</DependentUpon>
+	</Compile>
+    <Compile Include="UserControls\UserControlAutorsList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UserControlAutorsList.Designer.cs">
+      <DependentUpon>UserControlAutorsList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlSearch.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlSearch.Designer.cs">
+      <DependentUpon>UserControlSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ArticleDetailsUserControl.cs">
       <SubType>UserControl</SubType>
@@ -112,8 +124,14 @@
     <EmbeddedResource Include="AboutMeForm.resx">
       <DependentUpon>AboutMeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\CatUserControl.resx">
+	<EmbeddedResource Include="UserControls\CatUserControl.resx">
       <DependentUpon>CatUserControl.cs</DependentUpon>
+	</EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UserControlAutorsList.resx">
+      <DependentUpon>UserControlAutorsList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlSearch.resx">
+      <DependentUpon>UserControlSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ArticleDetailsUserControl.resx">
       <DependentUpon>ArticleDetailsUserControl.cs</DependentUpon>
