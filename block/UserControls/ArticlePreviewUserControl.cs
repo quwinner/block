@@ -29,26 +29,28 @@ namespace block
 
 
         private string URL_;
-        public ArticlePreviewUserControl(string URL, string Article, int Likes, int DisLikes)
+        /*public ArticlePreviewUserControl(List <string> paramet)
         {
             InitializeComponent();
-            like = Likes;
-            dislike = DisLikes;
-            URL_ = URL;
+            like = Convert.ToInt32(paramet[2]);
+            dislike = Convert.ToInt32(paramet[3]);
+            URL_ = paramet[0];
 
-            pictureBox1.LoadAsync(URL);
-            linkLabel1.Text = Article;
-            LikeCount.Text = Likes.ToString();
-            DisLikeCount.Text = DisLikes.ToString();
+            pictureBox1.LoadAsync(URL_);
+            linkLabel1.Text = paramet[1];
+            LikeCount.Text = like.ToString();
+            DisLikeCount.Text = dislike.ToString();
             DisLikePB.Image = Properties.Resources.dislike;
             LikePB.Image = Properties.Resources.like;
 
             
-        }
+        }*/
 
-        public ArticlePreviewUserControl(string Article)
+        public ArticlePreviewUserControl(List<string> Articles)
         {
             InitializeComponent();
+
+            String Article = Articles[0];
 
             List<String> url_pic = SQLClass.Select(string.Format("SELECT `Picture` FROM `Articles1` WHERE `Header`='{0}'", Article));
             pictureBox1.Load(url_pic[0]);

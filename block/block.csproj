@@ -57,6 +57,12 @@
     <Compile Include="AboutMeForm.Designer.cs">
       <DependentUpon>AboutMeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\CatUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\CatUserControl.Designer.cs">
+      <DependentUpon>CatUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ArticleDetailsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -105,6 +111,9 @@
     <Compile Include="SQLClass.cs" />
     <EmbeddedResource Include="AboutMeForm.resx">
       <DependentUpon>AboutMeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\CatUserControl.resx">
+      <DependentUpon>CatUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ArticleDetailsUserControl.resx">
       <DependentUpon>ArticleDetailsUserControl.cs</DependentUpon>

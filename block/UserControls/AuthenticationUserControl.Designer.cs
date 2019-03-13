@@ -95,6 +95,7 @@
             this.Controls.Add(this.loginLabel);
             this.Name = "AuthenticationUserControl";
             this.Size = new System.Drawing.Size(200, 97);
+            this.Load += new System.EventHandler(this.AuthenticationUserControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

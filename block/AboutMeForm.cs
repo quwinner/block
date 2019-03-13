@@ -19,9 +19,14 @@ namespace block
 
         private void AboutMeForm_Load(object sender, EventArgs e)
         {
-            AuthenticationUserControl abc = new AuthenticationUserControl();
+            List<string> parametry = new List<string>();
+            parametry.Add("Война и мир");
+            AuthenticationUserControl abc = new AuthenticationUserControl(parametry);
             this.Controls.Add(abc);
-            ArticlePreviewUserControl preview = new ArticlePreviewUserControl("Война и мир")
+
+            List<string> paramsArt = new List<string>();
+            paramsArt.Add("Война и мир");
+            ArticlePreviewUserControl preview = new ArticlePreviewUserControl(paramsArt)
             {
                 Location = new Point(300, 0)
             };

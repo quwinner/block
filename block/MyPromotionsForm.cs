@@ -8,6 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+using MySql.Data;
+using MySql.Data.MySqlClient;
+
 namespace block
 {
     public partial class MyPromotionsForm : Form
@@ -15,6 +19,11 @@ namespace block
         public MyPromotionsForm()
         {
             InitializeComponent();
+        }
+
+        private void MyPromotionsForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
