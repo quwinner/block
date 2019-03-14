@@ -8,22 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
-using MySql.Data;
-using MySql.Data.MySqlClient;
-
 namespace block
 {
-    public partial class MyPromotionsForm : Form
+    public partial class DetailsForm : Form
     {
-        public MyPromotionsForm()
+        public DetailsForm(ArticleDetailsUserControl Details)
         {
             InitializeComponent();
-        }
-
-        private void MyPromotionsForm_Load(object sender, EventArgs e)
-        {
-
+            flowLayoutPanel1.Controls.Add(Details);
         }
     }
 }

@@ -97,8 +97,9 @@ namespace block
             string[] sdfg = sad[3].Split(';');
             Point mesto = new Point(Convert.ToInt32(sdf[0]), Convert.ToInt32(sdf[1]));
             Size razmer = new Size(Convert.ToInt32(sdfg[0]), Convert.ToInt32(sdfg[1]));
-            
-            AuthenticationUserControl panel1 = new AuthenticationUserControl();
+
+            List<string> parametry = new List<string>();
+            AuthenticationUserControl panel1 = new AuthenticationUserControl(parametry);
             this.Controls.Add(panel1);
         }
 

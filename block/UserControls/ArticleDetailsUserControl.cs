@@ -13,16 +13,16 @@ namespace block
     public partial class ArticleDetailsUserControl : UserControl
     {
 
-        public ArticleDetailsUserControl(string Article)
+        public ArticleDetailsUserControl(List<string> Articles)
         {
             InitializeComponent();
 
-            List<String> result = SQLClass.Select("SELECT Author, Category, Text, Picture FROM " + "Articles1" + " WHERE `Header` = '" + Article + "'");
+            List<String> result = SQLClass.Select("SELECT Author, Category, Text, Picture FROM " + "Articles1" + " WHERE `Header` = '" + Articles[0] + "'");
             AuthorsNameLabel.Text = result[0];
-            ArticleLabel.Text = Article;
+            ArticleLabel.Text = Articles[0];
             ArticleTextLabel.Text = result[2];
             ArticlePicture.Load(result[3]);
-            BlockForm.deletemenu(this);
+            BlockForm.AddDeleteMenu(this);
             ArticlePreviewUserControl.AddDNDFunctions(this);
         }
 
@@ -32,6 +32,11 @@ namespace block
         }
 
         private void ArticleLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ArticleTextLabel_Click(object sender, EventArgs e)
         {
 
         }

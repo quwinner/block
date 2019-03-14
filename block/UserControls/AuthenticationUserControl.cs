@@ -1,5 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace block
 {
@@ -8,11 +16,11 @@ namespace block
     /// </summary>
     public partial class AuthenticationUserControl : UserControl
     {
-        public AuthenticationUserControl()
+        public AuthenticationUserControl(List<string> parametrs)
         {
             InitializeComponent();
 
-            BlockForm.deletemenu(this);
+            BlockForm.AddDeleteMenu(this);
         }
 
         private void loginButton_Click(object sender, EventArgs e)
@@ -22,6 +30,11 @@ namespace block
         }
 
         private void loginLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AuthenticationUserControl_Load(object sender, EventArgs e)
         {
 
         }

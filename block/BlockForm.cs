@@ -22,13 +22,13 @@ namespace block
         string FormName = "form_main";
         public static int like = 89;
         public static int dislike = 89;
-        public static ContextMenuStrip Delete;
+        public static ContextMenuStrip DeleteMenuStrip;
 
         public BlockForm(string FormName)
         {
             InitializeComponent();
             this.FormName = FormName;
-            Delete = DeletecontextMenuStrip1;
+            DeleteMenuStrip = DeletecontextMenuStrip1;
         }
 
         private string LoadFromDB(string block)
@@ -44,8 +44,11 @@ namespace block
             //label1.Text = (LoadFromDB("block1"));
             //Panel panel1 = CreateStatPanel();
             //flowLayoutPanel1.Controls.Add(panel1);
-            ArticleDetailsUserControl test = new ArticleDetailsUserControl("Война и мир");
+            List<string> paramsArt = new List<string>();
+            paramsArt.Add("Война и мир");
+            ArticleDetailsUserControl test = new ArticleDetailsUserControl(paramsArt);
             flowLayoutPanel1.Controls.Add(test);
+
 
             List<Type> forms = new List<Type>();
             foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
@@ -71,14 +74,24 @@ namespace block
                     ArticlecontextMenuStrip1.Items[i].Click += author_Click;
                     i++;
                 }
+                if (f.Name == "UserControlAutorsList")
+                {
+                    ArticlecontextMenuStrip1.Items[i].Click += authorsList_Click;
+                    i++;
+                }
+                if (f.Name == "CatUserControl")
+                {
+                    ArticlecontextMenuStrip1.Items[i].Click += cat_Click;
+                    i++;
+                }
 
             }
 
         }
 
-        public static void deletemenu(object sender)
+        public static void AddDeleteMenu(object sender)
         {
-            ((UserControl)sender).ContextMenuStrip = BlockForm.Delete;
+            ((UserControl)sender).ContextMenuStrip = BlockForm.DeleteMenuStrip;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -125,42 +138,64 @@ namespace block
 
         private void label4_Click(object sender, EventArgs e)
         {
-            ArticlePreviewUserControl a1 = new ArticlePreviewUserControl("Война и мир");
+            List<string> paramsArt = new List<string>();
+            paramsArt.Add("Война и мир");
+            ArticlePreviewUserControl a1 = new ArticlePreviewUserControl(paramsArt);
             flowLayoutPanel1.Controls.Add(a1);
-            SQLClass.Insert("INSERT INTO `block`(`form`, `x`, `y`, `name`) VALUES ('" + this.Name + "','" + a1.Location.X + "','" + a1.Location.Y + "','"+ a1.Name +"')");
+            SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
 
         private void articlePreview_Click(object sender, EventArgs e)
         {
-            ArticleDetailsUserControl a1 = new ArticleDetailsUserControl("Война и мир");
+            List<string> paramsArt = new List<string>();
+            paramsArt.Add("Война и мир");
+            ArticleDetailsUserControl a1 = new ArticleDetailsUserControl(paramsArt);
+            flowLayoutPanel1.Controls.Add(a1);
+            SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+        }
+
+        private void cat_Click(object sender, EventArgs e)
+        {
+            List<string> paramsArt = new List<string>();
+            CategoriesUserControl a1 = new CategoriesUserControl(paramsArt);
+            flowLayoutPanel1.Controls.Add(a1);
+            SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+        }
+        private void authorsList_Click(object sender, EventArgs e)
+        {
+            UserControlAutorsList a1 = new UserControlAutorsList();
             flowLayoutPanel1.Controls.Add(a1);
             SQLClass.Insert("INSERT INTO `block`(`form`, `x`, `y`, `name`) VALUES ('" + this.Name + "','" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
 
         private void author_Click(object sender, EventArgs e)
         {
-            AuthenticationUserControl a1 = new AuthenticationUserControl();
+            List<string> parametry = new List<string>();
+            AuthenticationUserControl a1 = new AuthenticationUserControl(parametry);
             flowLayoutPanel1.Controls.Add(a1);
-            SQLClass.Insert("INSERT INTO `block`(`form`, `x`, `y`, `name`) VALUES ('" + this.Name + "','" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+            SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
 
-        private void createBlockToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            flowLayoutPanel1.Controls.Add(new ArticlePreviewUserControl("Война и мир"));
-        }
 
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UserControl pb = (UserControl)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             MessageBox.Show(pb.Location.X.ToString());
-            SQLClass.Insert("INSERT INTO `block`(`form`, `x`, `y`, `name`) VALUES ('" + pb.Parent.Name + "'," + pb.Location.X + ", " + pb.Location.Y + ",'" + pb.Name + "')");
+            SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('"+this.Name+"','" + pb.Parent.Name + "'," + pb.Location.X + ", " + pb.Location.Y + ",'" + pb.Name + "')");
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UserControl pb = (UserControl)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             pb.Visible = false;
-            SQLClass.Delete("DELETE FROM `block` WHERE `name` = '"+ pb.Name +"' AND 'form' = '"+ pb.FindForm() +"'");
+            SQLClass.Delete("DELETE FROM `block` WHERE `name` = '"+ pb.Name +"' AND form = '"+ pb.FindForm() +"'");
+        }
+
+
+
+        private void BlockForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SQLClass.Delete("DELETE FROM block WHERE  form = '" + this.Name + "'");
         }
     }
 }

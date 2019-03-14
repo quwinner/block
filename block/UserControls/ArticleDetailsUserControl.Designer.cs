@@ -52,6 +52,7 @@
             this.ArticleTextLabel.Size = new System.Drawing.Size(342, 189);
             this.ArticleTextLabel.TabIndex = 2;
             this.ArticleTextLabel.Text = "Текст статьи";
+            this.ArticleTextLabel.Click += new System.EventHandler(this.ArticleTextLabel_Click);
             // 
             // AuthorsNameLabel
             // 
