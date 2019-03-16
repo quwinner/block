@@ -16,6 +16,7 @@ namespace block
     /// </summary>
     public partial class AuthenticationUserControl : UserControl
     {
+        public List<string> asd;
         public AuthenticationUserControl(List<string> parametrs)
         {
             InitializeComponent();

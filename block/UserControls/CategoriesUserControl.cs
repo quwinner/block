@@ -16,6 +16,8 @@ namespace block
 {
     public partial class CategoriesUserControl : UserControl
     {
+        public List<string> asd;
+
         /// <summary>
         /// Конструктор который заполняет <see cref="tableLayoutPanel1"/> 
         /// </summary>

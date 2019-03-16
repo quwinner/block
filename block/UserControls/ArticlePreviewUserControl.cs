@@ -16,6 +16,8 @@ namespace block
     /// </summary>
     public partial class ArticlePreviewUserControl : UserControl
     {
+        public List<string> asd;
+
         public string Article;
 
         public static bool dragging = false;

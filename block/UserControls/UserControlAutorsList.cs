@@ -12,6 +12,7 @@ namespace block
 {
     public partial class UserControlAutorsList : UserControl
     {
+        public List<string> asd;
         public UserControlAutorsList()
         {
             InitializeComponent();

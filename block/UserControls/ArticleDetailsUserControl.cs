@@ -12,11 +12,11 @@ namespace block
 {
     public partial class ArticleDetailsUserControl : UserControl
     {
-
+        public List<string> asd;
         public ArticleDetailsUserControl(List<string> Articles)
         {
             InitializeComponent();
-
+            this.asd = Articles;
             List<String> result = SQLClass.Select("SELECT Author, Category, Text, Picture FROM " + "Articles1" + " WHERE `Header` = '" + Articles[0] + "'");
             AuthorsNameLabel.Text = result[0];
             ArticleLabel.Text = Articles[0];
