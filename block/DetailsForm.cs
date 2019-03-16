@@ -17,5 +17,10 @@ namespace block
             InitializeComponent();
             flowLayoutPanel1.Controls.Add(Details);
         }
+
+        private void DetailsForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

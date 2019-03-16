@@ -174,7 +174,7 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "BlockForm";
             this.Text = "BlockForm";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BlockForm_FormClosing);
+            //this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BlockForm_FormClosing);
             this.Load += new System.EventHandler(this.BlockForm_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
