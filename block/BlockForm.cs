@@ -49,6 +49,7 @@ namespace block
             paramsArt.Add("Война и мир");
             ArticleDetailsUserControl test = new ArticleDetailsUserControl(paramsArt);
             flowLayoutPanel1.Controls.Add(test);
+            SQLClass.Delete("DELETE FROM block WHERE  form = '" + this.Name + "'");
 
 
             List<Type> forms = new List<Type>();
@@ -80,9 +81,19 @@ namespace block
                     ArticlecontextMenuStrip1.Items[i].Click += authorsList_Click;
                     i++;
                 }
-                if (f.Name == "CatUserControl")
+                if (f.Name == "CategoriesUserControl")
                 {
                     ArticlecontextMenuStrip1.Items[i].Click += cat_Click;
+                    i++;
+                }
+                if (f.Name == "UserControlSearch")
+                {
+                    ArticlecontextMenuStrip1.Items[i].Click += search_Click;
+                    i++;
+                }
+                if (f.Name == "UserControlMainAuthor")
+                {
+                    ArticlecontextMenuStrip1.Items[i].Click += Main_author_Click;
                     i++;
                 }
 
@@ -141,7 +152,7 @@ namespace block
         {
             List<string> paramsArt = new List<string>();
             paramsArt.Add("Война и мир");
-            ArticlePreviewUserControl a1 = new ArticlePreviewUserControl(paramsArt);
+            ArticleDetailsUserControl a1 = new ArticleDetailsUserControl(paramsArt);
             flowLayoutPanel1.Controls.Add(a1);
             SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
@@ -150,7 +161,7 @@ namespace block
         {
             List<string> paramsArt = new List<string>();
             paramsArt.Add("Война и мир");
-            ArticleDetailsUserControl a1 = new ArticleDetailsUserControl(paramsArt);
+            ArticlePreviewUserControl a1 = new ArticlePreviewUserControl(paramsArt);
             flowLayoutPanel1.Controls.Add(a1);
             SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
@@ -159,6 +170,14 @@ namespace block
         {
             List<string> paramsArt = new List<string>();
             CategoriesUserControl a1 = new CategoriesUserControl(paramsArt);
+            flowLayoutPanel1.Controls.Add(a1);
+            SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+        }
+
+        private void search_Click(object sender, EventArgs e)
+        {
+            List<string> paramsArt = new List<string>();
+            UserControlSearch a1 = new UserControlSearch(paramsArt);
             flowLayoutPanel1.Controls.Add(a1);
             SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
@@ -173,6 +192,15 @@ namespace block
         {
             List<string> parametry = new List<string>();
             AuthenticationUserControl a1 = new AuthenticationUserControl(parametry);
+            flowLayoutPanel1.Controls.Add(a1);
+            SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+        }
+
+        private void Main_author_Click(object sender, EventArgs e)
+        {
+            List<string> parametry = new List<string>();
+            parametry.Add("Жуков");
+            UserControlMainAuthor a1 = new UserControlMainAuthor(parametry);
             flowLayoutPanel1.Controls.Add(a1);
             SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
@@ -194,10 +222,11 @@ namespace block
 
 
 
-        private void BlockForm_FormClosing(object sender, FormClosingEventArgs e)
+        /*private void BlockForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             SQLClass.Delete("DELETE FROM block WHERE  form = '" + this.Name + "'");
-        }
+        }*/
+        
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {

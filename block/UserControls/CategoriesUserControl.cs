@@ -26,30 +26,33 @@ namespace block
         /// <param name="AmountOfCategories">
         /// Лимит на количество категорий для загрузки из базы. 
         /// </param>
-        public CategoriesUserControl(List<string> Categories = null, int AmountOfCategories = 50)
+        public CategoriesUserControl(List<string> CategoriesParams)
         {
             InitializeComponent();
-            if (Categories == null)
-            {
-                Categories = SQLClass.Select(string.Format("SELECT Name FROM Categories ORDER BY Name LIMIT {0}", AmountOfCategories));
-            }
-            tableLayoutPanel1.RowCount = Categories.Count;
+            List<string> Categories = SQLClass.Select("SELECT Name FROM Categories ORDER BY Name");
+            
             for (int i = 0; i < Categories.Count; i++)
             {
                 Label label = new Label
                 {
                     Size = new Size(100, 30),
+                    Location = new Point(0, i * 30 + 30),
                     Text = Categories[i].ToString()
                 };
                 label.Click += new EventHandler(lable_cat_Click);
                 
-                tableLayoutPanel1.SetRow(label, i);
+                this.Controls.Add(label);
             }
         }
 
         public void lable_cat_Click(object sender, EventArgs e)
         {
             MessageBox.Show(((Label)sender).Text);
+        }
+
+        private void CategoriesUserControl_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

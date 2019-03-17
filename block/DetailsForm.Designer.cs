@@ -47,6 +47,7 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "DetailsForm";
             this.Text = "DetailsForm";
+            this.Load += new System.EventHandler(this.DetailsForm_Load);
             this.ResumeLayout(false);
 
         }
