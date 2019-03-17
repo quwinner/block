@@ -12,7 +12,7 @@ namespace block
 {
     public partial class UserControlSearch : UserControl
     {
-        public UserControlSearch()
+        public UserControlSearch(List<string> SearchParams)
         {
             InitializeComponent();
         }
