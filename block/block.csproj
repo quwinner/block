@@ -57,6 +57,12 @@
     <Compile Include="AboutMeForm.Designer.cs">
       <DependentUpon>AboutMeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="parametri.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="parametri.Designer.cs">
+      <DependentUpon>parametri.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\CategoriesUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -129,6 +135,9 @@
     <Compile Include="SQLClass.cs" />
     <EmbeddedResource Include="AboutMeForm.resx">
       <DependentUpon>AboutMeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="parametri.resx">
+      <DependentUpon>parametri.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\CategoriesUserControl.resx">
       <DependentUpon>CategoriesUserControl.cs</DependentUpon>
