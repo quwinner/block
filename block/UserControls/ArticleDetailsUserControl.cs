@@ -12,10 +12,13 @@ namespace block
 {
     public partial class ArticleDetailsUserControl : UserControl
     {
-
+        public List<string> asd;
         public ArticleDetailsUserControl(List<string> Articles)
         {
             InitializeComponent();
+
+            this.asd = Articles;
+
             try
             {
                 this.Size = new Size(Convert.ToInt32(Articles[1]), Convert.ToInt32(Articles[2]));

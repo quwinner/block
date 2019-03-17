@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -57,17 +57,11 @@
     <Compile Include="AboutMeForm.Designer.cs">
       <DependentUpon>AboutMeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\UserControlMainAuthor.cs">
+    <Compile Include="UserControls\AdsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\UserControlMainAuthor.Designer.cs">
-      <DependentUpon>UserControlMainAuthor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="parametri.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="parametri.Designer.cs">
-      <DependentUpon>parametri.cs</DependentUpon>
+    <Compile Include="UserControls\AdsUserControl.Designer.cs">
+      <DependentUpon>AdsUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\CategoriesUserControl.cs">
       <SubType>UserControl</SubType>
@@ -142,11 +136,8 @@
     <EmbeddedResource Include="AboutMeForm.resx">
       <DependentUpon>AboutMeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\UserControlMainAuthor.resx">
-      <DependentUpon>UserControlMainAuthor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="parametri.resx">
-      <DependentUpon>parametri.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\AdsUserControl.resx">
+      <DependentUpon>AdsUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\CategoriesUserControl.resx">
       <DependentUpon>CategoriesUserControl.cs</DependentUpon>

@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,7 +40,6 @@ namespace block
 
         public void BlockForm_Load(object sender, EventArgs e)
         {
-            
             Program.UserControlCMS = contextMenuStrip1;
             //File.WriteAllText("test.json", SQLClass.Select("SELECT * FROM `block_blocks` WHERE 1")[1]);
             //label1.Text = (LoadFromDB("block1"));
@@ -49,7 +49,6 @@ namespace block
             paramsArt.Add("Война и мир");
             ArticleDetailsUserControl test = new ArticleDetailsUserControl(paramsArt);
             flowLayoutPanel1.Controls.Add(test);
-            SQLClass.Delete("DELETE FROM block WHERE  form = '" + this.Name + "'");
 
 
             List<Type> forms = new List<Type>();
@@ -81,22 +80,16 @@ namespace block
                     ArticlecontextMenuStrip1.Items[i].Click += authorsList_Click;
                     i++;
                 }
-                if (f.Name == "CategoriesUserControl")
+                if (f.Name == "CatUserControl")
                 {
                     ArticlecontextMenuStrip1.Items[i].Click += cat_Click;
                     i++;
                 }
-                if (f.Name == "UserControlSearch")
+                if (f.Name == "AdsUserControl")
                 {
-                    ArticlecontextMenuStrip1.Items[i].Click += search_Click;
+                    ArticlecontextMenuStrip1.Items[i].Click += ads_click;
                     i++;
                 }
-                if (f.Name == "UserControlMainAuthor")
-                {
-                    ArticlecontextMenuStrip1.Items[i].Click += Main_author_Click;
-                    i++;
-                }
-
             }
 
         }
@@ -148,16 +141,21 @@ namespace block
             SQLClass.Delete("DELETE FROM `block_blocks` WHERE 1");
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void ads_click(object sender, EventArgs e)
         {
             List<string> paramsArt = new List<string>();
-            paramsArt.Add("Война и мир");
-            ArticleDetailsUserControl a1 = new ArticleDetailsUserControl(paramsArt);
+            paramsArt.Add("http://rustrade.org.uk/rus/wp-content/uploads/dodo-pizza.jpg");
+            paramsArt.Add("https://i.simpalsmedia.com/joblist.md/360x200/f0eeb7ea787a8cc8370e29638d582f31.png");
+            paramsArt.Add("https://www.sostav.ru/images/news/2018/02/21/13349a407abf5ee3d8c795fc78694299.jpg");
+            paramsArt.Add("https://static.tildacdn.com/tild6533-3365-4438-a364-613965626338/cover-6.jpg");
+            paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
+            paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
+            AdsUserControl a1 = new AdsUserControl(paramsArt);
             flowLayoutPanel1.Controls.Add(a1);
             SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
 
-        private void articlePreview_Click(object sender, EventArgs e)
+        private void label4_Click(object sender, EventArgs e)
         {
             List<string> paramsArt = new List<string>();
             paramsArt.Add("Война и мир");
@@ -166,18 +164,19 @@ namespace block
             SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
 
-        private void cat_Click(object sender, EventArgs e)
+        private void articlePreview_Click(object sender, EventArgs e)
         {
             List<string> paramsArt = new List<string>();
-            CategoriesUserControl a1 = new CategoriesUserControl(paramsArt);
+            paramsArt.Add("Война и мир");
+            ArticleDetailsUserControl a1 = new ArticleDetailsUserControl(paramsArt);
             flowLayoutPanel1.Controls.Add(a1);
             SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
 
-        private void search_Click(object sender, EventArgs e)
+        private void cat_Click(object sender, EventArgs e)
         {
             List<string> paramsArt = new List<string>();
-            UserControlSearch a1 = new UserControlSearch(paramsArt);
+            CategoriesUserControl a1 = new CategoriesUserControl(paramsArt);
             flowLayoutPanel1.Controls.Add(a1);
             SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
@@ -192,15 +191,6 @@ namespace block
         {
             List<string> parametry = new List<string>();
             AuthenticationUserControl a1 = new AuthenticationUserControl(parametry);
-            flowLayoutPanel1.Controls.Add(a1);
-            SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
-        }
-
-        private void Main_author_Click(object sender, EventArgs e)
-        {
-            List<string> parametry = new List<string>();
-            parametry.Add("Жуков");
-            UserControlMainAuthor a1 = new UserControlMainAuthor(parametry);
             flowLayoutPanel1.Controls.Add(a1);
             SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
@@ -222,28 +212,9 @@ namespace block
 
 
 
-        /*private void BlockForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void BlockForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             SQLClass.Delete("DELETE FROM block WHERE  form = '" + this.Name + "'");
-        }*/
-        
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void ArticlecontextMenuStrip1_Opening(object sender, CancelEventArgs e)
-        {
-
-        }
-
-        private void настроитьПараметрыToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            UserControl pb = (UserControl)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            parametri p = new parametri("Реклама");
-            p.ShowDialog();
-            pb.Size = new Size(pb.Size.Width, p.visota);
         }
     }
 }
