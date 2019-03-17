@@ -39,6 +39,7 @@ namespace block
 
         public void BlockForm_Load(object sender, EventArgs e)
         {
+            
             Program.UserControlCMS = contextMenuStrip1;
             //File.WriteAllText("test.json", SQLClass.Select("SELECT * FROM `block_blocks` WHERE 1")[1]);
             //label1.Text = (LoadFromDB("block1"));
@@ -225,5 +226,24 @@ namespace block
         {
             SQLClass.Delete("DELETE FROM block WHERE  form = '" + this.Name + "'");
         }*/
+        
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void ArticlecontextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void настроитьПараметрыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UserControl pb = (UserControl)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            parametri p = new parametri("Реклама");
+            p.ShowDialog();
+            pb.Size = new Size(pb.Size.Width, p.visota);
+        }
     }
 }
