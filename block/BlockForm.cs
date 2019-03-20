@@ -29,7 +29,7 @@ namespace block
         {
             InitializeComponent();
             this.FormName = FormName;
-            DeleteMenuStrip = DeletecontextMenuStrip1;
+            DeleteMenuStrip = UCContextMenuStrip;
         }
 
         private string LoadFromDB(string block)
@@ -38,9 +38,18 @@ namespace block
             return aaa[0];
         }
 
+        private void search_Click(object sender, EventArgs e)
+        {
+            List<string> paramsArt = new List<string>();
+            UserControlSearch a1 = new UserControlSearch(paramsArt);
+            flowLayoutPanel1.Controls.Add(a1);
+            SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+        }
+
         public void BlockForm_Load(object sender, EventArgs e)
         {
-            Program.UserControlCMS = contextMenuStrip1;
+            Program.UserControlCMS = UCContextMenuStrip;
+            Program.AddNewUserControlCMS = ArticlecontextMenuStrip1;
             //File.WriteAllText("test.json", SQLClass.Select("SELECT * FROM `block_blocks` WHERE 1")[1]);
             //label1.Text = (LoadFromDB("block1"));
             //Panel panel1 = CreateStatPanel();
@@ -63,35 +72,47 @@ namespace block
                 if(f.Name == "ArticleDetailsUserControl")
                 {
                     ArticlecontextMenuStrip1.Items[i].Click += label4_Click;
-                    i++;
                 }
-                if (f.Name == "ArticlePreviewUserControl")
+                else if (f.Name == "ArticlePreviewUserControl")
                 {
                     ArticlecontextMenuStrip1.Items[i].Click += articlePreview_Click;
-                    i++;
                 }
-                if (f.Name == "AuthenticationUserControl")
+                else if (f.Name == "AuthenticationUserControl")
                 {
                     ArticlecontextMenuStrip1.Items[i].Click += author_Click;
-                    i++;
                 }
-                if (f.Name == "UserControlAutorsList")
+                else if (f.Name == "UserControlAutorsList")
                 {
                     ArticlecontextMenuStrip1.Items[i].Click += authorsList_Click;
-                    i++;
                 }
-                if (f.Name == "CatUserControl")
+                else if (f.Name == "CategoriesUserControl")
                 {
                     ArticlecontextMenuStrip1.Items[i].Click += cat_Click;
-                    i++;
                 }
-                if (f.Name == "AdsUserControl")
+                else if (f.Name == "UserControlSearch")
+                {
+                    ArticlecontextMenuStrip1.Items[i].Click += search_Click;
+                }
+                else if (f.Name == "AdsUserControl")
                 {
                     ArticlecontextMenuStrip1.Items[i].Click += ads_click;
-                    i++;
                 }
+                else if (f.Name == "UserControlMainAuthor")
+                {
+                    ArticlecontextMenuStrip1.Items[i].Click += Main_author_Click;
+                }
+                i++;
             }
 
+        }
+
+        private void Main_author_Click(object sender, EventArgs e)
+        {
+            List<string> parametry = new List<string>();
+            parametry.Add("Жуков");
+            UserControlMainAuthor a1 = new UserControlMainAuthor(parametry);
+            flowLayoutPanel1.Controls.Add(a1);
+            SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
 
         public static void AddDeleteMenu(object sender)
@@ -157,40 +178,46 @@ namespace block
 
         private void label4_Click(object sender, EventArgs e)
         {
-            List<string> paramsArt = new List<string>();
-            paramsArt.Add("Война и мир");
-            ArticlePreviewUserControl a1 = new ArticlePreviewUserControl(paramsArt);
+            UCParameters p = new UCParameters("block.ArticleDetailsUserControl", 0, 0);
+            p.qq.Add("Война и мир");
+            p.ShowDialog();
+            ArticlePreviewUserControl a1 = new ArticlePreviewUserControl(p.qq);
             flowLayoutPanel1.Controls.Add(a1);
             SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
 
         private void articlePreview_Click(object sender, EventArgs e)
         {
-            List<string> paramsArt = new List<string>();
-            paramsArt.Add("Война и мир");
-            ArticleDetailsUserControl a1 = new ArticleDetailsUserControl(paramsArt);
+            UCParameters p = new UCParameters("block.ArticlePreviewUserControl", 0, 0);
+            p.qq.Add("Война и мир");
+            p.ShowDialog();
+            ArticleDetailsUserControl a1 = new ArticleDetailsUserControl(p.qq);
             flowLayoutPanel1.Controls.Add(a1);
             SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
 
         private void cat_Click(object sender, EventArgs e)
         {
-            List<string> paramsArt = new List<string>();
-            CategoriesUserControl a1 = new CategoriesUserControl(paramsArt);
+            UCParameters p = new UCParameters("block.CategoriesUserControl", 0, 0);
+            p.ShowDialog();
+            CategoriesUserControl a1 = new CategoriesUserControl(p.qq);
             flowLayoutPanel1.Controls.Add(a1);
             SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
         private void authorsList_Click(object sender, EventArgs e)
         {
-            UserControlAutorsList a1 = new UserControlAutorsList();
+            UCParameters p = new UCParameters("block.UserControlAutorsList", 0, 0);
+            p.ShowDialog();
+            UserControlAutorsList a1 = new UserControlAutorsList(p.qq);
             flowLayoutPanel1.Controls.Add(a1);
             SQLClass.Insert("INSERT INTO `block`(`form`, `x`, `y`, `name`) VALUES ('" + this.Name + "','" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
 
         private void author_Click(object sender, EventArgs e)
         {
-            List<string> parametry = new List<string>();
-            AuthenticationUserControl a1 = new AuthenticationUserControl(parametry);
+            UCParameters p = new UCParameters("block.AuthenticationUserControl", 0, 0);
+            p.ShowDialog();
+            AuthenticationUserControl a1 = new AuthenticationUserControl(p.qq);
             flowLayoutPanel1.Controls.Add(a1);
             SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
@@ -214,7 +241,15 @@ namespace block
 
         private void BlockForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SQLClass.Delete("DELETE FROM block WHERE  form = '" + this.Name + "'");
+            //SQLClass.Delete("DELETE FROM block WHERE  form = '" + this.Name + "'");
+        }
+
+        private void настроитьПараметрыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UserControl pb = (UserControl)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            UCParameters p = new UCParameters(pb.GetType().ToString(), pb.Size.Height, pb.Size.Width);
+            p.ShowDialog();
+            pb.Size = new Size(p.shirina, p.visota);
         }
     }
 }

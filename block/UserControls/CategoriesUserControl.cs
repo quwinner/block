@@ -31,7 +31,10 @@ namespace block
         public CategoriesUserControl(List<string> CategoriesParams)
         {
             InitializeComponent();
-            List<string> Categories = SQLClass.Select("SELECT Name FROM Categories ORDER BY Name");
+
+
+
+            List<string> Categories = SQLClass.Select("SELECT Name FROM Categories ORDER BY Name LIMIT 0," + CategoriesParams[0]);
             
             for (int i = 0; i < Categories.Count; i++)
             {

@@ -25,5 +25,10 @@ namespace block
                 flowLayoutPanel1.Controls.Add(pic);
             }
         }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
