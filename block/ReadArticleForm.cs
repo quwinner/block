@@ -31,7 +31,7 @@ namespace block
 
         private void ReadArticleForm_Load(object sender, EventArgs e)
         {
-
+            AboutMeForm.read(this);
         }
     }
 }

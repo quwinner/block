@@ -23,7 +23,7 @@ namespace block
 
         private void MyPromotionsForm_Load(object sender, EventArgs e)
         {
-
+            AboutMeForm.read(this);
         }
     }
 }

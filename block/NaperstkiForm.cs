@@ -26,6 +26,7 @@ namespace block
         {
             reg(saddsa);
             reg("reg&Left&6;5&200;234");
+            AboutMeForm.read(this);
         }
 
         #region Drag-n-drop для картинок

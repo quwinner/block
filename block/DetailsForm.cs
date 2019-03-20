@@ -20,7 +20,7 @@ namespace block
 
         private void DetailsForm_Load(object sender, EventArgs e)
         {
-
+            AboutMeForm.read(this);
         }
     }
 }
