@@ -78,7 +78,7 @@
             this.loginButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.loginButton.Location = new System.Drawing.Point(0, 66);
             this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(200, 31);
+            this.loginButton.Size = new System.Drawing.Size(200, 34);
             this.loginButton.TabIndex = 4;
             this.loginButton.Text = "Войти";
             this.loginButton.UseVisualStyleBackColor = true;
@@ -94,7 +94,7 @@
             this.Controls.Add(this.loginTextBox);
             this.Controls.Add(this.loginLabel);
             this.Name = "AuthenticationUserControl";
-            this.Size = new System.Drawing.Size(200, 97);
+            this.Size = new System.Drawing.Size(200, 100);
             this.Load += new System.EventHandler(this.AuthenticationUserControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -21,6 +21,7 @@ namespace block
         {
             InitializeComponent();
 
+            ArticlePreviewUserControl.AddDNDFunctions(this);
             BlockForm.AddDeleteMenu(this);
         }
 

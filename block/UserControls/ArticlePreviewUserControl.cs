@@ -184,6 +184,10 @@ namespace block
             dragging = false;
         }
 
+        /// <summary>
+        /// Добавление к ЮзерКонтролу контекстного меню, функций для DND и т.д.
+        /// </summary>
+        /// <param name="sender"></param>
         public static void AddDNDFunctions(object sender)
         {
             ((UserControl)sender).MouseDown += new MouseEventHandler(ArticlePreviewUserControl.FormTest_MouseDown);
@@ -199,6 +203,11 @@ namespace block
         }
 
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }
