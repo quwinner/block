@@ -187,13 +187,21 @@ namespace block
             if (dragging)
             {
                 Point dif = Point.Subtract(Cursor.Position, new Size(dragCursorPoint));
-                ((UserControl)sender).Location = Point.Add(dragFormPoint, new Size(dif));
+                ((UserControl)sender).Location = Point.Add(dragFormPoint, new Size(dif));                
             }
         }
 
         public static void FormTest_MouseUp(object sender, MouseEventArgs e)
         {
             dragging = false;
+            foreach (UserControl uc in Program.CONTROLY)
+            {
+                if (sender.Equals(uc))
+                {
+                    SQLClass.Update("UPDATE block SET x = " + ((UserControl)sender).Location.X.ToString() +
+                        " WHERE name = '" + uc.Name + "' AND form = '" + uc.FindForm().Name + "'");
+                }
+            }
         }
 
         /// <summary>

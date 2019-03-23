@@ -64,7 +64,7 @@ namespace block
             List<Type> forms = new List<Type>();
             foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
             {
-                forms.AddRange(from t in asm.GetTypes() where t.IsSubclassOf(typeof(UserControl)) select t);
+                forms.AddRange(from t in asm.GetTypes() where t.IsSubclassOf(typeof(UserControl)) select t);            
             }
             int i =0;
             foreach (Type f in forms)
@@ -115,10 +115,7 @@ namespace block
             List<string> parametry = new List<string>();
             parametry.Add("Жуков");
             UserControlMainAuthor a1 = new UserControlMainAuthor(parametry);
-            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            c.Controls.Add(a1);
-            SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name) VALUES ('" + 
-                c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+            fInsert(sender, a1);
         }
 
         public static void AddDeleteMenu(object sender)
@@ -181,9 +178,15 @@ namespace block
             paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
             paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
             AdsUserControl a1 = new AdsUserControl(paramsArt);
+            fInsert(sender, a1);
+           
+        }
 
+        public void fInsert(object sender, UserControl a1)
+        {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             c.Controls.Add(a1);
+            Program.CONTROLY.Add(a1);
             SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name) VALUES ('" +
                 c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
@@ -193,12 +196,9 @@ namespace block
             UCParameters p = new UCParameters("block.ArticleDetailsUserControl", 0, 0);
             p.qq.Add("Война и мир");
             p.ShowDialog();
-            ArticlePreviewUserControl a1 = new ArticlePreviewUserControl(p.qq);
+            ArticleDetailsUserControl a1 = new ArticleDetailsUserControl(p.qq);
 
-            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            c.Controls.Add(a1);
-            SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name) VALUES ('" +
-                c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+            fInsert(sender, a1);
         }
 
         private void articlePreview_Click(object sender, EventArgs e)
@@ -208,10 +208,7 @@ namespace block
             p.ShowDialog();
             ArticleDetailsUserControl a1 = new ArticleDetailsUserControl(p.qq);
 
-            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            c.Controls.Add(a1);
-            SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name) VALUES ('" +
-                c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+            fInsert(sender, a1);
         }
 
         /// <summary>
@@ -222,11 +219,7 @@ namespace block
             UCParameters p = new UCParameters("block.CategoriesUserControl", 0, 0);
             p.ShowDialog();
             CategoriesUserControl a1 = new CategoriesUserControl(p.qq);
-
-            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            c.Controls.Add(a1);
-            SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name) VALUES ('" +
-                c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+            fInsert(sender, a1);
         }
         private void authorsList_Click(object sender, EventArgs e)
         {
@@ -234,10 +227,7 @@ namespace block
             p.ShowDialog();
             UserControlAutorsList a1 = new UserControlAutorsList(p.qq);
 
-            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            c.Controls.Add(a1);
-            SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name) VALUES ('" +
-                c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+            fInsert(sender, a1);
         }
 
         private void author_Click(object sender, EventArgs e)
@@ -246,10 +236,7 @@ namespace block
             p.ShowDialog();
             AuthenticationUserControl a1 = new AuthenticationUserControl(p.qq);
 
-            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            c.Controls.Add(a1);
-            SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name) VALUES ('" +
-                c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+            fInsert(sender, a1);
         }
 
 
@@ -260,11 +247,11 @@ namespace block
             SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('"+this.Name+"','" + pb.Parent.Name + "'," + pb.Location.X + ", " + pb.Location.Y + ",'" + pb.Name + "')");
         }
 
-        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        public void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UserControl pb = (UserControl)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             pb.Visible = false;
-            SQLClass.Delete("DELETE FROM `block` WHERE `name` = '"+ pb.Name +"' AND form = '"+ pb.FindForm() +"'");
+            SQLClass.Delete("DELETE FROM `block` WHERE `name` = '"+ pb.Name +"' AND form = '"+ pb.FindForm().Name +"'");
         }
 
 
@@ -280,6 +267,11 @@ namespace block
             UCParameters p = new UCParameters(pb.GetType().ToString(), pb.Size.Height, pb.Size.Width);
             p.ShowDialog();
             pb.Size = new Size(p.shirina, p.visota);
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

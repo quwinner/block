@@ -17,6 +17,9 @@ namespace block
         /// </summary>
         public static ContextMenuStrip AddNewUserControlCMS;
 
+
+        public static List<UserControl> CONTROLY = new List<UserControl>();
+
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>

@@ -64,6 +64,7 @@
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(627, 220);
             this.flowLayoutPanel1.TabIndex = 0;
+            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             // 
             // ArticlecontextMenuStrip1
             // 
@@ -145,7 +146,7 @@
             this.deleteToolStripMenuItem,
             this.настроитьПараметрыToolStripMenuItem});
             this.UCContextMenuStrip.Name = "DeletecontextMenuStrip1";
-            this.UCContextMenuStrip.Size = new System.Drawing.Size(198, 70);
+            this.UCContextMenuStrip.Size = new System.Drawing.Size(198, 48);
             // 
             // deleteToolStripMenuItem
             // 
