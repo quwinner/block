@@ -15,6 +15,7 @@ namespace block
         public AboutMeForm()
         {
             InitializeComponent();
+            this.ContextMenuStrip = Program.AddNewUserControlCMS;
         }
 
         private void AboutMeForm_Load(object sender, EventArgs e)

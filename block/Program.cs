@@ -8,7 +8,14 @@ namespace block
 {
     static class Program
     {
+        /// <summary>
+        /// Контекстное меню ЮзерКонтролов
+        /// </summary>
         public static ContextMenuStrip UserControlCMS;
+        /// <summary>
+        /// Контекстное меню добавления ЮзерКонтролов
+        /// </summary>
+        public static ContextMenuStrip AddNewUserControlCMS;
 
         /// <summary>
         /// Главная точка входа для приложения.

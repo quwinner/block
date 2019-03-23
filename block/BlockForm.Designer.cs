@@ -38,14 +38,14 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.DeletecontextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.UCContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.настроитьПараметрыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.настроитьПараметрыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.DeletecontextMenuStrip1.SuspendLayout();
+            this.UCContextMenuStrip.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,13 +64,11 @@
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(627, 220);
             this.flowLayoutPanel1.TabIndex = 0;
-            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             // 
             // ArticlecontextMenuStrip1
             // 
             this.ArticlecontextMenuStrip1.Name = "ArticlecontextMenuStrip1";
             this.ArticlecontextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            this.ArticlecontextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.ArticlecontextMenuStrip1_Opening);
             // 
             // label1
             // 
@@ -141,20 +139,27 @@
             this.label5.Text = "label5";
             this.label5.Click += new System.EventHandler(this.label4_Click);
             // 
-            // DeletecontextMenuStrip1
+            // UCContextMenuStrip
             // 
-            this.DeletecontextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.UCContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem,
             this.настроитьПараметрыToolStripMenuItem});
-            this.DeletecontextMenuStrip1.Name = "DeletecontextMenuStrip1";
-            this.DeletecontextMenuStrip1.Size = new System.Drawing.Size(198, 70);
+            this.UCContextMenuStrip.Name = "DeletecontextMenuStrip1";
+            this.UCContextMenuStrip.Size = new System.Drawing.Size(198, 70);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // настроитьПараметрыToolStripMenuItem
+            // 
+            this.настроитьПараметрыToolStripMenuItem.Name = "настроитьПараметрыToolStripMenuItem";
+            this.настроитьПараметрыToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.настроитьПараметрыToolStripMenuItem.Text = "Настроить параметры";
+            this.настроитьПараметрыToolStripMenuItem.Click += new System.EventHandler(this.настроитьПараметрыToolStripMenuItem_Click);
             // 
             // contextMenuStrip1
             // 
@@ -170,13 +175,6 @@
             this.toolStripMenuItem2.Text = "сохранить";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
-            // настроитьПараметрыToolStripMenuItem
-            // 
-            this.настроитьПараметрыToolStripMenuItem.Name = "настроитьПараметрыToolStripMenuItem";
-            this.настроитьПараметрыToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.настроитьПараметрыToolStripMenuItem.Text = "Настроить параметры";
-            this.настроитьПараметрыToolStripMenuItem.Click += new System.EventHandler(this.настроитьПараметрыToolStripMenuItem_Click);
-            // 
             // BlockForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -185,12 +183,11 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "BlockForm";
             this.Text = "BlockForm";
-            //this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BlockForm_FormClosing);
             this.Load += new System.EventHandler(this.BlockForm_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.DeletecontextMenuStrip1.ResumeLayout(false);
+            this.UCContextMenuStrip.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -209,7 +206,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ContextMenuStrip ArticlecontextMenuStrip1;
-        private System.Windows.Forms.ContextMenuStrip DeletecontextMenuStrip1;
+        private System.Windows.Forms.ContextMenuStrip UCContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
