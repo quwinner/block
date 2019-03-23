@@ -12,21 +12,22 @@ namespace block
 {
     public partial class AboutMeForm : Form
     {
-        public static List<UserControl> control;
 
         public AboutMeForm()
         {
             InitializeComponent();
             this.ContextMenuStrip = Program.AddNewUserControlCMS;
-            AboutMeForm.read(this);
+            Program.CONTROLY = AboutMeForm.read(this);
         }
 
         /// <summary>
         /// Читаем из БД список юзерКонтролов, лежащих на форме
         /// </summary>
         /// <param name="Name">Форма</param>
-        public static void read(Control Name)
+        public static List<UserControl> read(Control Name)
         {
+            List<UserControl> control = new List<UserControl>();
+
             List<string> user = SQLClass.Select(
                 "SELECT form, x, y, name FROM block WHERE form = '" + 
                 Name.FindForm().Name + "'");
@@ -46,6 +47,7 @@ namespace block
                     };
 
                     Name.Controls.Add(preview);
+                    control.Add(preview);
                 }
 
                 if (user[i + 3] == "ArticleDetailsUserControl")
@@ -58,6 +60,7 @@ namespace block
                     };
 
                     Name.Controls.Add(preview);
+                    control.Add(preview);
                 }
 
                 if (user[i + 3] == "AuthenticationUserControl")
@@ -69,6 +72,7 @@ namespace block
                     };
 
                     Name.Controls.Add(preview);
+                    control.Add(preview);
                 }
 
                 if (user[i + 3] == "UserControlAutorsList")
@@ -80,6 +84,7 @@ namespace block
                     };
 
                     Name.Controls.Add(preview);
+                    control.Add(preview);
                 }
 
                 if (user[i + 3] == "CatUserControl")
@@ -91,6 +96,7 @@ namespace block
                     };
 
                     Name.Controls.Add(preview);
+                    control.Add(preview);
                 }
 
                 if (user[i + 3] == "UserControlSearch")
@@ -102,6 +108,7 @@ namespace block
                     };
 
                     Name.Controls.Add(preview);
+                    control.Add(preview);
                 }
 
                 if (user[i + 3] == "AdsUserControl")
@@ -113,6 +120,7 @@ namespace block
                     };
 
                     Name.Controls.Add(preview);
+                    control.Add(preview);
                 }
 
                 if (user[i + 3] == "UserControlMainAuthor")
@@ -125,8 +133,11 @@ namespace block
                     };
 
                     Name.Controls.Add(preview);
+                    control.Add(preview);
                 }
             }
+
+            return control;
         }
 
         private void AboutMeForm_Load(object sender, EventArgs e)
