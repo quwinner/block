@@ -30,6 +30,7 @@ namespace block
             InitializeComponent();
             this.FormName = FormName;
             DeleteMenuStrip = UCContextMenuStrip;
+            AboutMeForm.read(this);
         }
 
         private string LoadFromDB(string block)
