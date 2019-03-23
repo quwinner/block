@@ -137,7 +137,7 @@
             this.label5.Size = new System.Drawing.Size(35, 13);
             this.label5.TabIndex = 6;
             this.label5.Text = "label5";
-            this.label5.Click += new System.EventHandler(this.label4_Click);
+            this.label5.Click += new System.EventHandler(this.ArticleDetailsClick);
             // 
             // UCContextMenuStrip
             // 
