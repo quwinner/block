@@ -190,7 +190,7 @@ namespace block
 
         private void ArticleDetailsClick(object sender, EventArgs e)
         {
-            UCParameters p = new UCParameters("block.ArticleDetailsUserControl", 0, 0);
+            UCParameters p = new UCParameters("block.ArticleDetailsUserControl", new Size(), new Point(), new List<string>(), ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl.Name, this.Name);
             p.qq.Add("Война и мир");
             p.ShowDialog();
             ArticlePreviewUserControl a1 = new ArticlePreviewUserControl(p.qq);
@@ -203,7 +203,7 @@ namespace block
 
         private void articlePreview_Click(object sender, EventArgs e)
         {
-            UCParameters p = new UCParameters("block.ArticlePreviewUserControl", 0, 0);
+            UCParameters p = new UCParameters("block.ArticlePreviewUserControl", new Size(), new Point(), new List<string>(), ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl.Name, this.Name);
             p.qq.Add("Война и мир");
             p.ShowDialog();
             ArticleDetailsUserControl a1 = new ArticleDetailsUserControl(p.qq);
@@ -219,7 +219,7 @@ namespace block
         /// </summary>
         private void cat_Click(object sender, EventArgs e)
         {
-            UCParameters p = new UCParameters("block.CategoriesUserControl", 0, 0);
+            UCParameters p = new UCParameters("block.CategoriesUserControl", new Size(), new Point(), new List<string>(), ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl.Name, this.Name);
             p.ShowDialog();
             CategoriesUserControl a1 = new CategoriesUserControl(p.qq);
 
@@ -230,7 +230,7 @@ namespace block
         }
         private void authorsList_Click(object sender, EventArgs e)
         {
-            UCParameters p = new UCParameters("block.UserControlAutorsList", 0, 0);
+            UCParameters p = new UCParameters("block.UserControlAutorsList", new Size(), new Point(), new List<string>(), ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl.Name, this.Name);
             p.ShowDialog();
             UserControlAutorsList a1 = new UserControlAutorsList(p.qq);
 
@@ -242,7 +242,7 @@ namespace block
 
         private void author_Click(object sender, EventArgs e)
         {
-            UCParameters p = new UCParameters("block.AuthenticationUserControl", 0, 0);
+            UCParameters p = new UCParameters("block.AuthenticationUserControl", new Size(), new Point(), new List<string>(), ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl.Name, this.Name);
             p.ShowDialog();
             AuthenticationUserControl a1 = new AuthenticationUserControl(p.qq);
 
@@ -277,9 +277,10 @@ namespace block
         private void настроитьПараметрыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UserControl pb = (UserControl)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            UCParameters p = new UCParameters(pb.GetType().ToString(), pb.Size.Height, pb.Size.Width);
+            UCParameters p = new UCParameters(pb.GetType().ToString(), pb.Size, pb.Location, new List<string>(), pb.Parent.Name, this.Name);
             p.ShowDialog();
-            pb.Size = new Size(p.shirina, p.visota);
+            pb.Size = p.size_Userconrla;
+            pb.Location = p.locetion_userconrla;
         }
     }
 }
