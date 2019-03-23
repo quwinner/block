@@ -12,6 +12,11 @@ namespace block
 {
     public partial class ArticleDetailsUserControl : UserControl
     {
+        public Size size_Userconrla;
+        public Point locetion_userconrla;
+
+
+
         public List<string> asd;
         public ArticleDetailsUserControl(List<string> Articles)
         {
