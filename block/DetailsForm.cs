@@ -15,7 +15,8 @@ namespace block
         public DetailsForm(ArticleDetailsUserControl Details)
         {
             InitializeComponent();
-            flowLayoutPanel1.Controls.Add(Details);
+            this.Controls.Add(Details);
+            AboutMeForm.read(this);
         }
 
         private void DetailsForm_Load(object sender, EventArgs e)

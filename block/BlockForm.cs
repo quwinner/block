@@ -30,6 +30,7 @@ namespace block
             InitializeComponent();
             this.FormName = FormName;
             DeleteMenuStrip = UCContextMenuStrip;
+            AboutMeForm.read(this);
         }
 
         private string LoadFromDB(string block)
@@ -71,7 +72,7 @@ namespace block
                 ArticlecontextMenuStrip1.Items.Add(f.Name);
                 if(f.Name == "ArticleDetailsUserControl")
                 {
-                    ArticlecontextMenuStrip1.Items[i].Click += label4_Click;
+                    ArticlecontextMenuStrip1.Items[i].Click += ArticleDetailsClick;
                 }
                 else if (f.Name == "ArticlePreviewUserControl")
                 {
@@ -106,13 +107,18 @@ namespace block
 
         }
 
+        /// <summary>
+        /// Инфа об авторе
+        /// </summary>
         private void Main_author_Click(object sender, EventArgs e)
         {
             List<string> parametry = new List<string>();
             parametry.Add("Жуков");
             UserControlMainAuthor a1 = new UserControlMainAuthor(parametry);
-            flowLayoutPanel1.Controls.Add(a1);
-            SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            c.Controls.Add(a1);
+            SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name) VALUES ('" + 
+                c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
 
         public static void AddDeleteMenu(object sender)
@@ -162,6 +168,9 @@ namespace block
             SQLClass.Delete("DELETE FROM `block_blocks` WHERE 1");
         }
 
+        /// <summary>
+        /// Реклама
+        /// </summary>
         private void ads_click(object sender, EventArgs e)
         {
             List<string> paramsArt = new List<string>();
@@ -172,18 +181,24 @@ namespace block
             paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
             paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
             AdsUserControl a1 = new AdsUserControl(paramsArt);
-            flowLayoutPanel1.Controls.Add(a1);
-            SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+
+            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            c.Controls.Add(a1);
+            SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name) VALUES ('" +
+                c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void ArticleDetailsClick(object sender, EventArgs e)
         {
             UCParameters p = new UCParameters("block.ArticleDetailsUserControl", 0, 0);
             p.qq.Add("Война и мир");
             p.ShowDialog();
             ArticlePreviewUserControl a1 = new ArticlePreviewUserControl(p.qq);
-            flowLayoutPanel1.Controls.Add(a1);
-            SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+
+            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            c.Controls.Add(a1);
+            SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name) VALUES ('" +
+                c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
 
         private void articlePreview_Click(object sender, EventArgs e)
@@ -192,25 +207,37 @@ namespace block
             p.qq.Add("Война и мир");
             p.ShowDialog();
             ArticleDetailsUserControl a1 = new ArticleDetailsUserControl(p.qq);
-            flowLayoutPanel1.Controls.Add(a1);
-            SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+
+            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            c.Controls.Add(a1);
+            SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name) VALUES ('" +
+                c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
 
+        /// <summary>
+        /// Категории
+        /// </summary>
         private void cat_Click(object sender, EventArgs e)
         {
             UCParameters p = new UCParameters("block.CategoriesUserControl", 0, 0);
             p.ShowDialog();
             CategoriesUserControl a1 = new CategoriesUserControl(p.qq);
-            flowLayoutPanel1.Controls.Add(a1);
-            SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+
+            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            c.Controls.Add(a1);
+            SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name) VALUES ('" +
+                c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
         private void authorsList_Click(object sender, EventArgs e)
         {
             UCParameters p = new UCParameters("block.UserControlAutorsList", 0, 0);
             p.ShowDialog();
             UserControlAutorsList a1 = new UserControlAutorsList(p.qq);
-            flowLayoutPanel1.Controls.Add(a1);
-            SQLClass.Insert("INSERT INTO `block`(`form`, `x`, `y`, `name`) VALUES ('" + this.Name + "','" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+
+            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            c.Controls.Add(a1);
+            SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name) VALUES ('" +
+                c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
 
         private void author_Click(object sender, EventArgs e)
@@ -218,8 +245,11 @@ namespace block
             UCParameters p = new UCParameters("block.AuthenticationUserControl", 0, 0);
             p.ShowDialog();
             AuthenticationUserControl a1 = new AuthenticationUserControl(p.qq);
-            flowLayoutPanel1.Controls.Add(a1);
-            SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+
+            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            c.Controls.Add(a1);
+            SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name) VALUES ('" +
+                c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
         }
 
 

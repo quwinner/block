@@ -20,6 +20,7 @@ namespace block
         public NaperstkiForm()
         {
             InitializeComponent();
+            AboutMeForm.read(this);
         }
 
         private void Form1_Load(object sender, EventArgs e)

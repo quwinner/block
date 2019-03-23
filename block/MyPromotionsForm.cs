@@ -19,6 +19,7 @@ namespace block
         public MyPromotionsForm()
         {
             InitializeComponent();
+            AboutMeForm.read(this);
         }
 
         private void MyPromotionsForm_Load(object sender, EventArgs e)

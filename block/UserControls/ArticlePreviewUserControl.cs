@@ -53,14 +53,26 @@ namespace block
         {
             InitializeComponent();
 
+            if (Articles.Count == 0)
+            {
+                return;
+            }
             Article = Articles[0];
 
-            List<String> url_pic = SQLClass.Select(string.Format("SELECT `Picture` FROM `Articles1` WHERE `Header`='{0}'", Article));
-            pictureBox1.Load(url_pic[0]);
+            try
+            {
+                List<String> url_pic = SQLClass.Select(string.Format("SELECT `Picture` FROM `Articles1` WHERE `Header`='{0}'", Article));
+                pictureBox1.Load(url_pic[0]);
+            }
+            catch (Exception) { }
 
-            List<String> likes_dislikes = SQLClass.Select(string.Format("SELECT `LikesCount`, `DisCount` FROM `Likes` WHERE `Article`='{0}'", Article));
-            like = Int32.Parse(likes_dislikes[0]);
-            dislike = Int32.Parse(likes_dislikes[1]);
+            try
+            {
+                List<String> likes_dislikes = SQLClass.Select(string.Format("SELECT `LikesCount`, `DisCount` FROM `Likes` WHERE `Article`='{0}'", Article));
+                like = Int32.Parse(likes_dislikes[0]);
+                dislike = Int32.Parse(likes_dislikes[1]);
+            }
+            catch (Exception) { }
 
             linkLabel1.Text = Article;
             LikeCount.Text = like.ToString();
