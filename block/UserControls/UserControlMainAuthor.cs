@@ -37,6 +37,21 @@ namespace block
             statia();
         }
 
+        /// <summary>
+        /// Добавление UserControl с детальной инфой об авторе
+        /// </summary>
+        public static void AddNewBlock(object sender, EventArgs e)
+        {
+            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            UCParameters p = new UCParameters("block.UserControlMainAuthor",
+                new Size(), new Point(), new List<string>(),
+                c.Name, c.FindForm().Name);
+            p.ShowDialog();
+            p.qq.Add("Жуков");
+            UserControlMainAuthor a1 = new UserControlMainAuthor(p.qq);
+            BlockForm.InsertBlockToDB(sender, a1);
+        }
+
         private void UserControl1_Load(object sender, EventArgs e)
         {
 
@@ -53,6 +68,11 @@ namespace block
                 labelstat.Text = stat[i].ToString();
                 this.Controls.Add(labelstat);
             }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

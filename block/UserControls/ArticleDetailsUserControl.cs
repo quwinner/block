@@ -21,6 +21,8 @@ namespace block
         public ArticleDetailsUserControl(List<string> Articles)
         {
             InitializeComponent();
+            BlockForm.AddDeleteMenu(this);
+            ArticlePreviewUserControl.AddDNDFunctions(this);
 
             this.asd = Articles;
 
@@ -38,8 +40,21 @@ namespace block
             ArticleLabel.Text = Articles[0];
             ArticleTextLabel.Text = result[2];
             ArticlePicture.Load(result[3]);
-            BlockForm.AddDeleteMenu(this);
-            ArticlePreviewUserControl.AddDNDFunctions(this);
+        }
+
+        /// <summary>
+        /// Добавление UserControl с детальной инфой о статье
+        /// </summary>
+        public static void AddNewBlock(object sender, EventArgs e)
+        {
+            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            UCParameters p = new UCParameters("block.ArticleDetailsUserControl", 
+                new Size(), new Point(), new List<string>(), 
+                c.Name, c.FindForm().Name);
+            p.qq.Add("Война и мир");
+            p.ShowDialog();
+            ArticleDetailsUserControl a1 = new ArticleDetailsUserControl(p.qq);
+            BlockForm.InsertBlockToDB(sender, a1);
         }
 
         private void ArticlePicture_Click(object sender, EventArgs e)

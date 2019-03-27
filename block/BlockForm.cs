@@ -39,14 +39,6 @@ namespace block
             return aaa[0];
         }
 
-        private void search_Click(object sender, EventArgs e)
-        {
-            List<string> paramsArt = new List<string>();
-            UserControlSearch a1 = new UserControlSearch(paramsArt);
-            flowLayoutPanel1.Controls.Add(a1);
-            SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "', 'null', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
-        }
-
         public void BlockForm_Load(object sender, EventArgs e)
         {
             Program.UserControlCMS = UCContextMenuStrip;
@@ -54,68 +46,57 @@ namespace block
             //File.WriteAllText("test.json", SQLClass.Select("SELECT * FROM `block_blocks` WHERE 1")[1]);
             //label1.Text = (LoadFromDB("block1"));
             //Panel panel1 = CreateStatPanel();
-            //flowLayoutPanel1.Controls.Add(panel1);
+
             List<string> paramsArt = new List<string>();
             paramsArt.Add("Война и мир");
             ArticleDetailsUserControl test = new ArticleDetailsUserControl(paramsArt);
-            flowLayoutPanel1.Controls.Add(test);
+            this.Controls.Add(test);
 
-
+            //Список типов UserControl-ов
             List<Type> forms = new List<Type>();
             foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
             {
                 forms.AddRange(from t in asm.GetTypes() where t.IsSubclassOf(typeof(UserControl)) select t);            
             }
-            int i =0;
+
+            int i = 0;
             foreach (Type f in forms)
             {
                 ArticlecontextMenuStrip1.Items.Add(f.Name);
-                if(f.Name == "ArticleDetailsUserControl")
+                if (f.Name == "AdsUserControl")
                 {
-                    ArticlecontextMenuStrip1.Items[i].Click += ArticleDetailsClick;
+                    ArticlecontextMenuStrip1.Items[i].Click += AdsUserControl.AddNewBlock;
+                }
+                else if (f.Name == "ArticleDetailsUserControl")
+                {
+                    ArticlecontextMenuStrip1.Items[i].Click += ArticleDetailsUserControl.AddNewBlock;
                 }
                 else if (f.Name == "ArticlePreviewUserControl")
                 {
-                    ArticlecontextMenuStrip1.Items[i].Click += articlePreview_Click;
+                    ArticlecontextMenuStrip1.Items[i].Click += ArticlePreviewUserControl.AddNewBlock;
                 }
                 else if (f.Name == "AuthenticationUserControl")
                 {
-                    ArticlecontextMenuStrip1.Items[i].Click += author_Click;
-                }
-                else if (f.Name == "UserControlAutorsList")
-                {
-                    ArticlecontextMenuStrip1.Items[i].Click += authorsList_Click;
+                    ArticlecontextMenuStrip1.Items[i].Click += AuthenticationUserControl.AddNewBlock;
                 }
                 else if (f.Name == "CategoriesUserControl")
                 {
-                    ArticlecontextMenuStrip1.Items[i].Click += cat_Click;
+                    ArticlecontextMenuStrip1.Items[i].Click += CategoriesUserControl.AddNewBlock;
                 }
-                else if (f.Name == "UserControlSearch")
+                else if (f.Name == "UserControlAutorsList")
                 {
-                    ArticlecontextMenuStrip1.Items[i].Click += search_Click;
-                }
-                else if (f.Name == "AdsUserControl")
-                {
-                    ArticlecontextMenuStrip1.Items[i].Click += ads_click;
+                    ArticlecontextMenuStrip1.Items[i].Click += UserControlAutorsList.AddNewBlock;
                 }
                 else if (f.Name == "UserControlMainAuthor")
                 {
-                    ArticlecontextMenuStrip1.Items[i].Click += Main_author_Click;
+                    ArticlecontextMenuStrip1.Items[i].Click += UserControlMainAuthor.AddNewBlock;
+                }
+                else if (f.Name == "UserControlSearch")
+                {
+                    ArticlecontextMenuStrip1.Items[i].Click += UserControlSearch.AddNewBlock;
                 }
                 i++;
             }
-
-        }
-
-        /// <summary>
-        /// Инфа об авторе
-        /// </summary>
-        private void Main_author_Click(object sender, EventArgs e)
-        {
-            List<string> parametry = new List<string>();
-            parametry.Add("Жуков");
-            UserControlMainAuthor a1 = new UserControlMainAuthor(parametry);
-            fInsert(sender, a1);
         }
 
         public static void AddDeleteMenu(object sender)
@@ -143,13 +124,13 @@ namespace block
         /// <summary>
         /// Открываем форму наперстков
         /// </summary>
-        private void naperstki_Click(object sender, EventArgs e)
+        private void Naperstki_Click(object sender, EventArgs e)
         {
             NaperstkiForm df = new NaperstkiForm();
             df.ShowDialog();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void AboutMeClick(object sender, EventArgs e)
         {
             AboutMeForm df = new AboutMeForm();
             df.ShowDialog();
@@ -166,79 +147,16 @@ namespace block
         }
 
         /// <summary>
-        /// Реклама
+        /// Добавление информации о блоке в БД
         /// </summary>
-        private void ads_click(object sender, EventArgs e)
-        {
-            List<string> paramsArt = new List<string>();
-            paramsArt.Add("http://rustrade.org.uk/rus/wp-content/uploads/dodo-pizza.jpg");
-            paramsArt.Add("https://i.simpalsmedia.com/joblist.md/360x200/f0eeb7ea787a8cc8370e29638d582f31.png");
-            paramsArt.Add("https://www.sostav.ru/images/news/2018/02/21/13349a407abf5ee3d8c795fc78694299.jpg");
-            paramsArt.Add("https://static.tildacdn.com/tild6533-3365-4438-a364-613965626338/cover-6.jpg");
-            paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
-            paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
-            AdsUserControl a1 = new AdsUserControl(paramsArt);
-            fInsert(sender, a1);
-           
-        }
-
-        public void fInsert(object sender, UserControl a1)
+        public static void InsertBlockToDB(object sender, UserControl a1)
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             c.Controls.Add(a1);
             Program.CONTROLY.Add(a1);
             SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name) VALUES ('" +
                 c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
-        }
-
-        private void ArticleDetailsClick(object sender, EventArgs e)
-        {
-            UCParameters p = new UCParameters("block.ArticleDetailsUserControl", new Size(), new Point(), new List<string>(), ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl.Name, this.Name);
-            p.qq.Add("Война и мир");
-            p.ShowDialog();
-            ArticleDetailsUserControl a1 = new ArticleDetailsUserControl(p.qq);
-
-            fInsert(sender, a1);
-        }
-
-        private void articlePreview_Click(object sender, EventArgs e)
-        {
-            UCParameters p = new UCParameters("block.ArticlePreviewUserControl", new Size(), new Point(), new List<string>(), ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl.Name, this.Name);
-            p.qq.Add("Война и мир");
-            p.ShowDialog();
-            ArticleDetailsUserControl a1 = new ArticleDetailsUserControl(p.qq);
-
-            fInsert(sender, a1);
-        }
-
-        /// <summary>
-        /// Категории
-        /// </summary>
-        private void cat_Click(object sender, EventArgs e)
-        {
-            UCParameters p = new UCParameters("block.CategoriesUserControl", new Size(), new Point(), new List<string>(), ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl.Name, this.Name);
-            p.ShowDialog();
-            CategoriesUserControl a1 = new CategoriesUserControl(p.qq);
-            fInsert(sender, a1);
-        }
-        private void authorsList_Click(object sender, EventArgs e)
-        {
-            UCParameters p = new UCParameters("block.UserControlAutorsList", new Size(), new Point(), new List<string>(), ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl.Name, this.Name);
-            p.ShowDialog();
-            UserControlAutorsList a1 = new UserControlAutorsList(p.qq);
-
-            fInsert(sender, a1);
-        }
-
-        private void author_Click(object sender, EventArgs e)
-        {
-            UCParameters p = new UCParameters("block.AuthenticationUserControl", new Size(), new Point(), new List<string>(), ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl.Name, this.Name);
-            p.ShowDialog();
-            AuthenticationUserControl a1 = new AuthenticationUserControl(p.qq);
-
-            fInsert(sender, a1);
-        }
-
+        }       
 
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -270,9 +188,16 @@ namespace block
             pb.Location = p.locetion_userconrla;
         }
 
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        private void MyPromoClick(object sender, EventArgs e)
         {
+            MyPromotionsForm mpf = new MyPromotionsForm();
+            mpf.ShowDialog();
+        }
 
+        private void ReadArticleClick(object sender, EventArgs e)
+        {
+            ReadArticleForm rf = new ReadArticleForm();
+            rf.ShowDialog();
         }
     }
 }
