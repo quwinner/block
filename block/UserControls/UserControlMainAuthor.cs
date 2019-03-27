@@ -15,6 +15,8 @@ namespace block
         public UserControlMainAuthor(List <string> parametries)
         {
             InitializeComponent();
+            ArticlePreviewUserControl.AddDNDFunctions(this);
+            BlockForm.AddDeleteMenu(this);
 
             if (parametries.Count == 0)
             {

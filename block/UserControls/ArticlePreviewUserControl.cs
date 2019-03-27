@@ -52,7 +52,8 @@ namespace block
         public ArticlePreviewUserControl(List<string> Articles)
         {
             InitializeComponent();
-
+            GC.Collect(2);
+            
             if (Articles.Count == 0)
             {
                 return;
