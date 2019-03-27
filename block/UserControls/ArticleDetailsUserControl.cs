@@ -14,9 +14,7 @@ namespace block
     {
         public Size size_Userconrla;
         public Point locetion_userconrla;
-
-
-
+        
         public List<string> asd;
         public ArticleDetailsUserControl(List<string> Articles)
         {
@@ -24,7 +22,7 @@ namespace block
             BlockForm.AddDeleteMenu(this);
             ArticlePreviewUserControl.AddDNDFunctions(this);
 
-            this.asd = Articles;
+            asd = Articles;
 
             try
             {

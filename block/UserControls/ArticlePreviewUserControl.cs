@@ -80,6 +80,7 @@ namespace block
 
             ArticlePreviewUserControl.AddDNDFunctions(this);
             BlockForm.AddDeleteMenu(this);
+
         }
 
 
@@ -90,7 +91,7 @@ namespace block
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             UCParameters p = new UCParameters("block.ArticlePreviewUserControl",
-                new Size(), new Point(), new List<string>(),
+                new Size(), new Point(), new List<string>() { "dfg","sd","23"},
                 c.Name, c.FindForm().Name);
             p.ShowDialog();
             p.qq.Add("Война и мир");
@@ -240,6 +241,11 @@ namespace block
         }
 
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }

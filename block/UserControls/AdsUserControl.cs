@@ -12,11 +12,26 @@ namespace block
 {
     public partial class AdsUserControl : UserControl
     {
+        public int progal = 0;
+        public int kol_vo = 1;
+
         List<string> paramsAds;
-        public AdsUserControl(List<string> ParamsAds)
+        public AdsUserControl(List<string> ParamsAds, int kolvo, int progl)
         {
             InitializeComponent();
             paramsAds = ParamsAds;
+            progal = kolvo;
+            kol_vo = progl;
+            Random r = new Random();
+            for(int i = 0; i < kol_vo; i++)
+            {
+                PictureBox pic = new PictureBox();
+                pic.SizeMode = PictureBoxSizeMode.StretchImage;
+                pic.Load(ParamsAds[r.Next(0, ParamsAds.Count)]);
+                flowLayoutPanel1.Controls.Add(pic);
+            }
+
+            /*
             foreach (var PictureUrl in ParamsAds)
             {
                 var pic = new PictureBox();
@@ -24,6 +39,7 @@ namespace block
                 pic.Load(PictureUrl);
                 flowLayoutPanel1.Controls.Add(pic);
             }
+            */
         }
 
         /// <summary>
@@ -38,7 +54,7 @@ namespace block
             paramsArt.Add("https://static.tildacdn.com/tild6533-3365-4438-a364-613965626338/cover-6.jpg");
             paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
             paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
-            AdsUserControl a1 = new AdsUserControl(paramsArt);
+            AdsUserControl a1 = new AdsUserControl(paramsArt, 1, 0);
 
             BlockForm.InsertBlockToDB(sender, a1);
         }

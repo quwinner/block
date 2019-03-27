@@ -31,7 +31,7 @@ namespace block
         public CategoriesUserControl(List<string> CategoriesParams)
         {
             InitializeComponent();
-            
+            asd = CategoriesParams;
             //Сюда бы значение по умолчанию
             List<string> Categories = SQLClass.Select("SELECT Name FROM Categories ORDER BY Name LIMIT 0," + CategoriesParams[0]);
             

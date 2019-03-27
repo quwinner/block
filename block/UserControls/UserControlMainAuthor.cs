@@ -12,10 +12,11 @@ namespace block
 {
     public partial class UserControlMainAuthor : UserControl
     {
+        public List<string> par;
         public UserControlMainAuthor(List <string> parametries)
         {
             InitializeComponent();
-
+            par = parametries;
             if (parametries.Count == 0)
             {
                 return;

@@ -182,7 +182,44 @@ namespace block
         private void настроитьПараметрыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UserControl pb = (UserControl)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            UCParameters p = new UCParameters(pb.GetType().ToString(), pb.Size, pb.Location, new List<string>(), pb.Parent.Name, this.Name);
+            List<string> dnonil = new List<string>();
+            switch (pb.Name)
+            {
+                case "AdsUserControl":
+                    AdsUserControl pb1 = (AdsUserControl)pb;
+                    dnonil.Add(pb1.progal.ToString());
+                    dnonil.Add(pb1.kol_vo.ToString());
+                    break;
+                case "ArticleDetailsUserControl":
+                    ArticleDetailsUserControl pb2 = (ArticleDetailsUserControl)pb;
+                    dnonil.Add(pb2.asd[0]);
+                    break;
+                case "ArticlePreviewUserControl":
+                    ArticlePreviewUserControl pb3 = (ArticlePreviewUserControl)pb;
+                    dnonil.Add(pb3.Article);
+                    dnonil.Add("5");
+                    break;
+                case "CategoriesUserControl":
+                    CategoriesUserControl pb4 = (CategoriesUserControl)pb;
+                    dnonil.Add("1");
+                    dnonil.Add(pb4.asd[0]);
+                    break;
+                case "UserControlAutorsList":
+                    UserControlAutorsList pb5 = (UserControlAutorsList)pb;
+                    dnonil.Add("1");
+                    dnonil.Add(" ");
+                    break;
+                case "UserControlMainAuthor":
+                    UserControlMainAuthor pb6 = (UserControlMainAuthor)pb;
+                    dnonil.Add(pb6.par[0]);
+                    break;
+                case "UserControlSearch":
+                    UserControlSearch pb7 = (UserControlSearch)pb;
+                    dnonil.Add(" ");
+                    break;
+
+            }
+            UCParameters p = new UCParameters(pb.GetType().ToString(), pb.Size, pb.Location, dnonil, pb.Parent.Name, this.Name);
             p.ShowDialog();
             pb.Size = p.size_Userconrla;
             pb.Location = p.locetion_userconrla;
