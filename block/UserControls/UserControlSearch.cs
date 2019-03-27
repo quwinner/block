@@ -15,6 +15,8 @@ namespace block
         public UserControlSearch(List<string> SearchParams)
         {
             InitializeComponent();
+            BlockForm.AddDeleteMenu(this);
+            ArticlePreviewUserControl.AddDNDFunctions(this);
         }
 
         /// <summary>

@@ -50,11 +50,11 @@ namespace block
                     control.Add(preview);
                 }
 
-                if (user[i + 3] == "ArticleDetailsUserControl")
+                else if (user[i + 3] == "ArticleDetailsUserControl")
                 {
                     List<string> paramsArt = new List<string>();
                     paramsArt.Add("Война и мир");
-                    ArticlePreviewUserControl preview = new ArticlePreviewUserControl(paramsArt)
+                    ArticleDetailsUserControl preview = new ArticleDetailsUserControl(paramsArt)
                     {
                         Location = new Point(x, y)
                     };
@@ -63,10 +63,10 @@ namespace block
                     control.Add(preview);
                 }
 
-                if (user[i + 3] == "AuthenticationUserControl")
+                else if (user[i + 3] == "AuthenticationUserControl")
                 {
                     List<string> paramsArt = new List<string>();
-                    ArticlePreviewUserControl preview = new ArticlePreviewUserControl(paramsArt)
+                    AuthenticationUserControl preview = new AuthenticationUserControl(paramsArt)
                     {
                         Location = new Point(x, y)
                     };
@@ -75,10 +75,10 @@ namespace block
                     control.Add(preview);
                 }
 
-                if (user[i + 3] == "UserControlAutorsList")
+                else if (user[i + 3] == "UserControlAutorsList")
                 {
                     List<string> paramsArt = new List<string>();
-                    ArticlePreviewUserControl preview = new ArticlePreviewUserControl(paramsArt)
+                    UserControlAutorsList preview = new UserControlAutorsList(paramsArt)
                     {
                         Location = new Point(x, y)
                     };
@@ -87,10 +87,10 @@ namespace block
                     control.Add(preview);
                 }
 
-                if (user[i + 3] == "CatUserControl")
+                else if (user[i + 3] == "CategoriesUserControl")
                 {
                     List<string> paramsArt = new List<string>();
-                    ArticlePreviewUserControl preview = new ArticlePreviewUserControl(paramsArt)
+                    CategoriesUserControl preview = new CategoriesUserControl(paramsArt)
                     {
                         Location = new Point(x, y)
                     };
@@ -99,10 +99,10 @@ namespace block
                     control.Add(preview);
                 }
 
-                if (user[i + 3] == "UserControlSearch")
+                else if (user[i + 3] == "UserControlSearch")
                 {
                     List<string> paramsArt = new List<string>();
-                    ArticlePreviewUserControl preview = new ArticlePreviewUserControl(paramsArt)
+                    UserControlSearch preview = new UserControlSearch(paramsArt)
                     {
                         Location = new Point(x, y)
                     };
@@ -111,10 +111,10 @@ namespace block
                     control.Add(preview);
                 }
 
-                if (user[i + 3] == "AdsUserControl")
+                else if (user[i + 3] == "AdsUserControl")
                 {
                     List<string> paramsArt = new List<string>();
-                    ArticlePreviewUserControl preview = new ArticlePreviewUserControl(paramsArt)
+                    AdsUserControl preview = new AdsUserControl(paramsArt)
                     {
                         Location = new Point(x, y)
                     };
@@ -123,17 +123,22 @@ namespace block
                     control.Add(preview);
                 }
 
-                if (user[i + 3] == "UserControlMainAuthor")
+                else if (user[i + 3] == "UserControlMainAuthor")
                 {
                     List<string> paramsArt = new List<string>();
                     paramsArt.Add("Жуков");
-                    ArticlePreviewUserControl preview = new ArticlePreviewUserControl(paramsArt)
+                    UserControlMainAuthor preview = new UserControlMainAuthor(paramsArt)
                     {
                         Location = new Point(x, y)
                     };
 
                     Name.Controls.Add(preview);
                     control.Add(preview);
+                }
+
+                else
+                {
+                    MessageBox.Show(user[i + 3]);
                 }
             }
 

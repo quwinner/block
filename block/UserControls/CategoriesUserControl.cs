@@ -31,7 +31,13 @@ namespace block
         public CategoriesUserControl(List<string> CategoriesParams)
         {
             InitializeComponent();
-            
+            BlockForm.AddDeleteMenu(this);
+            ArticlePreviewUserControl.AddDNDFunctions(this);
+
+            if (CategoriesParams.Count == 0)
+            {
+                return;
+            }
             //Сюда бы значение по умолчанию
             List<string> Categories = SQLClass.Select("SELECT Name FROM Categories ORDER BY Name LIMIT 0," + CategoriesParams[0]);
             

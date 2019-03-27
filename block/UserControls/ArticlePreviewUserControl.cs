@@ -216,7 +216,7 @@ namespace block
                 if (sender.Equals(uc))
                 {
                     SQLClass.Update("UPDATE block SET x = " + ((UserControl)sender).Location.X.ToString() +
-                        " WHERE name = '" + uc.Name + "' AND form = '" + uc.FindForm().Name + "'");
+                        " WHERE name = '" + uc.Name + "' AND form = '" + uc.FindForm().Name + "' AND Parent = '"+uc.Parent.Name+"'");
                 }
             }
         }
@@ -240,6 +240,11 @@ namespace block
         }
 
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }

@@ -16,6 +16,9 @@ namespace block
         public AdsUserControl(List<string> ParamsAds)
         {
             InitializeComponent();
+            BlockForm.AddDeleteMenu(this);
+            ArticlePreviewUserControl.AddDNDFunctions(this);
+
             paramsAds = ParamsAds;
             foreach (var PictureUrl in ParamsAds)
             {
