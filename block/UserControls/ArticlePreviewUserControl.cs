@@ -82,6 +82,23 @@ namespace block
             BlockForm.AddDeleteMenu(this);
         }
 
+
+        /// <summary>
+        /// Добавление UserControl с инфой о статье в режиме предпросмотра
+        /// </summary>
+        public static void AddNewBlock(object sender, EventArgs e)
+        {
+            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            UCParameters p = new UCParameters("block.ArticlePreviewUserControl",
+                new Size(), new Point(), new List<string>(),
+                c.Name, c.FindForm().Name);
+            p.ShowDialog();
+            p.qq.Add("Война и мир");
+            ArticlePreviewUserControl a1 = new ArticlePreviewUserControl(p.qq);
+            BlockForm.InsertBlockToDB(sender, a1);
+        }
+
+
         public JObject Data
         {
             get

@@ -19,7 +19,8 @@ namespace block
         public MyPromotionsForm()
         {
             InitializeComponent();
-            AboutMeForm.read(this);
+            this.ContextMenuStrip = Program.AddNewUserControlCMS;
+            Program.CONTROLY = AboutMeForm.read(this);
         }
 
         private void MyPromotionsForm_Load(object sender, EventArgs e)

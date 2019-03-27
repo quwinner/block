@@ -17,6 +17,20 @@ namespace block
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Добавление UserControl поиска
+        /// </summary>
+        public static void AddNewBlock(object sender, EventArgs e)
+        {
+            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            UCParameters p = new UCParameters("block.UserControlSearch",
+                new Size(), new Point(), new List<string>(),
+                c.Name, c.FindForm().Name);
+            p.ShowDialog();
+            UserControlSearch a1 = new UserControlSearch(p.qq);
+            BlockForm.InsertBlockToDB(sender, a1);
+        }
+
         private void textBox_search_TextChanged(object sender, EventArgs e)
         {
 
@@ -27,6 +41,9 @@ namespace block
 
         }
 
-        
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

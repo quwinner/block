@@ -31,9 +31,8 @@ namespace block
         public CategoriesUserControl(List<string> CategoriesParams)
         {
             InitializeComponent();
-
-
-
+            
+            //Сюда бы значение по умолчанию
             List<string> Categories = SQLClass.Select("SELECT Name FROM Categories ORDER BY Name LIMIT 0," + CategoriesParams[0]);
             
             for (int i = 0; i < Categories.Count; i++)
@@ -48,6 +47,20 @@ namespace block
                 
                 this.Controls.Add(label);
             }
+        }
+
+        /// <summary>
+        /// Добавление UserControl с категориями
+        /// </summary>
+        public static void AddNewBlock(object sender, EventArgs e)
+        {
+            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            UCParameters p = new UCParameters("block.CategoriesUserControl",
+                new Size(), new Point(), new List<string>(),
+                c.Name, c.FindForm().Name);
+            p.ShowDialog();
+            CategoriesUserControl a1 = new CategoriesUserControl(p.qq);
+            BlockForm.InsertBlockToDB(sender, a1);
         }
 
         public void lable_cat_Click(object sender, EventArgs e)

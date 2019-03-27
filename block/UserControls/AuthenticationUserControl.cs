@@ -24,6 +24,20 @@ namespace block
             BlockForm.AddDeleteMenu(this);
         }
 
+        /// <summary>
+        /// Добавление UserControl с аутентификацией
+        /// </summary>
+        public static void AddNewBlock(object sender, EventArgs e)
+        {
+            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            UCParameters p = new UCParameters("block.AuthenticationUserControl",
+                new Size(), new Point(), new List<string>(),
+                c.Name, c.FindForm().Name);
+            p.ShowDialog();
+            AuthenticationUserControl a1 = new AuthenticationUserControl(p.qq);
+            BlockForm.InsertBlockToDB(sender, a1);
+        }
+
         private void loginButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show(loginTextBox.Text);

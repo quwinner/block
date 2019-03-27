@@ -51,17 +51,6 @@ namespace block
         /// <summary>
         /// Перемещение картинок Drag-n-drop
         /// </summary>
-        public void pictureBoxPoint_MouseMove(Control sender, MouseEventArgs e)
-        {
-            if (_moving)
-            {
-                
-            }
-        }
-
-        /// <summary>
-        /// Перемещение картинок Drag-n-drop
-        /// </summary>
         private void pictureBoxPoint_MouseMove(object sender, MouseEventArgs e)
         {
             pictureBoxPoint_MouseMove((Control)sender, e);
@@ -167,7 +156,7 @@ namespace block
 
         #endregion
 
-        private void button3_Click(object sender, EventArgs e)
+        private void CloseClick(object sender, EventArgs e)
         {
             Close();
         }

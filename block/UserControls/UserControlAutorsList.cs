@@ -20,6 +20,22 @@ namespace block
             BlockForm.AddDeleteMenu(this);
         }
 
+        /// <summary>
+        /// Добавление UserControl со списком авторов
+        /// </summary>
+        public static void AddNewBlock(object sender, EventArgs e)
+        {
+            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            UCParameters p = new UCParameters("block.UserControlAutorsList",
+                new Size(), new Point(), new List<string>(),
+                c.Name, c.FindForm().Name);
+            p.ShowDialog();
+            UserControlAutorsList a1 = new UserControlAutorsList(p.qq);
+            BlockForm.InsertBlockToDB(sender, a1);
+        }
+
+
+
         private void UserControlAutorsList_Load(object sender, EventArgs e)
         {
             List<String> authorsList = new List<string>{ "Жулик", "Вор", "Единорос" };
@@ -51,8 +67,11 @@ namespace block
            
         }
 
+        private void labelPopular_Click(object sender, EventArgs e)
+        {
 
         }
+    }
 
       
     }
