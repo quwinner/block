@@ -155,5 +155,11 @@ namespace block
             };
             this.Controls.Add(preview);
         }
+
+        private void collect_Gc(object sender, FormClosedEventArgs e)
+        {
+            this.Controls.Clear();
+            GC.Collect();
+        }
     }
 }
