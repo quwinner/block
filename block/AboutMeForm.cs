@@ -114,7 +114,7 @@ namespace block
                 else if (user[i + 3] == "AdsUserControl")
                 {
                     List<string> paramsArt = new List<string>();
-                    AdsUserControl preview = new AdsUserControl(paramsArt)
+                    AdsUserControl preview = new AdsUserControl(paramsArt, 4, 4)
                     {
                         Location = new Point(x, y)
                     };

@@ -31,10 +31,10 @@ namespace block
         public CategoriesUserControl(List<string> CategoriesParams)
         {
             InitializeComponent();
-            asd = CategoriesParams;
             BlockForm.AddDeleteMenu(this);
-            ArticlePreviewUserControl.AddDNDFunctions(this);
+            UCFunctions.AddDNDFunctions(this);
 
+            asd = CategoriesParams;
             if (CategoriesParams.Count == 0)
             {
                 return;

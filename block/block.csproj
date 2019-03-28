@@ -102,6 +102,7 @@
     <Compile Include="DetailsForm.Designer.cs">
       <DependentUpon>DetailsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCFunctions.cs" />
     <Compile Include="UserControls\UserControlAutorsList.cs">
       <SubType>UserControl</SubType>
     </Compile>

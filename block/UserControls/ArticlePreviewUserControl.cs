@@ -20,9 +20,6 @@ namespace block
 
         public string Article;
 
-        public static bool dragging = false;
-        public static Point dragCursorPoint;
-        public static Point dragFormPoint;
 
         private int like = 0;
         private int dislike = 0;
@@ -52,6 +49,9 @@ namespace block
         public ArticlePreviewUserControl(List<string> Articles)
         {
             InitializeComponent();
+            UCFunctions.AddDNDFunctions(this);
+            BlockForm.AddDeleteMenu(this);
+
             GC.Collect(2);
             
             if (Articles.Count == 0)
@@ -78,10 +78,6 @@ namespace block
             linkLabel1.Text = Article;
             LikeCount.Text = like.ToString();
             DisLikeCount.Text = dislike.ToString();
-
-            ArticlePreviewUserControl.AddDNDFunctions(this);
-            BlockForm.AddDeleteMenu(this);
-
         }
 
 
@@ -193,48 +189,6 @@ namespace block
             DisLikeCount.Text = dislike.ToString();
         }
         #endregion
-
-        public static void FormTest_MouseDown(object sender, MouseEventArgs e)
-        {
-            dragging = true;
-            dragCursorPoint = Cursor.Position;
-            dragFormPoint = ((UserControl)sender).Location;
-        }
-
-        public static void FormTest_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (dragging)
-            {
-                Point dif = Point.Subtract(Cursor.Position, new Size(dragCursorPoint));
-                ((UserControl)sender).Location = Point.Add(dragFormPoint, new Size(dif));                
-            }
-        }
-
-        public static void FormTest_MouseUp(object sender, MouseEventArgs e)
-        {
-            dragging = false;
-            foreach (UserControl uc in Program.CONTROLY)
-            {
-                if (sender.Equals(uc))
-                {
-                    SQLClass.Update("UPDATE block SET x = " + ((UserControl)sender).Location.X.ToString() +
-                        " WHERE name = '" + uc.Name + "' AND form = '" + uc.FindForm().Name + "' AND Parent = '"+uc.Parent.Name+"'");
-                }
-            }
-        }
-
-        /// <summary>
-        /// Добавление к ЮзерКонтролу контекстного меню, функций для DND и т.д.
-        /// </summary>
-        /// <param name="sender"></param>
-        public static void AddDNDFunctions(object sender)
-        {
-            ((UserControl)sender).MouseDown += new MouseEventHandler(ArticlePreviewUserControl.FormTest_MouseDown);
-            ((UserControl)sender).MouseMove += new MouseEventHandler(ArticlePreviewUserControl.FormTest_MouseMove);
-            ((UserControl)sender).MouseUp += new MouseEventHandler(ArticlePreviewUserControl.FormTest_MouseUp);
-
-            ((UserControl)sender).ContextMenuStrip = Program.UserControlCMS;
-        }
 
         private void ArticlePreviewUserControl_Load(object sender, EventArgs e)
         {

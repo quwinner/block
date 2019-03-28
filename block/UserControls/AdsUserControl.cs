@@ -20,7 +20,7 @@ namespace block
         {
             InitializeComponent();
             BlockForm.AddDeleteMenu(this);
-            ArticlePreviewUserControl.AddDNDFunctions(this);
+            UCFunctions.AddDNDFunctions(this);
 
             paramsAds = ParamsAds;
             progal = kolvo;

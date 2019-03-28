@@ -20,7 +20,7 @@ namespace block
         public AuthenticationUserControl(List<string> parametrs)
         {
             InitializeComponent();
-            ArticlePreviewUserControl.AddDNDFunctions(this);
+            UCFunctions.AddDNDFunctions(this);
             BlockForm.AddDeleteMenu(this);
         }
 

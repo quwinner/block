@@ -17,9 +17,10 @@ namespace block
         public UserControlMainAuthor(List <string> parametries)
         {
             InitializeComponent();
-            par = parametries;
-            ArticlePreviewUserControl.AddDNDFunctions(this);
+            UCFunctions.AddDNDFunctions(this);
             BlockForm.AddDeleteMenu(this);
+
+            par = parametries;
             if (parametries.Count == 0)
             {
                 fu = true;

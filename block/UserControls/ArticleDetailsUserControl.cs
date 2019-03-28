@@ -21,7 +21,7 @@ namespace block
             InitializeComponent();
             GC.Collect(50);
             BlockForm.AddDeleteMenu(this);
-            ArticlePreviewUserControl.AddDNDFunctions(this);
+            UCFunctions.AddDNDFunctions(this);
 
             asd = Articles;
 

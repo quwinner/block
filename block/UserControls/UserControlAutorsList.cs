@@ -17,9 +17,8 @@ namespace block
         {
             InitializeComponent();
             asd = par;
-            ArticlePreviewUserControl.AddDNDFunctions(this);
             BlockForm.AddDeleteMenu(this);
-            ArticlePreviewUserControl.AddDNDFunctions(this);
+            UCFunctions.AddDNDFunctions(this);
         }
 
         /// <summary>
