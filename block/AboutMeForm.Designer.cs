@@ -48,6 +48,7 @@
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "AboutMeForm";
             this.Text = "Обо мне";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.collect_Gc);
             this.Load += new System.EventHandler(this.AboutMeForm_Load);
             this.ResumeLayout(false);
 

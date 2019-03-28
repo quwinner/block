@@ -32,9 +32,12 @@ namespace block
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             UCParameters p = new UCParameters("block.AuthenticationUserControl",
                 new Size(), new Point(), new List<string>(),
-                c.Name, c.FindForm().Name);
+                c.Name, c.FindForm().Name
+            );
             p.ShowDialog();
             AuthenticationUserControl a1 = new AuthenticationUserControl(p.qq);
+            a1.Location = p.locetion_userconrla;
+
             BlockForm.InsertBlockToDB(sender, a1);
         }
 

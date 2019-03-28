@@ -95,10 +95,10 @@ namespace block
                 switch (parametr)
                 {
                     case "Высота":
-                        textBox1.Text = size_Userconrla.Height.ToString();
+                        textBox1.Text = Math.Max(size_Userconrla.Height, 80).ToString();
                         break;
                     case "Ширина":
-                        textBox1.Text = size_Userconrla.Width.ToString();
+                        textBox1.Text = Math.Max(size_Userconrla.Width, 120).ToString();
                         break;
                     case "X":
                         textBox1.Text = locetion_userconrla.X.ToString();
