@@ -19,6 +19,9 @@ namespace block
         public AdsUserControl(List<string> ParamsAds, int kolvo, int progl)
         {
             InitializeComponent();
+            BlockForm.AddDeleteMenu(this);
+            ArticlePreviewUserControl.AddDNDFunctions(this);
+
             paramsAds = ParamsAds;
             progal = kolvo;
             kol_vo = progl;

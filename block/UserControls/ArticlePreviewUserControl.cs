@@ -218,7 +218,7 @@ namespace block
                 if (sender.Equals(uc))
                 {
                     SQLClass.Update("UPDATE block SET x = " + ((UserControl)sender).Location.X.ToString() +
-                        " WHERE name = '" + uc.Name + "' AND form = '" + uc.FindForm().Name + "'");
+                        " WHERE name = '" + uc.Name + "' AND form = '" + uc.FindForm().Name + "' AND Parent = '"+uc.Parent.Name+"'");
                 }
             }
         }

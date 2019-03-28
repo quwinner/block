@@ -19,6 +19,7 @@ namespace block
             asd = par;
             ArticlePreviewUserControl.AddDNDFunctions(this);
             BlockForm.AddDeleteMenu(this);
+            ArticlePreviewUserControl.AddDNDFunctions(this);
         }
 
         /// <summary>

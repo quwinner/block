@@ -29,8 +29,12 @@ namespace block
         {
             InitializeComponent();
             this.FormName = FormName;
+
+            Program.UserControlCMS = UCContextMenuStrip;
+            Program.AddNewUserControlCMS = ArticlecontextMenuStrip1;
+            this.ContextMenuStrip = Program.AddNewUserControlCMS;
             DeleteMenuStrip = UCContextMenuStrip;
-            AboutMeForm.read(this);
+            Program.CONTROLY = AboutMeForm.read(this);
         }
 
         private string LoadFromDB(string block)
@@ -41,8 +45,6 @@ namespace block
 
         public void BlockForm_Load(object sender, EventArgs e)
         {
-            Program.UserControlCMS = UCContextMenuStrip;
-            Program.AddNewUserControlCMS = ArticlecontextMenuStrip1;
             //File.WriteAllText("test.json", SQLClass.Select("SELECT * FROM `block_blocks` WHERE 1")[1]);
             //label1.Text = (LoadFromDB("block1"));
             //Panel panel1 = CreateStatPanel();
