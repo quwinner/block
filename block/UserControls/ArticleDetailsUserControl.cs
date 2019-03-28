@@ -19,6 +19,7 @@ namespace block
         public ArticleDetailsUserControl(List<string> Articles)
         {
             InitializeComponent();
+            GC.Collect(50);
             BlockForm.AddDeleteMenu(this);
             ArticlePreviewUserControl.AddDNDFunctions(this);
 

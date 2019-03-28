@@ -58,6 +58,7 @@ namespace block
                 case "block.UserControlAutorsList":
                     koli_vo = Convert.ToInt32(par[0]);
                     poridok_sortir = par[1];
+                    progal = Convert.ToInt32(par[2]);
                     break;
                 case "block.UserControlMainAuthor":
                     login = par[0];

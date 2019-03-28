@@ -17,6 +17,8 @@ namespace block
         {
             InitializeComponent();
             par = parametries;
+            ArticlePreviewUserControl.AddDNDFunctions(this);
+            BlockForm.AddDeleteMenu(this);
             if (parametries.Count == 0)
             {
                 return;

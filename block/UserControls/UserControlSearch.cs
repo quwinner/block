@@ -15,6 +15,8 @@ namespace block
         public UserControlSearch(List<string> SearchParams)
         {
             InitializeComponent();
+            ArticlePreviewUserControl.AddDNDFunctions(this);
+            BlockForm.AddDeleteMenu(this);
         }
 
         /// <summary>
@@ -24,7 +26,7 @@ namespace block
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             UCParameters p = new UCParameters("block.UserControlSearch",
-                new Size(), new Point(), new List<string>(),
+                new Size(), new Point(), new List<string> {"Введите запрос"},
                 c.Name, c.FindForm().Name);
             p.ShowDialog();
             UserControlSearch a1 = new UserControlSearch(p.qq);

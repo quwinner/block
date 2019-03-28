@@ -17,6 +17,7 @@ namespace block
         {
             InitializeComponent();
             asd = par;
+            ArticlePreviewUserControl.AddDNDFunctions(this);
             BlockForm.AddDeleteMenu(this);
         }
 
@@ -27,7 +28,7 @@ namespace block
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             UCParameters p = new UCParameters("block.UserControlAutorsList",
-                new Size(), new Point(), new List<string>(),
+                new Size(), new Point(), new List<string>{"5", "По алфавиту", "5"},
                 c.Name, c.FindForm().Name);
             p.ShowDialog();
             UserControlAutorsList a1 = new UserControlAutorsList(p.qq);
