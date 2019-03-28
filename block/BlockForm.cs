@@ -34,7 +34,7 @@ namespace block
             Program.AddNewUserControlCMS = ArticlecontextMenuStrip1;
             this.ContextMenuStrip = Program.AddNewUserControlCMS;
             DeleteMenuStrip = UCContextMenuStrip;
-            Program.CONTROLY = AboutMeForm.read(this);
+            Program.CONTROLY = UCFunctions.read(this);
         }
 
         private string LoadFromDB(string block)
@@ -181,7 +181,7 @@ namespace block
             //SQLClass.Delete("DELETE FROM block WHERE  form = '" + this.Name + "'");
         }
 
-        private void настроитьПараметрыToolStripMenuItem_Click(object sender, EventArgs e)
+        private void setUCParams(object sender, EventArgs e)
         {
             UserControl pb = (UserControl)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             List<string> dnonil = new List<string>();
@@ -221,6 +221,7 @@ namespace block
                     break;
 
             }
+
             UCParameters p = new UCParameters(pb.GetType().ToString(), pb.Size, pb.Location, dnonil, pb.Parent.Name, this.Name);
             p.ShowDialog();
             pb.Size = p.size_Userconrla;

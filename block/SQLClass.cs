@@ -33,7 +33,7 @@ namespace block
             {
                 CONN.Open();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 OpenConnection();
             }

@@ -16,7 +16,7 @@ namespace block
         {
             InitializeComponent();
             this.Controls.Add(Details);
-            AboutMeForm.read(this);
+            UCFunctions.read(this);
         }
 
         private void DetailsForm_Load(object sender, EventArgs e)

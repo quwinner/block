@@ -64,7 +64,7 @@ namespace block
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             UCParameters p = new UCParameters("block.CategoriesUserControl",
-                new Size(), new Point(), new List<string>() { "5", "5", "5", "5" },
+                new Size(), new Point(), new List<string>() { "5", "По алфавиту" },
                 c.Name, c.FindForm().Name);
             p.ShowDialog();
             if(p.qq != new List<string>())
