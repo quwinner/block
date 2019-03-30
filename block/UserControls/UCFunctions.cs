@@ -77,10 +77,10 @@ namespace block
             List<UserControl> control = new List<UserControl>();
 
             List<string> user = SQLClass.Select(
-                "SELECT form, x, y, name FROM block WHERE form = '" +
+                "SELECT form, x, y, name, params FROM block WHERE form = '" +
                 Name.FindForm().Name + "'");
 
-            for (int i = 0; i < user.Count; i += 4)
+            for (int i = 0; i < user.Count; i += 5)
             {
                 //Вычисляем координаты
                 int x = Convert.ToInt32(user[i + 1]);
@@ -89,14 +89,15 @@ namespace block
                 #region Реклама
                 if (user[i + 3] == "AdsUserControl")
                 {
-                    List<string> paramsArt = new List<string>();
+                    Reklama newRek = AdsUserControl.readparam(user[i + 4]);
+                    /*List<string> paramsArt = new List<string>();
                     paramsArt.Add("http://rustrade.org.uk/rus/wp-content/uploads/dodo-pizza.jpg");
                     paramsArt.Add("https://i.simpalsmedia.com/joblist.md/360x200/f0eeb7ea787a8cc8370e29638d582f31.png");
                     paramsArt.Add("https://www.sostav.ru/images/news/2018/02/21/13349a407abf5ee3d8c795fc78694299.jpg");
                     paramsArt.Add("https://static.tildacdn.com/tild6533-3365-4438-a364-613965626338/cover-6.jpg");
                     paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
                     paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
-                    AdsUserControl preview = new AdsUserControl(paramsArt, 4, 4)
+                   */ AdsUserControl preview = new AdsUserControl(newRek.kart, newRek.kolvo, 4)
                     {
                         Location = new Point(x, y)
                     };

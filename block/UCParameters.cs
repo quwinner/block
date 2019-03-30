@@ -151,7 +151,7 @@ namespace block
         {
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        void button1_Click(object sender, EventArgs e)
         {
             
             foreach (Control contr in this.Controls)
