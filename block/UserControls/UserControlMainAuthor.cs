@@ -55,8 +55,8 @@ namespace block
                 new Size(), new Point(), new List<string>(),
                 c.Name, c.FindForm().Name);
             p.ShowDialog();
-            p.qq.Add("Жуков");
-            UserControlMainAuthor a1 = new UserControlMainAuthor(p.qq);
+            p.ParamsList.Add("Жуков");
+            UserControlMainAuthor a1 = new UserControlMainAuthor(p.ParamsList);
             BlockForm.InsertBlockToDB(sender, a1);
         }
 

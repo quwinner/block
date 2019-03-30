@@ -91,8 +91,8 @@ namespace block
                 new Size(), new Point(), new List<string>() { "dfg","sd","23"},
                 c.Name, c.FindForm().Name);
             p.ShowDialog();
-            p.qq.Add("Война и мир");
-            ArticlePreviewUserControl a1 = new ArticlePreviewUserControl(p.qq);
+            p.ParamsList.Add("Война и мир");
+            ArticlePreviewUserControl a1 = new ArticlePreviewUserControl(p.ParamsList);
             BlockForm.InsertBlockToDB(sender, a1);
         }
 

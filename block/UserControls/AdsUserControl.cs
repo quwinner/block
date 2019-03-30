@@ -40,16 +40,16 @@ namespace block
         /// </summary>
         public static void AddNewBlock(object sender, EventArgs e)
         {
-            List<string> paramsArt = new List<string>();
-            paramsArt.Add("http://rustrade.org.uk/rus/wp-content/uploads/dodo-pizza.jpg");
-            paramsArt.Add("https://i.simpalsmedia.com/joblist.md/360x200/f0eeb7ea787a8cc8370e29638d582f31.png");
-            paramsArt.Add("https://www.sostav.ru/images/news/2018/02/21/13349a407abf5ee3d8c795fc78694299.jpg");
-            paramsArt.Add("https://static.tildacdn.com/tild6533-3365-4438-a364-613965626338/cover-6.jpg");
-            paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
-            paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
-            AdsUserControl a1 = new AdsUserControl(paramsArt, 1, 0);
-
-            BlockForm.InsertBlockToDB(sender, a1);
+            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            UCParameters p = new UCParameters("block.AdsUserControl",
+                new Size(), new Point(), new List<string>() { "0", "0" },
+                c.Name, c.FindForm().Name);
+            p.ShowDialog();
+            if (p.ParamsList != new List<string>())
+            {
+                AdsUserControl a1 = new AdsUserControl(p.ParamsList, p.Amount, p.DistanceBetween);
+                BlockForm.InsertBlockToDB(sender, a1);
+            }
         }
     }
 }

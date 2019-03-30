@@ -12,153 +12,157 @@ namespace block
 {
     public partial class UCParameters : Form
     {
-        public string parent;
-        public string form_name;
+        public const int LabelOffest = 30;
 
-        public Size size_Userconrla;
-        public Point locetion_userconrla;
-        ///////////////////////////////////////////////////////////////
+        public string UCParent;
+        public string FormName;
 
-        public int koli_vo;
-        public int progal;
-        public string zagal;
-        public string sersh_zapros;
-        public string login;
-        public string poridok_sortir;
+        public Size UCSize;
+        public Point UCLocation;
+
+        #region Параметры
+
+        public int Amount;
+        public int DistanceBetween;
+        public string Header;
+        public string SerachQuery;
+        public string UserName;
+        public string SortOrder;
+
+        public List<string> ParamsList = new List<string>();
+
+        #endregion
+
         /// <summary>
-        /// //////////////////////////////////////////////////
+        /// 
         /// </summary>
-        public static int sdf;
-        public List<string> qq = new List<string>();
-
-        public UCParameters(String typ, Size qw, Point qwq, List<string> par, string ww, string wwqq)
+        /// <param name="UCName">
+        /// Название юзер контрола, например "block.AdsUserControl".
+        /// </param>
+        /// <param name="UCSize">
+        /// </param>
+        /// <param name="UCLocation"></param>
+        /// <param name="par"></param>
+        /// <param name="UCParent"></param>
+        /// <param name="FormName"></param>
+        public UCParameters(string UCName, Size UCSize, Point UCLocation, List<string> par, string UCParent, string FormName)
         {
             InitializeComponent();
-            parent = ww;
-            form_name = wwqq;
-            size_Userconrla = qw;
-            locetion_userconrla = qwq;
-            switch (typ)
+            this.UCParent = UCParent;
+            this.FormName = FormName;
+            this.UCSize = UCSize;
+            this.UCLocation = UCLocation;
+
+            switch (UCName)
             {
                 case "block.AdsUserControl":
-                    koli_vo = Convert.ToInt32(par[0]);
-                    progal = Convert.ToInt32(par[1]);
+                    Amount = Convert.ToInt32(par[0]);
+                    DistanceBetween = Convert.ToInt32(par[1]);
                     break;
                 case "block.ArticleDetailsUserControl":
-                    zagal = par[0];
+                    Header = par[0];
                     break;
                 case "block.ArticlePreviewUserControl":
-                    sersh_zapros = par[0];
-                    koli_vo = Convert.ToInt32(par[1]);
+                    SerachQuery = par[0];
+                    Amount = Convert.ToInt32(par[1]);
                     break;
                 case "block.CategoriesUserControl":
-                    koli_vo = Convert.ToInt32(par[0]);
-                    poridok_sortir = par[1];
+                    Amount = Convert.ToInt32(par[0]);
+                    SortOrder = par[1];
                     break;
                 case "block.UserControlAutorsList":
-                    koli_vo = Convert.ToInt32(par[0]);
-                    poridok_sortir = par[1];
-                    progal = Convert.ToInt32(par[2]);
+                    Amount = Convert.ToInt32(par[0]);
+                    SortOrder = par[1];
+                    DistanceBetween = Convert.ToInt32(par[2]);
                     break;
                 case "block.UserControlMainAuthor":
-                    login = par[0];
+                    UserName = par[0];
                     break;
                 case "block.UserControlSearch":
-                    sersh_zapros = par[0];
+                    SerachQuery = par[0];
                     break;
-                    
             }
 
-            List<string> Params = SQLClass.Select("SELECT params FROM block_blocks WHERE name ='" + typ + "'");
-            if (Params.Count == 0)
+            List<string> ParamsStr = SQLClass.Select("SELECT params FROM block_blocks WHERE name ='" + UCName + "'");
+            if (ParamsStr.Count == 0)
             {
-                return;
+                throw new Exception("Нету парамов");
             }
 
             int Y = 50;
-            string[] paramsArray = Params[0].Split(new char[] { ',' });
+            List<string> ParamsListFromDB = ParamsStr[0].Split(new char[] { ',' }).ToList<string>();
 
-            foreach (string parametr in paramsArray)
+            foreach (string ParamName in ParamsListFromDB)
             {
-                Label label1 = new Label();
-                TextBox textBox1 = new TextBox();
+                Label ParamLabel = new Label
+                {
+                    Location = new Point(12, Y),
+                    Name = "label1",
+                    Size = new Size(150, 30),
+                    TabIndex = 0,
+                    Text = ParamName
+                };
 
-                label1.Location = new System.Drawing.Point(12, Y);
-                label1.Name = "label1";
-                label1.Size = new System.Drawing.Size(150, 30);
-                label1.TabIndex = 0;
-                label1.Text = parametr;
-                
- 
-                textBox1.Location = new System.Drawing.Point(20 + label1.Size.Width, Y);
-                textBox1.Name = parametr;
-                switch (parametr)
+                TextBox ParamInput = new TextBox
+                {
+                    Location = new Point(20 + ParamLabel.Size.Width, Y),
+                    Name = ParamName
+                };
+
+                switch (ParamName.Trim())
                 {
                     case "Высота":
-                        textBox1.Text = Math.Max(size_Userconrla.Height, 80).ToString();
+                        ParamInput.Text = Math.Max(this.UCSize.Height, 80).ToString();
                         break;
                     case "Ширина":
-                        textBox1.Text = Math.Max(size_Userconrla.Width, 120).ToString();
+                        ParamInput.Text = Math.Max(this.UCSize.Width, 120).ToString();
                         break;
                     case "X":
-                        textBox1.Text = locetion_userconrla.X.ToString();
+                        ParamInput.Text = this.UCLocation.X.ToString();
                         break;
                     case "Y":
-                        textBox1.Text = locetion_userconrla.Y.ToString();
+                        ParamInput.Text = this.UCLocation.Y.ToString();
                         break;
                     case "Количество":
-                        textBox1.Text = koli_vo.ToString();
+                        ParamInput.Text = Amount.ToString();
                         break;
                     case "Прогал":
-                        textBox1.Text = progal.ToString();
+                        ParamInput.Text = DistanceBetween.ToString();
                         break;
                     case "заголовок":
-                        textBox1.Text = zagal;
+                        ParamInput.Text = Header;
                         break;
                     case "Поисковый запрос":
-                        textBox1.Text = sersh_zapros;
+                        ParamInput.Text = SerachQuery;
                         break;
                     case "Логин":
-                        textBox1.Text = login;
+                        ParamInput.Text = UserName;
                         break;
                     case "Порядок сортировки":
-                        textBox1.Text = poridok_sortir;
+                        ParamInput.Text = SortOrder;
                         break;
                 }
-                textBox1.Size = new System.Drawing.Size(144, 20);
-                textBox1.TabIndex = 1;
+                ParamInput.Size = new Size(144, 20);
+                ParamInput.TabIndex = 1;
 
-                Y += 30;
-                this.Controls.Add(label1);
-                this.Controls.Add(textBox1);
+                Y += LabelOffest;
+                this.Controls.Add(ParamLabel);
+                this.Controls.Add(ParamInput);
             }
-        }
-
-        void parametriSave()
-        {
-            List<string> toSave = new List<string>{
-                koli_vo.ToString(),
-                progal.ToString(),
-                zagal,
-                sersh_zapros,
-                login,
-                poridok_sortir
-            };
-            SQLClass.Insert("INSERT INTO `block`(`form`, `Parent`, `x`, `y`, `name`, `Params`) VALUES ('" + form_name + "','" + parent + "', 0, 1, 'хз','" + toSave.ToString() + "')");
         }
 
         private void parametri_Load(object sender, EventArgs e)
         {
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void SaveButtonClick(object sender, EventArgs e)
         {
             
             foreach (Control contr in this.Controls)
             {
                 if (contr.GetType().Name == "TextBox")
                 {
-                    qq.Add(contr.Text);
+                    ParamsList.Add(contr.Text);
                 }
             }
 
@@ -168,36 +172,35 @@ namespace block
                 switch (contr.Name)
                 {
                     case "Высота":
-                        size_Userconrla.Height = Math.Abs(Convert.ToInt32(contr.Text));
+                        UCSize.Height = Math.Abs(Convert.ToInt32(contr.Text));
                         break;
                     case "Ширина":
-                        size_Userconrla.Width = Math.Abs(Convert.ToInt32(contr.Text));
+                        UCSize.Width = Math.Abs(Convert.ToInt32(contr.Text));
                         break;
                     case "X":
-                        locetion_userconrla.X = Math.Abs(Convert.ToInt32(contr.Text));
+                        UCLocation.X = Math.Abs(Convert.ToInt32(contr.Text));
                         break;
                     case "Y":
-                        locetion_userconrla.Y = Math.Abs(Convert.ToInt32(contr.Text));
+                        UCLocation.Y = Math.Abs(Convert.ToInt32(contr.Text));
                         break;
                     case "Количество":
-                        koli_vo = Math.Abs(Convert.ToInt32(contr.Text));
+                        Amount = Math.Abs(Convert.ToInt32(contr.Text));
                         break;
                     case "Прогал":
-                        progal = Math.Abs(Convert.ToInt32(contr.Text));
+                        DistanceBetween = Math.Abs(Convert.ToInt32(contr.Text));
                         break;
                     case "заголовок":
-                        zagal = contr.Text;
+                        Header = contr.Text;
                         break;
                     case "Поисковый запрос":
-                        sersh_zapros = contr.Text;
+                        SerachQuery = contr.Text;
                         break;
                     case "Логин":
-                        login = contr.Text;
+                        UserName = contr.Text;
                         break;
                     case "Порядок сортировки":
-                        poridok_sortir = contr.Text;
+                        SortOrder = contr.Text;
                         break;
-
                 }
             }
             this.Close();
