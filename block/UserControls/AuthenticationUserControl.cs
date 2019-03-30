@@ -36,8 +36,12 @@ namespace block
             p.ShowDialog();
             AuthenticationUserControl a1 = new AuthenticationUserControl(p.qq);
             a1.Location = p.locetion_userconrla;
-
-            BlockForm.InsertBlockToDB(sender, a1);
+            string shsvfhksv = "";
+            foreach (string asd in p.qq)
+            {
+                shsvfhksv += asd + ',';
+            }
+            BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
         }
 
         private void loginButton_Click(object sender, EventArgs e)

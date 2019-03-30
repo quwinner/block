@@ -161,7 +161,7 @@ namespace block
                     qq.Add(contr.Text);
                 }
             }
-
+           
 
             foreach (Control contr in this.Controls)
             {
@@ -197,7 +197,6 @@ namespace block
                     case "Порядок сортировки":
                         poridok_sortir = contr.Text;
                         break;
-
                 }
             }
             this.Close();

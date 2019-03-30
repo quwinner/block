@@ -50,7 +50,12 @@ namespace block
             p.qq.Add("Война и мир");
             p.ShowDialog();
             ArticleDetailsUserControl a1 = new ArticleDetailsUserControl(p.qq);
-            BlockForm.InsertBlockToDB(sender, a1);
+            string shsvfhksv = "";
+            foreach (string asd in p.qq)
+            {
+                shsvfhksv += asd + ',';
+            }
+            BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
         }
 
         private void ArticlePicture_Click(object sender, EventArgs e)

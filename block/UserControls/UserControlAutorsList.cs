@@ -32,7 +32,12 @@ namespace block
                 c.Name, c.FindForm().Name);
             p.ShowDialog();
             UserControlAutorsList a1 = new UserControlAutorsList(p.qq);
-            BlockForm.InsertBlockToDB(sender, a1);
+            string shsvfhksv = "";
+            foreach (string asd in p.qq)
+            {
+                shsvfhksv += asd + ',';
+            }
+            BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
         }
 
 

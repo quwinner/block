@@ -77,10 +77,10 @@ namespace block
             List<UserControl> control = new List<UserControl>();
 
             List<string> user = SQLClass.Select(
-                "SELECT form, x, y, name FROM block WHERE form = '" +
+                "SELECT form, x, y, name, Params FROM block WHERE form = '" +
                 Name.FindForm().Name + "'");
 
-            for (int i = 0; i < user.Count; i += 4)
+            for (int i = 0; i < user.Count; i += 5)
             {
                 //Вычисляем координаты
                 int x = Convert.ToInt32(user[i + 1]);
@@ -108,8 +108,9 @@ namespace block
                 #region Чтение статьи
                 else if (user[i + 3] == "ArticleDetailsUserControl")
                 {
+                    string[] ss = user[i + 4].Split(',');
                     List<string> paramsArt = new List<string>();
-                    paramsArt.Add("Война и мир");
+                    paramsArt.Add(ss[0]);
                     ArticleDetailsUserControl preview = new ArticleDetailsUserControl(paramsArt)
                     {
                         Location = new Point(x, y)
@@ -123,7 +124,8 @@ namespace block
                 else if (user[i + 3] == "ArticlePreviewUserControl")
                 {
                     List<string> paramsArt = new List<string>();
-                    paramsArt.Add("Война и мир");
+                    string[] ss = user[i + 4].Split(',');
+                    paramsArt.Add(ss[0]);
                     ArticlePreviewUserControl preview = new ArticlePreviewUserControl(paramsArt)
                     {
                         Location = new Point(x, y)

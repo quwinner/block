@@ -48,8 +48,17 @@ namespace block
             paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
             paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
             AdsUserControl a1 = new AdsUserControl(paramsArt, 1, 0);
+            string shsvfhksv = "";
+            foreach(string asd in paramsArt)
+            {
+                shsvfhksv += asd + ',';
+            }
+            BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
+        }
 
-            BlockForm.InsertBlockToDB(sender, a1);
+        private void AdsUserControl_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

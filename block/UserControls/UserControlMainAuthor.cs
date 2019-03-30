@@ -57,7 +57,12 @@ namespace block
             p.ShowDialog();
             p.qq.Add("Жуков");
             UserControlMainAuthor a1 = new UserControlMainAuthor(p.qq);
-            BlockForm.InsertBlockToDB(sender, a1);
+            string shsvfhksv = "";
+            foreach (string asd in p.qq)
+            {
+                shsvfhksv += asd + ',';
+            }
+            BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
         }
 
         private void UserControl1_Load(object sender, EventArgs e)

@@ -151,13 +151,13 @@ namespace block
         /// <summary>
         /// Добавление информации о блоке в БД
         /// </summary>
-        public static void InsertBlockToDB(object sender, UserControl a1)
+        public static void InsertBlockToDB(object sender, UserControl a1, string par)
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             c.Controls.Add(a1);
             Program.CONTROLY.Add(a1);
-            SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name) VALUES ('" +
-                c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+            SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name,Params) VALUES ('" +
+                c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "','" + par +"')");
         }       
 
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)

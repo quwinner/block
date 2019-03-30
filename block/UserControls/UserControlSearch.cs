@@ -30,7 +30,12 @@ namespace block
                 c.Name, c.FindForm().Name);
             p.ShowDialog();
             UserControlSearch a1 = new UserControlSearch(p.qq);
-            BlockForm.InsertBlockToDB(sender, a1);
+            string shsvfhksv = "";
+            foreach (string asd in p.qq)
+            {
+                shsvfhksv += asd + ',';
+            }
+            BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
         }
 
         private void textBox_search_TextChanged(object sender, EventArgs e)

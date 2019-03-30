@@ -70,7 +70,12 @@ namespace block
             if(p.qq != new List<string>())
             {
                 CategoriesUserControl a1 = new CategoriesUserControl(p.qq);
-                BlockForm.InsertBlockToDB(sender, a1);
+                string shsvfhksv = "";
+                foreach (string asd in p.qq)
+                {
+                    shsvfhksv += asd + ',';
+                }
+                BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
             }
         }
 
