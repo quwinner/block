@@ -13,14 +13,20 @@ namespace block
     public partial class UserControlMainAuthor : UserControl
     {
         public List<string> par;
+        bool fu = false;
         public UserControlMainAuthor(List <string> parametries)
         {
             InitializeComponent();
+            UCFunctions.AddDNDFunctions(this);
+            BlockForm.AddDeleteMenu(this);
+
             par = parametries;
             if (parametries.Count == 0)
             {
+                fu = true;
                 return;
             }
+
 
             List<string> author = SQLClass.Select("SELECT UserName, `Likes`, `Dislikes`, " +
                 "`Information_about_author`, `Pic` FROM `Authors` WHERE UserName = '" + parametries[0] + "'");
@@ -43,6 +49,7 @@ namespace block
         /// </summary>
         public static void AddNewBlock(object sender, EventArgs e)
         {
+            
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             UCParameters p = new UCParameters("block.UserControlMainAuthor",
                 new Size(), new Point(), new List<string>(),

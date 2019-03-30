@@ -16,7 +16,7 @@ namespace block
         {
             InitializeComponent();
             this.ContextMenuStrip = Program.AddNewUserControlCMS;
-            Program.CONTROLY = AboutMeForm.read(this);
+            Program.CONTROLY = UCFunctions.read(this);
         }
 
         public static List<string> GetLikesDislikes(string Article)

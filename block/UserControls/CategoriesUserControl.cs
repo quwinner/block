@@ -31,7 +31,14 @@ namespace block
         public CategoriesUserControl(List<string> CategoriesParams)
         {
             InitializeComponent();
+            BlockForm.AddDeleteMenu(this);
+            UCFunctions.AddDNDFunctions(this);
+
             asd = CategoriesParams;
+            if (CategoriesParams.Count == 0)
+            {
+                return;
+            }
             //Сюда бы значение по умолчанию
             List<string> Categories = SQLClass.Select("SELECT Name FROM Categories ORDER BY Name LIMIT 0," + CategoriesParams[0]);
             
@@ -47,6 +54,7 @@ namespace block
                 
                 this.Controls.Add(label);
             }
+
         }
 
         /// <summary>
@@ -56,11 +64,14 @@ namespace block
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             UCParameters p = new UCParameters("block.CategoriesUserControl",
-                new Size(), new Point(), new List<string>(),
+                new Size(), new Point(), new List<string>() { "5", "По алфавиту" },
                 c.Name, c.FindForm().Name);
             p.ShowDialog();
-            CategoriesUserControl a1 = new CategoriesUserControl(p.qq);
-            BlockForm.InsertBlockToDB(sender, a1);
+            if(p.qq != new List<string>())
+            {
+                CategoriesUserControl a1 = new CategoriesUserControl(p.qq);
+                BlockForm.InsertBlockToDB(sender, a1);
+            }
         }
 
         public void lable_cat_Click(object sender, EventArgs e)

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -20,7 +19,7 @@ namespace block
         public AuthenticationUserControl(List<string> parametrs)
         {
             InitializeComponent();
-            ArticlePreviewUserControl.AddDNDFunctions(this);
+            UCFunctions.AddDNDFunctions(this);
             BlockForm.AddDeleteMenu(this);
         }
 
@@ -32,9 +31,12 @@ namespace block
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             UCParameters p = new UCParameters("block.AuthenticationUserControl",
                 new Size(), new Point(), new List<string>(),
-                c.Name, c.FindForm().Name);
+                c.Name, c.FindForm().Name
+            );
             p.ShowDialog();
             AuthenticationUserControl a1 = new AuthenticationUserControl(p.qq);
+            a1.Location = p.locetion_userconrla;
+
             BlockForm.InsertBlockToDB(sender, a1);
         }
 

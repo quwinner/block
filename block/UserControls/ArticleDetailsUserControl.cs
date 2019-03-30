@@ -19,8 +19,9 @@ namespace block
         public ArticleDetailsUserControl(List<string> Articles)
         {
             InitializeComponent();
+            GC.Collect(50);
             BlockForm.AddDeleteMenu(this);
-            ArticlePreviewUserControl.AddDNDFunctions(this);
+            UCFunctions.AddDNDFunctions(this);
 
             asd = Articles;
 
@@ -28,10 +29,7 @@ namespace block
             {
                 this.Size = new Size(Convert.ToInt32(Articles[1]), Convert.ToInt32(Articles[2]));
             }
-            catch(Exception e)
-            {
-
-            }
+            catch (Exception) { }
             
             List<String> result = SQLClass.Select("SELECT Author, Category, Text, Picture FROM " + "Articles1" + " WHERE `Header` = '" + Articles[0] + "'");
             AuthorsNameLabel.Text = result[0];

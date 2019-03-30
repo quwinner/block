@@ -20,7 +20,7 @@ namespace block
         {
             InitializeComponent();
             this.ContextMenuStrip = Program.AddNewUserControlCMS;
-            Program.CONTROLY = AboutMeForm.read(this);
+            Program.CONTROLY = UCFunctions.read(this);
         }
 
         private void MyPromotionsForm_Load(object sender, EventArgs e)

@@ -19,6 +19,9 @@ namespace block
         public AdsUserControl(List<string> ParamsAds, int kolvo, int progl)
         {
             InitializeComponent();
+            BlockForm.AddDeleteMenu(this);
+            UCFunctions.AddDNDFunctions(this);
+
             paramsAds = ParamsAds;
             progal = kolvo;
             kol_vo = progl;
@@ -28,18 +31,8 @@ namespace block
                 PictureBox pic = new PictureBox();
                 pic.SizeMode = PictureBoxSizeMode.StretchImage;
                 pic.Load(ParamsAds[r.Next(0, ParamsAds.Count)]);
-                flowLayoutPanel1.Controls.Add(pic);
+                this.Controls.Add(pic);
             }
-
-            /*
-            foreach (var PictureUrl in ParamsAds)
-            {
-                var pic = new PictureBox();
-                pic.SizeMode = PictureBoxSizeMode.StretchImage;
-                pic.Load(PictureUrl);
-                flowLayoutPanel1.Controls.Add(pic);
-            }
-            */
         }
 
         /// <summary>
@@ -57,11 +50,6 @@ namespace block
             AdsUserControl a1 = new AdsUserControl(paramsArt, 1, 0);
 
             BlockForm.InsertBlockToDB(sender, a1);
-        }
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

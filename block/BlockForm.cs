@@ -29,8 +29,12 @@ namespace block
         {
             InitializeComponent();
             this.FormName = FormName;
+
+            Program.UserControlCMS = UCContextMenuStrip;
+            Program.AddNewUserControlCMS = ArticlecontextMenuStrip1;
+            this.ContextMenuStrip = Program.AddNewUserControlCMS;
             DeleteMenuStrip = UCContextMenuStrip;
-            AboutMeForm.read(this);
+            Program.CONTROLY = UCFunctions.read(this);
         }
 
         private string LoadFromDB(string block)
@@ -41,8 +45,6 @@ namespace block
 
         public void BlockForm_Load(object sender, EventArgs e)
         {
-            Program.UserControlCMS = UCContextMenuStrip;
-            Program.AddNewUserControlCMS = ArticlecontextMenuStrip1;
             //File.WriteAllText("test.json", SQLClass.Select("SELECT * FROM `block_blocks` WHERE 1")[1]);
             //label1.Text = (LoadFromDB("block1"));
             //Panel panel1 = CreateStatPanel();
@@ -179,7 +181,7 @@ namespace block
             //SQLClass.Delete("DELETE FROM block WHERE  form = '" + this.Name + "'");
         }
 
-        private void настроитьПараметрыToolStripMenuItem_Click(object sender, EventArgs e)
+        private void setUCParams(object sender, EventArgs e)
         {
             UserControl pb = (UserControl)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             List<string> dnonil = new List<string>();
@@ -219,6 +221,7 @@ namespace block
                     break;
 
             }
+
             UCParameters p = new UCParameters(pb.GetType().ToString(), pb.Size, pb.Location, dnonil, pb.Parent.Name, this.Name);
             p.ShowDialog();
             pb.Size = p.size_Userconrla;

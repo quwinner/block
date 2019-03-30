@@ -78,3 +78,10 @@ C:\Users\Abra\1\block\block\obj\Debug\block.UserControlSearch.resources
 C:\Users\Abra\1\block\block\obj\Debug\block.ArticleDetailsUserControl.resources
 C:\Users\Abra\1\block\block\obj\Debug\block.ArticlePreviewUserControl.resources
 C:\Users\Abra\1\block\block\obj\Debug\block.AuthenticationUserControl.resources
+C:\Users\student.ATIAM\Downloads\Вебинары\block\block\obj\Debug\block.UCParameters.resources
+C:\Users\student.ATIAM\Downloads\Вебинары\block\block\obj\Debug\block.AdsUserControl.resources
+C:\Users\student.ATIAM\Downloads\Вебинары\block\block\obj\Debug\block.CategoriesUserControl.resources
+C:\Users\student.ATIAM\Downloads\Вебинары\block\block\obj\Debug\block.DetailsForm.resources
+C:\Users\student.ATIAM\Downloads\Вебинары\block\block\obj\Debug\block.UserControlAutorsList.resources
+C:\Users\student.ATIAM\Downloads\Вебинары\block\block\obj\Debug\block.UserControlMainAuthor.resources
+C:\Users\student.ATIAM\Downloads\Вебинары\block\block\obj\Debug\block.UserControlSearch.resources

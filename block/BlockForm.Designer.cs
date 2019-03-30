@@ -146,7 +146,7 @@
             this.настроитьПараметрыToolStripMenuItem.Name = "настроитьПараметрыToolStripMenuItem";
             this.настроитьПараметрыToolStripMenuItem.Size = new System.Drawing.Size(234, 24);
             this.настроитьПараметрыToolStripMenuItem.Text = "Настроить параметры";
-            this.настроитьПараметрыToolStripMenuItem.Click += new System.EventHandler(this.настроитьПараметрыToolStripMenuItem_Click);
+            this.настроитьПараметрыToolStripMenuItem.Click += new System.EventHandler(this.setUCParams);
             // 
             // contextMenuStrip1
             // 

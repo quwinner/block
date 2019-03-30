@@ -33,7 +33,7 @@ namespace block
             {
                 CONN.Open();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 OpenConnection();
             }
@@ -76,6 +76,7 @@ namespace block
         /// <returns>Результат в виде списка строк</returns>
         public static List<String> Select(string query)
         {
+            GC.Collect();
             List<String> res = new List<String>();
             MySqlCommand q = new MySqlCommand(query, CONN);
             if (CONN.State != ConnectionState.Open)
@@ -92,7 +93,7 @@ namespace block
                 }
             }
             r.Close();
-
+            GC.Collect();
             return res;
         }
 
