@@ -37,7 +37,7 @@ namespace block
             AuthenticationUserControl a1 = new AuthenticationUserControl(p.ParamsList);
             a1.Location = p.UCLocation;
             string shsvfhksv = "";
-            foreach (string asd in p.qq)
+            foreach (string asd in p.ParamsList)
             {
                 shsvfhksv += asd + ',';
             }

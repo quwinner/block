@@ -71,7 +71,7 @@ namespace block
             {
                 CategoriesUserControl a1 = new CategoriesUserControl(p.ParamsList);
                 string shsvfhksv = "";
-                foreach (string asd in p.qq)
+                foreach (string asd in p.ParamsList)
                 {
                     shsvfhksv += asd + ',';
                 }

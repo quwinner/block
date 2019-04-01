@@ -33,7 +33,7 @@ namespace block
             p.ShowDialog();
             UserControlAutorsList a1 = new UserControlAutorsList(p.ParamsList);
             string shsvfhksv = "";
-            foreach (string asd in p.qq)
+            foreach (string asd in p.ParamsList)
             {
                 shsvfhksv += asd + ',';
             }

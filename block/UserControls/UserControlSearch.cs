@@ -31,7 +31,7 @@ namespace block
             p.ShowDialog();
             UserControlSearch a1 = new UserControlSearch(p.ParamsList);
             string shsvfhksv = "";
-            foreach (string asd in p.qq)
+            foreach (string asd in p.ParamsList)
             {
                 shsvfhksv += asd + ',';
             }

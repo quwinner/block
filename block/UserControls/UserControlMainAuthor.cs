@@ -58,7 +58,7 @@ namespace block
             p.ParamsList.Add("Жуков");
             UserControlMainAuthor a1 = new UserControlMainAuthor(p.ParamsList);
             string shsvfhksv = "";
-            foreach (string asd in p.qq)
+            foreach (string asd in p.ParamsList)
             {
                 shsvfhksv += asd + ',';
             }

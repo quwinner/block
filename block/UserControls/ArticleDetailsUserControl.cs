@@ -51,7 +51,7 @@ namespace block
             p.ShowDialog();
             ArticleDetailsUserControl a1 = new ArticleDetailsUserControl(p.ParamsList);
             string shsvfhksv = "";
-            foreach (string asd in p.qq)
+            foreach (string asd in p.ParamsList)
             {
                 shsvfhksv += asd + ',';
             }

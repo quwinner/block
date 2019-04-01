@@ -94,7 +94,7 @@ namespace block
             p.ParamsList.Add("Война и мир");
             ArticlePreviewUserControl a1 = new ArticlePreviewUserControl(p.ParamsList);
             string shsvfhksv = "";
-            foreach (string asd in p.qq)
+            foreach (string asd in p.ParamsList)
             {
                 shsvfhksv += asd + ',';
             }

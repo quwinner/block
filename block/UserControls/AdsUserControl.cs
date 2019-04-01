@@ -74,13 +74,6 @@ namespace block
         /// </summary>
         public static void AddNewBlock(object sender, EventArgs e)
         {
-            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            UCParameters p = new UCParameters("block.AdsUserControl",
-                new Size(), new Point(), new List<string>() { "0", "0" },
-                c.Name, c.FindForm().Name);
-            p.ShowDialog();
-            if (p.ParamsList != new List<string>())
-            {
             List<string> paramsArt = new List<string>();
             paramsArt.Add("http://rustrade.org.uk/rus/wp-content/uploads/dodo-pizza.jpg");
             paramsArt.Add("https://i.simpalsmedia.com/joblist.md/360x200/f0eeb7ea787a8cc8370e29638d582f31.png");
@@ -88,19 +81,27 @@ namespace block
             paramsArt.Add("https://static.tildacdn.com/tild6533-3365-4438-a364-613965626338/cover-6.jpg");
             paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
             paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
-            
-            AdsUserControl a1 = new AdsUserControl(paramsArt, 3, 0);
-            string shsvfhksv = "";
-            foreach(string asd in paramsArt)
+
+            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            UCParameters p = new UCParameters("block.AdsUserControl",
+                new Size(), new Point(), new List<string>() { "0", "0" },
+                c.Name, c.FindForm().Name);
+            p.ShowDialog();
+            if (p.ParamsList != new List<string>())
             {
-                shsvfhksv += asd + ',';
+                AdsUserControl a1 = new AdsUserControl(paramsArt, 3, 0);
+                string shsvfhksv = "";
+                foreach (string asd in paramsArt)
+                {
+                    shsvfhksv += asd + ',';
+                }
+                BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
             }
-            BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
         }
 
         private void AdsUserControl_Load(object sender, EventArgs e)
         {
-                BlockForm.InsertBlockToDB(sender, a1);
+            //BlockForm.InsertBlockToDB(sender, a1);
            
           /*  String pars = "";
             foreach (string str in paramsArt)
@@ -110,13 +111,7 @@ namespace block
             pars += " kol = 5";
 
             SQLClass.Insert("UPDATE block SET Params = '" + pars + "' WHERE name = 'AdsUserControl' AND x = " + a1.Location.X);
-        */}
-
-        private void AdsUserControl_Load(object sender, EventArgs e)
-        {
-
-        }
-
-       
+        */
+        }       
     }
 }
