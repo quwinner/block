@@ -34,8 +34,8 @@ namespace block
                 c.Name, c.FindForm().Name
             );
             p.ShowDialog();
-            AuthenticationUserControl a1 = new AuthenticationUserControl(p.qq);
-            a1.Location = p.locetion_userconrla;
+            AuthenticationUserControl a1 = new AuthenticationUserControl(p.ParamsList);
+            a1.Location = p.UCLocation;
             string shsvfhksv = "";
             foreach (string asd in p.qq)
             {

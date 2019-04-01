@@ -91,7 +91,8 @@ namespace block
                 new Size(), new Point(), new List<string>() { "Война и мир","23"},
                 c.Name, c.FindForm().Name);
             p.ShowDialog();
-            ArticlePreviewUserControl a1 = new ArticlePreviewUserControl(p.qq);
+            p.ParamsList.Add("Война и мир");
+            ArticlePreviewUserControl a1 = new ArticlePreviewUserControl(p.ParamsList);
             string shsvfhksv = "";
             foreach (string asd in p.qq)
             {

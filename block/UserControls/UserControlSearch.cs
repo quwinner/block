@@ -29,7 +29,7 @@ namespace block
                 new Size(), new Point(), new List<string> {"Введите запрос"},
                 c.Name, c.FindForm().Name);
             p.ShowDialog();
-            UserControlSearch a1 = new UserControlSearch(p.qq);
+            UserControlSearch a1 = new UserControlSearch(p.ParamsList);
             string shsvfhksv = "";
             foreach (string asd in p.qq)
             {

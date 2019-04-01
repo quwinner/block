@@ -224,8 +224,8 @@ namespace block
 
             UCParameters p = new UCParameters(pb.GetType().ToString(), pb.Size, pb.Location, dnonil, pb.Parent.Name, this.Name);
             p.ShowDialog();
-            pb.Size = p.size_Userconrla;
-            pb.Location = p.locetion_userconrla;
+            pb.Size = p.UCSize;
+            pb.Location = p.UCLocation;
         }
 
         private void MyPromoClick(object sender, EventArgs e)
@@ -238,6 +238,11 @@ namespace block
         {
             ReadArticleForm rf = new ReadArticleForm();
             rf.ShowDialog();
+        }
+
+        private void ArticlecontextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
         }
     }
 }

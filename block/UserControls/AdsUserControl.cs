@@ -74,6 +74,13 @@ namespace block
         /// </summary>
         public static void AddNewBlock(object sender, EventArgs e)
         {
+            Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            UCParameters p = new UCParameters("block.AdsUserControl",
+                new Size(), new Point(), new List<string>() { "0", "0" },
+                c.Name, c.FindForm().Name);
+            p.ShowDialog();
+            if (p.ParamsList != new List<string>())
+            {
             List<string> paramsArt = new List<string>();
             paramsArt.Add("http://rustrade.org.uk/rus/wp-content/uploads/dodo-pizza.jpg");
             paramsArt.Add("https://i.simpalsmedia.com/joblist.md/360x200/f0eeb7ea787a8cc8370e29638d582f31.png");
@@ -93,8 +100,7 @@ namespace block
 
         private void AdsUserControl_Load(object sender, EventArgs e)
         {
-            
-            BlockForm.InsertBlockToDB(sender, a1);
+                BlockForm.InsertBlockToDB(sender, a1);
            
           /*  String pars = "";
             foreach (string str in paramsArt)
