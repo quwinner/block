@@ -10,6 +10,12 @@ using System.Windows.Forms;
 
 namespace block
 {
+    public struct Reklama
+    {
+        public List<string> kart;
+        public int kolvo;
+    }
+
     public partial class AdsUserControl : UserControl
     {
         public int progal = 0;
@@ -25,16 +31,44 @@ namespace block
             paramsAds = ParamsAds;
             progal = kolvo;
             kol_vo = progl;
+            int x = 0;
+            int y = 0;
             Random r = new Random();
-            for(int i = 0; i < kol_vo; i++)
+            for (int i = 0; i < kol_vo; i++)
             {
-                PictureBox pic = new PictureBox();
-                pic.SizeMode = PictureBoxSizeMode.StretchImage;
-                pic.Load(ParamsAds[r.Next(0, ParamsAds.Count)]);
-                this.Controls.Add(pic);
+                if (ParamsAds.Count > 0)
+                {
+                    PictureBox pic = new PictureBox();
+                    pic.Location = new Point(x, y);
+                    pic.SizeMode = PictureBoxSizeMode.StretchImage;
+                    pic.Load(ParamsAds[r.Next(0, ParamsAds.Count)]);
+                    this.Controls.Add(pic);
+                    y += progal + pic.Height;
+                }
             }
         }
 
+        public static Reklama readparam(String img)
+        {
+            String[] words = img.Split(new string[] { " = ", ",  ", "," }, StringSplitOptions.RemoveEmptyEntries);
+
+            Reklama newRek = new Reklama();
+            newRek.kart = new List<string>();
+
+            for (int index = 0; index < words.Length; index++)
+            {
+                if (words[index] == "pic")
+                {
+                    newRek.kart.Add(words[index + 1]);
+                }
+                if (words[index] == "kol")
+                {
+                    newRek.kolvo = Convert.ToInt32(words[index + 1]);
+                }
+            }
+
+            return newRek;
+        }
         /// <summary>
         /// Добавление UserControl с рекламой
         /// </summary>
@@ -47,7 +81,8 @@ namespace block
             paramsArt.Add("https://static.tildacdn.com/tild6533-3365-4438-a364-613965626338/cover-6.jpg");
             paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
             paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
-            AdsUserControl a1 = new AdsUserControl(paramsArt, 1, 0);
+            
+            AdsUserControl a1 = new AdsUserControl(paramsArt, 3, 0);
             string shsvfhksv = "";
             foreach(string asd in paramsArt)
             {
@@ -58,7 +93,24 @@ namespace block
 
         private void AdsUserControl_Load(object sender, EventArgs e)
         {
+            
+            BlockForm.InsertBlockToDB(sender, a1);
+           
+          /*  String pars = "";
+            foreach (string str in paramsArt)
+            {
+                pars += "pic = " + str + ", ";
+            }
+            pars += " kol = 5";
+
+            SQLClass.Insert("UPDATE block SET Params = '" + pars + "' WHERE name = 'AdsUserControl' AND x = " + a1.Location.X);
+        */}
+
+        private void AdsUserControl_Load(object sender, EventArgs e)
+        {
 
         }
+
+       
     }
 }
