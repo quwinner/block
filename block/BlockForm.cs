@@ -151,13 +151,13 @@ namespace block
         /// <summary>
         /// Добавление информации о блоке в БД
         /// </summary>
-        public static void InsertBlockToDB(object sender, UserControl a1)
+        public static void InsertBlockToDB(object sender, UserControl a1, string par)
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             c.Controls.Add(a1);
             Program.CONTROLY.Add(a1);
-            SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name) VALUES ('" +
-                c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "')");
+            SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name,Params) VALUES ('" +
+                c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "','" + par +"')");
         }       
 
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -224,8 +224,8 @@ namespace block
 
             UCParameters p = new UCParameters(pb.GetType().ToString(), pb.Size, pb.Location, dnonil, pb.Parent.Name, this.Name);
             p.ShowDialog();
-            pb.Size = p.size_Userconrla;
-            pb.Location = p.locetion_userconrla;
+            pb.Size = p.UCSize;
+            pb.Location = p.UCLocation;
         }
 
         private void MyPromoClick(object sender, EventArgs e)
@@ -238,6 +238,11 @@ namespace block
         {
             ReadArticleForm rf = new ReadArticleForm();
             rf.ShowDialog();
+        }
+
+        private void ArticlecontextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
         }
     }
 }

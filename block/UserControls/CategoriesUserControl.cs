@@ -67,10 +67,15 @@ namespace block
                 new Size(), new Point(), new List<string>() { "5", "По алфавиту" },
                 c.Name, c.FindForm().Name);
             p.ShowDialog();
-            if(p.qq != new List<string>())
+            if(p.ParamsList != new List<string>())
             {
-                CategoriesUserControl a1 = new CategoriesUserControl(p.qq);
-                BlockForm.InsertBlockToDB(sender, a1);
+                CategoriesUserControl a1 = new CategoriesUserControl(p.ParamsList);
+                string shsvfhksv = "";
+                foreach (string asd in p.ParamsList)
+                {
+                    shsvfhksv += asd + ',';
+                }
+                BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
             }
         }
 

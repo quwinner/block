@@ -37,6 +37,7 @@
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.Name = "AdsUserControl";
             this.Size = new System.Drawing.Size(192, 558);
+            this.Load += new System.EventHandler(this.AdsUserControl_Load);
             this.ResumeLayout(false);
 
         }

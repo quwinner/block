@@ -55,9 +55,14 @@ namespace block
                 new Size(), new Point(), new List<string>(),
                 c.Name, c.FindForm().Name);
             p.ShowDialog();
-            p.qq.Add("Жуков");
-            UserControlMainAuthor a1 = new UserControlMainAuthor(p.qq);
-            BlockForm.InsertBlockToDB(sender, a1);
+            p.ParamsList.Add("Жуков");
+            UserControlMainAuthor a1 = new UserControlMainAuthor(p.ParamsList);
+            string shsvfhksv = "";
+            foreach (string asd in p.ParamsList)
+            {
+                shsvfhksv += asd + ',';
+            }
+            BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
         }
 
         private void UserControl1_Load(object sender, EventArgs e)

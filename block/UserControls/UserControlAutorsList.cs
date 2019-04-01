@@ -31,8 +31,13 @@ namespace block
                 new Size(), new Point(), new List<string>{"5", "По алфавиту", "5"},
                 c.Name, c.FindForm().Name);
             p.ShowDialog();
-            UserControlAutorsList a1 = new UserControlAutorsList(p.qq);
-            BlockForm.InsertBlockToDB(sender, a1);
+            UserControlAutorsList a1 = new UserControlAutorsList(p.ParamsList);
+            string shsvfhksv = "";
+            foreach (string asd in p.ParamsList)
+            {
+                shsvfhksv += asd + ',';
+            }
+            BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
         }
 
 

@@ -47,10 +47,15 @@ namespace block
             UCParameters p = new UCParameters("block.ArticleDetailsUserControl", 
                 new Size(), new Point(), new List<string>(), 
                 c.Name, c.FindForm().Name);
-            p.qq.Add("Война и мир");
+            p.ParamsList.Add("Война и мир");
             p.ShowDialog();
-            ArticleDetailsUserControl a1 = new ArticleDetailsUserControl(p.qq);
-            BlockForm.InsertBlockToDB(sender, a1);
+            ArticleDetailsUserControl a1 = new ArticleDetailsUserControl(p.ParamsList);
+            string shsvfhksv = "";
+            foreach (string asd in p.ParamsList)
+            {
+                shsvfhksv += asd + ',';
+            }
+            BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
         }
 
         private void ArticlePicture_Click(object sender, EventArgs e)

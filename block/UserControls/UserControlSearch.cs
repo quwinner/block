@@ -29,8 +29,13 @@ namespace block
                 new Size(), new Point(), new List<string> {"Введите запрос"},
                 c.Name, c.FindForm().Name);
             p.ShowDialog();
-            UserControlSearch a1 = new UserControlSearch(p.qq);
-            BlockForm.InsertBlockToDB(sender, a1);
+            UserControlSearch a1 = new UserControlSearch(p.ParamsList);
+            string shsvfhksv = "";
+            foreach (string asd in p.ParamsList)
+            {
+                shsvfhksv += asd + ',';
+            }
+            BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
         }
 
         private void textBox_search_TextChanged(object sender, EventArgs e)

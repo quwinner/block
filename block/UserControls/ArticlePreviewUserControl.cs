@@ -88,12 +88,17 @@ namespace block
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             UCParameters p = new UCParameters("block.ArticlePreviewUserControl",
-                new Size(), new Point(), new List<string>() { "dfg","sd","23"},
+                new Size(), new Point(), new List<string>() { "Война и мир","23"},
                 c.Name, c.FindForm().Name);
             p.ShowDialog();
-            p.qq.Add("Война и мир");
-            ArticlePreviewUserControl a1 = new ArticlePreviewUserControl(p.qq);
-            BlockForm.InsertBlockToDB(sender, a1);
+            p.ParamsList.Add("Война и мир");
+            ArticlePreviewUserControl a1 = new ArticlePreviewUserControl(p.ParamsList);
+            string shsvfhksv = "";
+            foreach (string asd in p.ParamsList)
+            {
+                shsvfhksv += asd + ',';
+            }
+            BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
         }
 
 
