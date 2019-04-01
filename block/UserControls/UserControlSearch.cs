@@ -12,11 +12,14 @@ namespace block
 {
     public partial class UserControlSearch : UserControl
     {
+        public DragAndDrop Drag = new DragAndDrop();
+
         public UserControlSearch(List<string> SearchParams)
         {
             InitializeComponent();
-            UCFunctions.AddDNDFunctions(this);
+            Drag.AddDNDFunctions(this);
             BlockForm.AddDeleteMenu(this);
+
         }
 
         /// <summary>
@@ -26,8 +29,7 @@ namespace block
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             UCParameters p = new UCParameters("block.UserControlSearch",
-                new Size(), new Point(), new List<string> {"Введите запрос"},
-                c.Name, c.FindForm().Name);
+                new Size(), new Point(), new List<string> {"Введите запрос"});
             p.ShowDialog();
             UserControlSearch a1 = new UserControlSearch(p.ParamsList);
             string shsvfhksv = "";

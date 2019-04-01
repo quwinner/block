@@ -17,6 +17,7 @@ namespace block
     public partial class CategoriesUserControl : UserControl
     {
         public List<string> asd;
+        public DragAndDrop Drag = new DragAndDrop();
 
         /// <summary>
         /// Конструктор который заполняет <see cref="tableLayoutPanel1"/> 
@@ -32,15 +33,15 @@ namespace block
         {
             InitializeComponent();
             BlockForm.AddDeleteMenu(this);
-            UCFunctions.AddDNDFunctions(this);
+            Drag.AddDNDFunctions(this);
 
             asd = CategoriesParams;
-            if (CategoriesParams.Count == 0)
+            if (CategoriesParams.Count < 2)
             {
                 return;
             }
             //Сюда бы значение по умолчанию
-            List<string> Categories = SQLClass.Select("SELECT Name FROM Categories ORDER BY Name LIMIT 0," + CategoriesParams[0]);
+            List<string> Categories = SQLClass.Select("SELECT Name FROM Categories ORDER BY Name LIMIT 0," + Convert.ToInt32(CategoriesParams[0]));
             
             for (int i = 0; i < Categories.Count; i++)
             {
@@ -64,8 +65,7 @@ namespace block
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             UCParameters p = new UCParameters("block.CategoriesUserControl",
-                new Size(), new Point(), new List<string>() { "5", "По алфавиту" },
-                c.Name, c.FindForm().Name);
+                new Size(), new Point(), new List<string>() { "5", "По алфавиту" });
             p.ShowDialog();
             if(p.ParamsList != new List<string>())
             {

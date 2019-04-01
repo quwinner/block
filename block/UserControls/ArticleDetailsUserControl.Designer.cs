@@ -43,7 +43,6 @@
             this.ArticleLabel.Size = new System.Drawing.Size(221, 23);
             this.ArticleLabel.TabIndex = 0;
             this.ArticleLabel.Text = "Заголовок";
-            this.ArticleLabel.Click += new System.EventHandler(this.ArticleLabel_Click);
             // 
             // ArticleTextLabel
             // 
@@ -52,7 +51,6 @@
             this.ArticleTextLabel.Size = new System.Drawing.Size(342, 189);
             this.ArticleTextLabel.TabIndex = 2;
             this.ArticleTextLabel.Text = "Текст статьи";
-            this.ArticleTextLabel.Click += new System.EventHandler(this.ArticleTextLabel_Click);
             // 
             // AuthorsNameLabel
             // 
@@ -71,7 +69,6 @@
             this.ArticlePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ArticlePicture.TabIndex = 1;
             this.ArticlePicture.TabStop = false;
-            this.ArticlePicture.Click += new System.EventHandler(this.ArticlePicture_Click);
             // 
             // ArticleDetailsUserControl
             // 

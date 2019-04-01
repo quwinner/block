@@ -20,21 +20,20 @@ namespace block
 {
     public partial class BlockForm : Form
     {
-        string FormName = "form_main";
+        const string FormName = "form2";
         public static int like = 89;
         public static int dislike = 89;
         public static ContextMenuStrip DeleteMenuStrip;
 
-        public BlockForm(string FormName)
+        public BlockForm()
         {
             InitializeComponent();
-            this.FormName = FormName;
 
             Program.UserControlCMS = UCContextMenuStrip;
             Program.AddNewUserControlCMS = ArticlecontextMenuStrip1;
             this.ContextMenuStrip = Program.AddNewUserControlCMS;
             DeleteMenuStrip = UCContextMenuStrip;
-            Program.CONTROLY = UCFunctions.read(this);
+            this.Controls.AddRange(UCFunctions.ReadFromDB(this.Name).ToArray());
         }
 
         private string LoadFromDB(string block)
@@ -140,12 +139,12 @@ namespace block
 
         private void label2_Click(object sender, EventArgs e)
         {
-            SQLClass.Delete("DELETE FROM `block_blocks` WHERE 1");
+            //SQLClass.Delete("DELETE FROM `block_blocks` WHERE 1");
         }
 
         private void label3_Click(object sender, EventArgs e)
         {
-            SQLClass.Delete("DELETE FROM `block_blocks` WHERE 1");
+            //SQLClass.Delete("DELETE FROM `block_blocks` WHERE 1");
         }
 
         /// <summary>
@@ -190,11 +189,11 @@ namespace block
                 case "AdsUserControl":
                     AdsUserControl pb1 = (AdsUserControl)pb;
                     dnonil.Add(pb1.progal.ToString());
-                    dnonil.Add(pb1.kol_vo.ToString());
+                    dnonil.Add(pb1.ParamsAds.Count.ToString());
                     break;
                 case "ArticleDetailsUserControl":
                     ArticleDetailsUserControl pb2 = (ArticleDetailsUserControl)pb;
-                    dnonil.Add(pb2.asd[0]);
+                    dnonil.Add(pb2.ListOfArticles[0]);
                     break;
                 case "ArticlePreviewUserControl":
                     ArticlePreviewUserControl pb3 = (ArticlePreviewUserControl)pb;
@@ -222,7 +221,7 @@ namespace block
 
             }
 
-            UCParameters p = new UCParameters(pb.GetType().ToString(), pb.Size, pb.Location, dnonil, pb.Parent.Name, this.Name);
+            UCParameters p = new UCParameters(pb.GetType().ToString(), pb.Size, pb.Location, dnonil);
             p.ShowDialog();
             pb.Size = p.UCSize;
             pb.Location = p.UCLocation;

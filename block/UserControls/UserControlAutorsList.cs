@@ -13,12 +13,14 @@ namespace block
     public partial class UserControlAutorsList : UserControl
     {
         public List<string> asd;
+        public DragAndDrop Drag = new DragAndDrop();
+
         public UserControlAutorsList(List<string> par)
         {
             InitializeComponent();
             asd = par;
             BlockForm.AddDeleteMenu(this);
-            UCFunctions.AddDNDFunctions(this);
+            Drag.AddDNDFunctions(this);
         }
 
         /// <summary>
@@ -28,8 +30,7 @@ namespace block
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             UCParameters p = new UCParameters("block.UserControlAutorsList",
-                new Size(), new Point(), new List<string>{"5", "По алфавиту", "5"},
-                c.Name, c.FindForm().Name);
+                new Size(), new Point(), new List<string>{"5", "По алфавиту", "5"});
             p.ShowDialog();
             UserControlAutorsList a1 = new UserControlAutorsList(p.ParamsList);
             string shsvfhksv = "";

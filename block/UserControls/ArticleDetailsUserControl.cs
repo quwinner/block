@@ -12,26 +12,34 @@ namespace block
 {
     public partial class ArticleDetailsUserControl : UserControl
     {
-        public Size size_Userconrla;
-        public Point locetion_userconrla;
-        
-        public List<string> asd;
+        public DragAndDrop Drag = new DragAndDrop();
+
+        public List<string> ListOfArticles;
         public ArticleDetailsUserControl(List<string> Articles)
         {
             InitializeComponent();
-            GC.Collect(50);
             BlockForm.AddDeleteMenu(this);
-            UCFunctions.AddDNDFunctions(this);
+            Drag.AddDNDFunctions(this);
 
-            asd = Articles;
+            ListOfArticles = Articles;
+
+            int x = 356;
+            int y = 376;
 
             try
             {
-                this.Size = new Size(Convert.ToInt32(Articles[1]), Convert.ToInt32(Articles[2]));
+                x = Convert.ToInt32(Articles[1]);
+                y = Convert.ToInt32(Articles[2]);
+            } catch (ArgumentOutOfRangeException)
+            {
+                // Используем тандартный размер
             }
-            catch (Exception) { }
             
-            List<String> result = SQLClass.Select("SELECT Author, Category, Text, Picture FROM " + "Articles1" + " WHERE `Header` = '" + Articles[0] + "'");
+
+            this.Size = new Size(x, y);
+            
+            List<string> result = SQLClass.Select("SELECT Author, Category, Text, Picture FROM " + "Articles1" + " WHERE `Header` = '" + Articles[0] + "'");
+
             AuthorsNameLabel.Text = result[0];
             ArticleLabel.Text = Articles[0];
             ArticleTextLabel.Text = result[2];
@@ -45,33 +53,16 @@ namespace block
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             UCParameters p = new UCParameters("block.ArticleDetailsUserControl", 
-                new Size(), new Point(), new List<string>(), 
-                c.Name, c.FindForm().Name);
+                new Size(), new Point(), new List<string>());
             p.ParamsList.Add("Война и мир");
             p.ShowDialog();
             ArticleDetailsUserControl a1 = new ArticleDetailsUserControl(p.ParamsList);
-            string shsvfhksv = "";
-            foreach (string asd in p.ParamsList)
+            string Buff = "";
+            foreach (string Param in p.ParamsList)
             {
-                shsvfhksv += asd + ',';
+                Buff += Param + ',';
             }
-            BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
+            BlockForm.InsertBlockToDB(sender, a1, Buff);
         }
-
-        private void ArticlePicture_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ArticleLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ArticleTextLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-        
     }
 }

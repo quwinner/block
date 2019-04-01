@@ -10,86 +10,71 @@ using System.Windows.Forms;
 
 namespace block
 {
-    public struct Reklama
-    {
-        public List<string> kart;
-        public int kolvo;
-    }
-
     public partial class AdsUserControl : UserControl
     {
         public int progal = 0;
-        public int kol_vo = 1;
+        public DragAndDrop Drag = new DragAndDrop();
+        public List<string> ParamsAds;
 
-        List<string> paramsAds;
-        public AdsUserControl(List<string> ParamsAds, int kolvo, int progl)
+        public AdsUserControl(List<string> ParamsAds)
         {
             InitializeComponent();
-            BlockForm.AddDeleteMenu(this);
-            UCFunctions.AddDNDFunctions(this);
 
-            paramsAds = ParamsAds;
-            progal = kolvo;
-            kol_vo = progl;
+            BlockForm.AddDeleteMenu(this);
+            Drag.AddDNDFunctions(this);
+
+            progal = ParamsAds.Count;
+
+            this.ParamsAds = ParamsAds;
+
             int x = 0;
             int y = 0;
-            Random r = new Random();
-            for (int i = 0; i < kol_vo; i++)
+            Random rnd = new Random();
+
+            for (int i = 0; i < this.ParamsAds.Count(); i++)
             {
                 if (ParamsAds.Count > 0)
                 {
-                    PictureBox pic = new PictureBox();
-                    pic.Location = new Point(x, y);
-                    pic.SizeMode = PictureBoxSizeMode.StretchImage;
-                    pic.Load(ParamsAds[r.Next(0, ParamsAds.Count)]);
+                    PictureBox pic = new PictureBox
+                    {
+                        Location = new Point(x, y),
+                        SizeMode = PictureBoxSizeMode.StretchImage
+                    };
+                    try
+                    {
+                        pic.Load(ParamsAds[rnd.Next(0, ParamsAds.Count)]);
+                    } catch (InvalidOperationException err)
+                    {
+                        MessageBox.Show(err.Message);
+                    }
                     this.Controls.Add(pic);
                     y += progal + pic.Height;
                 }
             }
         }
 
-        public static Reklama readparam(String img)
-        {
-            String[] words = img.Split(new string[] { " = ", ",  ", "," }, StringSplitOptions.RemoveEmptyEntries);
-
-            Reklama newRek = new Reklama();
-            newRek.kart = new List<string>();
-
-            for (int index = 0; index < words.Length; index++)
-            {
-                if (words[index] == "pic")
-                {
-                    newRek.kart.Add(words[index + 1]);
-                }
-                if (words[index] == "kol")
-                {
-                    newRek.kolvo = Convert.ToInt32(words[index + 1]);
-                }
-            }
-
-            return newRek;
-        }
         /// <summary>
         /// Добавление UserControl с рекламой
         /// </summary>
         public static void AddNewBlock(object sender, EventArgs e)
         {
-            List<string> paramsArt = new List<string>();
-            paramsArt.Add("http://rustrade.org.uk/rus/wp-content/uploads/dodo-pizza.jpg");
-            paramsArt.Add("https://i.simpalsmedia.com/joblist.md/360x200/f0eeb7ea787a8cc8370e29638d582f31.png");
-            paramsArt.Add("https://www.sostav.ru/images/news/2018/02/21/13349a407abf5ee3d8c795fc78694299.jpg");
-            paramsArt.Add("https://static.tildacdn.com/tild6533-3365-4438-a364-613965626338/cover-6.jpg");
-            paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
-            paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
+            List<string> paramsArt = new List<string>
+            {
+                "http://rustrade.org.uk/rus/wp-content/uploads/dodo-pizza.jpg",
+                "https://i.simpalsmedia.com/joblist.md/360x200/f0eeb7ea787a8cc8370e29638d582f31.png",
+                "https://www.sostav.ru/images/news/2018/02/21/13349a407abf5ee3d8c795fc78694299.jpg",
+                "https://static.tildacdn.com/tild6533-3365-4438-a364-613965626338/cover-6.jpg",
+                "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg",
+                "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg"
+            };
 
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             UCParameters p = new UCParameters("block.AdsUserControl",
-                new Size(), new Point(), new List<string>() { "0", "0" },
-                c.Name, c.FindForm().Name);
+                new Size(), new Point(), new List<string>() { "0", "0" });
             p.ShowDialog();
             if (p.ParamsList != new List<string>())
             {
-                AdsUserControl a1 = new AdsUserControl(paramsArt, 3, 0);
+                AdsUserControl a1 = new AdsUserControl(paramsArt);
                 string shsvfhksv = "";
                 foreach (string asd in paramsArt)
                 {
