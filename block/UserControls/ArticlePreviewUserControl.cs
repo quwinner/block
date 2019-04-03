@@ -21,11 +21,11 @@ namespace block
         public string Article;
         public DragAndDrop Drag = new DragAndDrop();
 
-        private int like = 0;
-        private int dislike = 0;
-        private bool changed = false;
-        private bool like_pressed = false;
-        private bool dislike_pressed = false;
+        public int like = 0;
+        public int dislike = 0;
+        public bool changed = false;
+        public bool like_pressed = false;
+        public bool dislike_pressed = false;
 
 
         private string URL_;
@@ -175,7 +175,11 @@ namespace block
 
         private void ArticlePreviewUserControl_Load(object sender, EventArgs e)
         {
+            if (Program.ShowColor == true)
+            {
+                this.BackColor = SystemColors.ActiveBorder;
 
+            }
         }
 
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)

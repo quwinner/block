@@ -37,6 +37,7 @@
             // 
             // ArticleLabel
             // 
+            this.ArticleLabel.BackColor = System.Drawing.SystemColors.Control;
             this.ArticleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ArticleLabel.Location = new System.Drawing.Point(4, 4);
             this.ArticleLabel.Name = "ArticleLabel";
@@ -46,15 +47,18 @@
             // 
             // ArticleTextLabel
             // 
+            this.ArticleTextLabel.BackColor = System.Drawing.SystemColors.Control;
             this.ArticleTextLabel.Location = new System.Drawing.Point(4, 174);
             this.ArticleTextLabel.Name = "ArticleTextLabel";
             this.ArticleTextLabel.Size = new System.Drawing.Size(342, 189);
             this.ArticleTextLabel.TabIndex = 2;
             this.ArticleTextLabel.Text = "Текст статьи";
+            this.ArticleTextLabel.Click += new System.EventHandler(this.ArticleTextLabel_Click);
             // 
             // AuthorsNameLabel
             // 
             this.AuthorsNameLabel.AutoSize = true;
+            this.AuthorsNameLabel.BackColor = System.Drawing.SystemColors.Control;
             this.AuthorsNameLabel.Location = new System.Drawing.Point(231, 6);
             this.AuthorsNameLabel.Name = "AuthorsNameLabel";
             this.AuthorsNameLabel.Size = new System.Drawing.Size(67, 13);
@@ -63,6 +67,7 @@
             // 
             // ArticlePicture
             // 
+            this.ArticlePicture.BackColor = System.Drawing.SystemColors.Control;
             this.ArticlePicture.Location = new System.Drawing.Point(7, 30);
             this.ArticlePicture.Name = "ArticlePicture";
             this.ArticlePicture.Size = new System.Drawing.Size(339, 130);
@@ -74,12 +79,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.Controls.Add(this.AuthorsNameLabel);
             this.Controls.Add(this.ArticleTextLabel);
             this.Controls.Add(this.ArticlePicture);
             this.Controls.Add(this.ArticleLabel);
             this.Name = "ArticleDetailsUserControl";
             this.Size = new System.Drawing.Size(356, 376);
+            this.Load += new System.EventHandler(this.ArticleDetailsUserControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ArticlePicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -88,9 +95,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Label ArticleLabel;
-        private System.Windows.Forms.PictureBox ArticlePicture;
-        private System.Windows.Forms.Label ArticleTextLabel;
-        private System.Windows.Forms.Label AuthorsNameLabel;
+        public System.Windows.Forms.Label ArticleLabel;
+        public System.Windows.Forms.PictureBox ArticlePicture;
+        public System.Windows.Forms.Label ArticleTextLabel;
+        public System.Windows.Forms.Label AuthorsNameLabel;
     }
 }

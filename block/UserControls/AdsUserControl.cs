@@ -42,7 +42,7 @@ namespace block
                     };
                     try
                     {
-                        pic.Load(ParamsAds[rnd.Next(0, ParamsAds.Count)]);
+                        pic.Load(ParamsAds[rnd.Next(0, ParamsAds.Count)]);                        
                     } catch (InvalidOperationException err)
                     {
                         MessageBox.Show(err.Message);
