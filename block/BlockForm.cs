@@ -184,15 +184,19 @@ namespace block
         {
             UserControl pb = (UserControl)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             List<string> dnonil = new List<string>();
+
+            AdsUserControl pb1 = new AdsUserControl(dnonil);
+            ArticleDetailsUserControl pb2;
+
             switch (pb.Name)
             {
                 case "AdsUserControl":
-                    AdsUserControl pb1 = (AdsUserControl)pb;
-                    dnonil.Add(pb1.progal.ToString());
+                    pb1 = (AdsUserControl)pb;
+                    dnonil.Add(pb1.amount.ToString());
                     dnonil.Add(pb1.ParamsAds.Count.ToString());
                     break;
                 case "ArticleDetailsUserControl":
-                    ArticleDetailsUserControl pb2 = (ArticleDetailsUserControl)pb;
+                    pb2 = (ArticleDetailsUserControl)pb;
                     dnonil.Add(pb2.ListOfArticles[0]);
                     break;
                 case "ArticlePreviewUserControl":
@@ -225,6 +229,10 @@ namespace block
             p.ShowDialog();
             pb.Size = p.UCSize;
             pb.Location = p.UCLocation;
+            if (pb1 != null)
+            {
+                pb1.amount = p.Amount;
+            }
         }
 
         private void MyPromoClick(object sender, EventArgs e)
