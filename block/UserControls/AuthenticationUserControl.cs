@@ -56,6 +56,15 @@ namespace block
 
         private void AuthenticationUserControl_Load(object sender, EventArgs e)
         {
+            if (Program.ShowColor == true)
+            {
+                this.BackColor = SystemColors.ActiveBorder;
+
+            }
+        }
+
+        private void passwordTextBox_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

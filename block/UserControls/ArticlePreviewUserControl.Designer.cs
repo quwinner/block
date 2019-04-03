@@ -122,12 +122,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label LikeCount;
-        private System.Windows.Forms.Label DisLikeCount;
         private System.Windows.Forms.PictureBox LikePB;
         private System.Windows.Forms.PictureBox DisLikePB;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        public System.Windows.Forms.LinkLabel linkLabel1;
+        public System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.Label LikeCount;
+        public System.Windows.Forms.Label DisLikeCount;
     }
 }

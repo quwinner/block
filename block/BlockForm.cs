@@ -157,6 +157,9 @@ namespace block
             Program.CONTROLY.Add(a1);
             SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name,Params) VALUES ('" +
                 c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "','" + par +"')");
+
+            List < String > str  = SQLClass.Select("SELECT MAX(id) FROM block");
+            a1.Tag = str[0];
         }       
 
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -164,6 +167,8 @@ namespace block
             UserControl pb = (UserControl)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             MessageBox.Show(pb.Location.X.ToString());
             SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('"+this.Name+"','" + pb.Parent.Name + "'," + pb.Location.X + ", " + pb.Location.Y + ",'" + pb.Name + "')");
+
+
         }
 
         public void deleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -227,11 +232,34 @@ namespace block
 
             UCParameters p = new UCParameters(pb.GetType().ToString(), pb.Size, pb.Location, dnonil);
             p.ShowDialog();
-            pb.Size = p.UCSize;
+            p.Size = p.UCSize;
             pb.Location = p.UCLocation;
-            if (pb1 != null)
+            if (pb.Name == "ArticlePreviewUserControl")
             {
-                pb1.amount = p.Amount;
+                ArticlePreviewUserControl pb2 = (ArticlePreviewUserControl)pb;
+
+
+                pb2.Article = p.ParamsList[0];
+                pb2.linkLabel1.Text = pb2.Article;
+                List<string> kart = SQLClass.Select("SELECT `Picture` FROM `Articles1` WHERE `Header` = '"+ pb2.Article + "'");
+                pb2.pictureBox1.Load(kart[0]);
+
+                List<string> likes = SQLClass.Select("SELECT `LikesCount`, `DisCount` FROM `Likes` WHERE `Article` = '" + pb2.Article + "'");
+                pb2.LikeCount.Text = likes[0];
+                pb2.DisLikeCount.Text = likes[1];
+                pb2.like = Convert.ToInt32(likes[0]);
+                pb2.dislike = Convert.ToInt32(likes[1]);
+
+            }
+            else if (pb.Name == "ArticleDetailsUserControl")
+            {
+                ArticleDetailsUserControl pb2 = (ArticleDetailsUserControl)pb;
+                pb2.ListOfArticles = p.ParamsList;
+                pb2.ArticleLabel.Text = p.ParamsList[0];
+                List<string> kart = SQLClass.Select("SELECT Picture, Text, Author  FROM Articles1 WHERE Header = '" + pb2.ArticleLabel.Text + "'");
+                pb2.ArticlePicture.Load(kart[0]);
+                pb2.ArticleTextLabel.Text = kart[1];
+                pb2.AuthorsNameLabel.Text = kart[2];
             }
         }
 

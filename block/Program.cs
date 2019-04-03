@@ -12,6 +12,8 @@ namespace block
         /// Контекстное меню ЮзерКонтролов
         /// </summary>
         public static ContextMenuStrip UserControlCMS;
+
+        public static bool ShowColor = true;
         /// <summary>
         /// Контекстное меню добавления ЮзерКонтролов
         /// </summary>
