@@ -157,6 +157,9 @@ namespace block
             Program.CONTROLY.Add(a1);
             SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name,Params) VALUES ('" +
                 c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "','" + par +"')");
+
+            List < String > str  = SQLClass.Select("SELECT MAX(id) FROM block");
+            a1.Tag = str[0];
         }       
 
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -164,6 +167,8 @@ namespace block
             UserControl pb = (UserControl)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             MessageBox.Show(pb.Location.X.ToString());
             SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('"+this.Name+"','" + pb.Parent.Name + "'," + pb.Location.X + ", " + pb.Location.Y + ",'" + pb.Name + "')");
+
+
         }
 
         public void deleteToolStripMenuItem_Click(object sender, EventArgs e)
