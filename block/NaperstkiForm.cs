@@ -20,7 +20,7 @@ namespace block
         public NaperstkiForm()
         {
             InitializeComponent();
-            UCFunctions.read(this);
+            this.Controls.AddRange(UCFunctions.ReadFromDB(this.Name).ToArray());
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -53,14 +53,15 @@ namespace block
         /// </summary>
         private void pictureBoxPoint_MouseMove(object sender, MouseEventArgs e)
         {
-            pictureBoxPoint_MouseMove((Control)sender, e);
+            //pictureBoxPoint_MouseMove((Control)sender, e);
+            //Глючный код, кидает StackOverflowException
         }
 
         #endregion
 
         void reg(string sasdasd)
         {
-            DockStyle sdsasd = new DockStyle();
+            DockStyle sdsasd;
             string[] sad = sasdasd.Split('&');
             switch (sad[1])
             {

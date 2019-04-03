@@ -102,6 +102,7 @@
     <Compile Include="DetailsForm.Designer.cs">
       <DependentUpon>DetailsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\DragAndDrop.cs" />
     <Compile Include="UserControls\UCFunctions.cs" />
     <Compile Include="UserControls\UserControlAutorsList.cs">
       <SubType>UserControl</SubType>
@@ -139,7 +140,6 @@
     <Compile Include="UserControls\AuthenticationUserControl.Designer.cs">
       <DependentUpon>AuthenticationUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="BlockData.cs" />
     <Compile Include="BlockForm.cs">
       <SubType>Form</SubType>
     </Compile>

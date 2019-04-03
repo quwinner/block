@@ -12,205 +12,100 @@ namespace block
     /// </summary>
     class UCFunctions
     {
-        #region Функции по части Drag-n-drop
-
-        public static bool dragging = false;
-        public static Point dragCursorPoint;
-        public static Point dragFormPoint;
-
-        public static void FormTest_MouseDown(object sender, MouseEventArgs e)
+        /// <summary>
+        /// Функция со стака которая делит одномерный массив в массивы 
+        /// размером <paramref name="chunk_size"/>
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        private static List<List<T>> Split<T>(List<T> source, int chunk_size)
         {
-            dragging = true;
-            dragCursorPoint = Cursor.Position;
-            dragFormPoint = ((UserControl)sender).Location;
-        }
-
-        public static void FormTest_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (dragging)
-            {
-                Point dif = Point.Subtract(Cursor.Position, new Size(dragCursorPoint));
-                ((UserControl)sender).Location = Point.Add(dragFormPoint, new Size(dif));
-            }
+            return source
+                .Select((x, i) => new { Index = i, Value = x })
+                .GroupBy(x => x.Index / chunk_size)
+                .Select(x => x.Select(v => v.Value).ToList())
+                .ToList();
         }
 
         /// <summary>
-        /// Когда отпускаем мышку, сохраняем координаты ЮзерКонтрола в БД
+        /// Переписанная функция чтения из базы.
         /// </summary>
-        public static void FormTest_MouseUp(object sender, MouseEventArgs e)
+        /// <param name="FormName">Имя нужной формы</param>
+        /// <returns>Лист контролов</returns>
+        public static List<UserControl> ReadFromDB(string FormName)
         {
-            dragging = false;
-            foreach (UserControl uc in Program.CONTROLY)
+            List<string> ListDB = SQLClass.Select(
+                "SELECT form, x, y, name, Params FROM block WHERE form = '" + FormName + "'");
+
+            List<UserControl> ListOfControls = new List<UserControl>();
+
+            foreach (List<string> Row in Split(ListDB, 5))
             {
-                if (sender.Equals(uc))
+                // Вспомогательные переменные для того чтобы не писать Row[...]
+                string form = Row[0] ?? throw new NullReferenceException("form = null");
+                int x = Convert.ToInt32(Row[1]);
+                int y = Convert.ToInt32(Row[2]);
+                string name = Row[3] ?? throw new NullReferenceException("name = null");
+                List<string> Params = Row[4].Split(',').ToList() ?? throw new NullReferenceException("Params = null");
+
+                switch (name)
                 {
-                    SQLClass.Update("UPDATE block SET" +
-                        " x = " + ((UserControl)sender).Location.X.ToString() + "," +
-                        " y = " + ((UserControl)sender).Location.Y.ToString() +
-                    " WHERE name = '" + uc.Name + "'" +
-                        " AND form = '" + uc.FindForm().Name + "'" +
-                        " AND Parent = '" + uc.Parent.Name + "'");
-                }
-            }
-        }
-
-        /// <summary>
-        /// Добавление к ЮзерКонтролу контекстного меню, функций для DND и т.д.
-        /// </summary>
-        /// <param name="sender"></param>
-        public static void AddDNDFunctions(object sender)
-        {
-            ((UserControl)sender).MouseDown += new MouseEventHandler(FormTest_MouseDown);
-            ((UserControl)sender).MouseMove += new MouseEventHandler(FormTest_MouseMove);
-            ((UserControl)sender).MouseUp += new MouseEventHandler(FormTest_MouseUp);
-
-            ((UserControl)sender).ContextMenuStrip = Program.UserControlCMS;
-        }
-        #endregion
-        
-        /// <summary>
-        /// Читаем из БД список юзерКонтролов, лежащих на форме
-        /// </summary>
-        /// <param name="Name">Форма</param>
-        public static List<UserControl> read(Control Name)
-        {
-            List<UserControl> control = new List<UserControl>();
-
-            List<string> user = SQLClass.Select(
-                "SELECT form, x, y, name, Params FROM block WHERE form = '" +
-                Name.FindForm().Name + "'");
-
-            for (int i = 0; i < user.Count; i += 5)
-            {
-                //Вычисляем координаты
-                int x = Convert.ToInt32(user[i + 1]);
-                int y = Convert.ToInt32(user[i + 2]);
-
-                #region Реклама
-                if (user[i + 3] == "AdsUserControl")
-                {
-                    Reklama newRek = AdsUserControl.readparam(user[i + 4]);
-                    /*List<string> paramsArt = new List<string>();
-                    paramsArt.Add("http://rustrade.org.uk/rus/wp-content/uploads/dodo-pizza.jpg");
-                    paramsArt.Add("https://i.simpalsmedia.com/joblist.md/360x200/f0eeb7ea787a8cc8370e29638d582f31.png");
-                    paramsArt.Add("https://www.sostav.ru/images/news/2018/02/21/13349a407abf5ee3d8c795fc78694299.jpg");
-                    paramsArt.Add("https://static.tildacdn.com/tild6533-3365-4438-a364-613965626338/cover-6.jpg");
-                    paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
-                    paramsArt.Add("https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg");
-                   */ AdsUserControl preview = new AdsUserControl(newRek.kart, newRek.kolvo, 4)
-                    {
-                        Location = new Point(x, y)
-                    };
-
-                    Name.Controls.Add(preview);
-                    control.Add(preview);
-                }
-                #endregion
-                #region Чтение статьи
-                else if (user[i + 3] == "ArticleDetailsUserControl")
-                {
-                    string[] ss = user[i + 4].Split(',');
-                    List<string> paramsArt = new List<string>();
-                    paramsArt.Add(ss[0]);
-                    ArticleDetailsUserControl preview = new ArticleDetailsUserControl(paramsArt)
-                    {
-                        Location = new Point(x, y)
-                    };
-
-                    Name.Controls.Add(preview);
-                    control.Add(preview);
-                }
-                #endregion
-                #region Предпросмотр статьи
-                else if (user[i + 3] == "ArticlePreviewUserControl")
-                {
-                    List<string> paramsArt = new List<string>();
-                    string[] ss = user[i + 4].Split(',');
-                    paramsArt.Add(ss[0]);
-                    ArticlePreviewUserControl preview = new ArticlePreviewUserControl(paramsArt)
-                    {
-                        Location = new Point(x, y)
-                    };
-
-                    Name.Controls.Add(preview);
-                    control.Add(preview);
-                }
-                #endregion
-                #region Аутентификация
-                else if (user[i + 3] == "AuthenticationUserControl")
-                {
-                    List<string> paramsArt = new List<string>();
-                    AuthenticationUserControl preview = new AuthenticationUserControl(paramsArt)
-                    {
-                        Location = new Point(x, y)
-                    };
-
-                    Name.Controls.Add(preview);
-                    control.Add(preview);
-                }
-                #endregion
-                #region Категории
-                else if (user[i + 3] == "CategoriesUserControl")
-                {
-                    CategoriesUserControl preview = new CategoriesUserControl(new List<string>() { "5", "По алфавиту" })
-                    {
-                        Location = new Point(x, y)
-                    };
-
-                    Name.Controls.Add(preview);
-                    control.Add(preview);
-                }
-                #endregion
-                #region Список авторов
-                else if (user[i + 3] == "UserControlAutorsList")
-                {
-                    List<string> paramsArt = new List<string>();
-                    UserControlAutorsList preview = new UserControlAutorsList(paramsArt)
-                    {
-                        Location = new Point(x, y)
-                    };
-
-                    Name.Controls.Add(preview);
-                    control.Add(preview);
-                }
-                #endregion
-                #region Автор
-                else if (user[i + 3] == "UserControlMainAuthor")
-                {
-                    List<string> paramsArt = new List<string>();
-                    paramsArt.Add("Жуков");
-                    UserControlMainAuthor preview = new UserControlMainAuthor(paramsArt)
-                    {
-                        Location = new Point(x, y)
-                    };
-
-                    Name.Controls.Add(preview);
-                    control.Add(preview);
-                }
-                #endregion
-                #region Поиск
-                else if (user[i + 3] == "UserControlSearch")
-                {
-                    List<string> paramsArt = new List<string>();
-                    UserControlSearch preview = new UserControlSearch(paramsArt)
-                    {
-                        Location = new Point(x, y)
-                    };
-
-                    Name.Controls.Add(preview);
-                    control.Add(preview);
-                }
-                #endregion
-
-                else
-                {
-                    MessageBox.Show(user[i + 3]);
+                    case "AdsUserControl":
+                        AdsUserControl NewAds = new AdsUserControl(Params)
+                        {
+                            Location = new Point(x, y)
+                        };
+                        ListOfControls.Add(NewAds);
+                        break;
+                    case "ArticlePreviewUserControl":
+                        ArticlePreviewUserControl NewPreview = new ArticlePreviewUserControl(Params)
+                        {
+                            Location = new Point(x, y)
+                        };
+                        ListOfControls.Add(NewPreview);
+                        break;
+                    case "AuthenticationUserControl":
+                        AuthenticationUserControl NewAuth = new AuthenticationUserControl(Params)
+                        {
+                            Location = new Point(x, y)
+                        };
+                        ListOfControls.Add(NewAuth);
+                        break;
+                    case "CategoriesUserControl":
+                        CategoriesUserControl NewCateg = new CategoriesUserControl(Params)
+                        {
+                            Location = new Point(x, y)
+                        };
+                        ListOfControls.Add(NewCateg);
+                        break;
+                    case "UserControlAutorsList":
+                        UserControlAutorsList NewAuthorList = new UserControlAutorsList(Params)
+                        {
+                            Location = new Point(x, y)
+                        };
+                        ListOfControls.Add(NewAuthorList);
+                        break;
+                    case "UserControlMainAuthor":
+                        UserControlMainAuthor NewMainAuthor = new UserControlMainAuthor(Params)
+                        {
+                            Location = new Point(x, y)
+                        };
+                        ListOfControls.Add(NewMainAuthor);
+                        break;
+                    case "UserControlSearch":
+                        CategoriesUserControl NewSearch = new CategoriesUserControl(Params)
+                        {
+                            Location = new Point(x, y)
+                        };
+                        ListOfControls.Add(NewSearch);
+                        break;
+                    default:
+                        throw new Exception(string.Format("'{0}' это неправильное название блока", name));
                 }
             }
 
-            return control;
+            return ListOfControls;
         }
-
-    
     }
 }

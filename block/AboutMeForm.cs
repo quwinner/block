@@ -12,12 +12,11 @@ namespace block
 {
     public partial class AboutMeForm : Form
     {
-
         public AboutMeForm()
         {
             InitializeComponent();
             this.ContextMenuStrip = Program.AddNewUserControlCMS;
-            Program.CONTROLY = UCFunctions.read(this);
+            this.Controls.AddRange(UCFunctions.ReadFromDB(this.Name).ToArray());
         }
                 
         private void AboutMeForm_Load(object sender, EventArgs e)

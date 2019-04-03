@@ -19,7 +19,7 @@ namespace block
         public List<string> asd;
 
         public string Article;
-
+        public DragAndDrop Drag = new DragAndDrop();
 
         private int like = 0;
         private int dislike = 0;
@@ -49,7 +49,7 @@ namespace block
         public ArticlePreviewUserControl(List<string> Articles)
         {
             InitializeComponent();
-            UCFunctions.AddDNDFunctions(this);
+            Drag.AddDNDFunctions(this);
             BlockForm.AddDeleteMenu(this);
 
             GC.Collect(2);
@@ -60,20 +60,20 @@ namespace block
             }
             Article = Articles[0];
 
-            try
+
+            List<String> url_pic = SQLClass.Select(string.Format("SELECT `Picture` FROM `Articles1` WHERE `Header`='{0}'", Article));
+            if (url_pic.Count == 1)
             {
-                List<String> url_pic = SQLClass.Select(string.Format("SELECT `Picture` FROM `Articles1` WHERE `Header`='{0}'", Article));
                 pictureBox1.Load(url_pic[0]);
             }
-            catch (Exception) { }
+            
 
-            try
+            List<string> likes_dislikes = SQLClass.Select(string.Format("SELECT `LikesCount`, `DisCount` FROM `Likes` WHERE `Article`='{0}'", Article));
+            if (likes_dislikes.Count == 2)
             {
-                List<String> likes_dislikes = SQLClass.Select(string.Format("SELECT `LikesCount`, `DisCount` FROM `Likes` WHERE `Article`='{0}'", Article));
                 like = Int32.Parse(likes_dislikes[0]);
                 dislike = Int32.Parse(likes_dislikes[1]);
             }
-            catch (Exception) { }
 
             linkLabel1.Text = Article;
             LikeCount.Text = like.ToString();
@@ -88,8 +88,7 @@ namespace block
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             UCParameters p = new UCParameters("block.ArticlePreviewUserControl",
-                new Size(), new Point(), new List<string>() { "Война и мир","23"},
-                c.Name, c.FindForm().Name);
+                new Size(), new Point(), new List<string>() { "Война и мир","23"});
             p.ShowDialog();
             p.ParamsList.Add("Война и мир");
             ArticlePreviewUserControl a1 = new ArticlePreviewUserControl(p.ParamsList);
@@ -99,27 +98,6 @@ namespace block
                 shsvfhksv += asd + ',';
             }
             BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
-        }
-
-
-        public JObject Data
-        {
-            get
-            {
-                return new JObject(new Dictionary<string, dynamic> {
-                    {"Article", linkLabel1.Name},
-                    {"Likes", LikeCount.Text},
-                    {"DisLikes", DisLikeCount.Text},
-                    {"URL", URL_}
-                });
-            }
-            set
-            {
-                linkLabel1.Text = value["Article"].ToString();
-                LikeCount.Text = value["Likes"].ToString();
-                DisLikeCount.Text = value["DisLikes"].ToString();
-                pictureBox1.Load(value["URL"].ToString());
-            }
         }
 
         /// <summary>

@@ -14,17 +14,19 @@ namespace block
     {
         public List<string> par;
         bool fu = false;
+
+        public DragAndDrop Drag = new DragAndDrop();
+
         public UserControlMainAuthor(List <string> parametries)
         {
             InitializeComponent();
-            UCFunctions.AddDNDFunctions(this);
+            Drag.AddDNDFunctions(this);
             BlockForm.AddDeleteMenu(this);
 
             par = parametries;
             if (parametries.Count == 0)
             {
-                fu = true;
-                return;
+                throw new Exception("Нету параметров");
             }
 
 
@@ -52,8 +54,7 @@ namespace block
             
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             UCParameters p = new UCParameters("block.UserControlMainAuthor",
-                new Size(), new Point(), new List<string>(),
-                c.Name, c.FindForm().Name);
+                new Size(), new Point(), new List<string>());
             p.ShowDialog();
             p.ParamsList.Add("Жуков");
             UserControlMainAuthor a1 = new UserControlMainAuthor(p.ParamsList);

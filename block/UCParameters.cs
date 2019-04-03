@@ -14,11 +14,8 @@ namespace block
     {
         public const int LabelOffest = 30;
 
-        public string UCParent;
-        public string FormName;
-
-        public Size UCSize;
-        public Point UCLocation;
+        public Size UCSize = new Size(0, 0);
+        public Point UCLocation = new Point(0, 0);
 
         #region Параметры
 
@@ -36,20 +33,13 @@ namespace block
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="UCName">
-        /// Название юзер контрола, например "block.AdsUserControl".
-        /// </param>
-        /// <param name="UCSize">
-        /// </param>
+        /// <param name="UCName"></param>
+        /// <param name="UCSize"></param>
         /// <param name="UCLocation"></param>
         /// <param name="par"></param>
-        /// <param name="UCParent"></param>
-        /// <param name="FormName"></param>
-        public UCParameters(string UCName, Size UCSize, Point UCLocation, List<string> par, string UCParent, string FormName)
+        public UCParameters(string UCName, Size UCSize, Point UCLocation, List<string> par)
         {
             InitializeComponent();
-            this.UCParent = UCParent;
-            this.FormName = FormName;
             this.UCSize = UCSize;
             this.UCLocation = UCLocation;
 
@@ -71,6 +61,10 @@ namespace block
                     SortOrder = par[1];
                     break;
                 case "block.UserControlAutorsList":
+                    if (par.Count < 3)
+                    {
+                        break;
+                    }
                     Amount = Convert.ToInt32(par[0]);
                     SortOrder = par[1];
                     DistanceBetween = Convert.ToInt32(par[2]);
@@ -81,6 +75,8 @@ namespace block
                 case "block.UserControlSearch":
                     SerachQuery = par[0];
                     break;
+                default:
+                    throw new Exception("Неправильный UCName " + UCName);
             }
 
             List<string> ParamsStr = SQLClass.Select("SELECT params FROM block_blocks WHERE name ='" + UCName + "'");

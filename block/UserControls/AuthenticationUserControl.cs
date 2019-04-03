@@ -15,11 +15,12 @@ namespace block
     /// </summary>
     public partial class AuthenticationUserControl : UserControl
     {
+        public DragAndDrop Drag = new DragAndDrop();
         public List<string> asd;
         public AuthenticationUserControl(List<string> parametrs)
         {
             InitializeComponent();
-            UCFunctions.AddDNDFunctions(this);
+            Drag.AddDNDFunctions(this);
             BlockForm.AddDeleteMenu(this);
         }
 
@@ -30,9 +31,7 @@ namespace block
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             UCParameters p = new UCParameters("block.AuthenticationUserControl",
-                new Size(), new Point(), new List<string>(),
-                c.Name, c.FindForm().Name
-            );
+                new Size(), new Point(), new List<string>());
             p.ShowDialog();
             AuthenticationUserControl a1 = new AuthenticationUserControl(p.ParamsList);
             a1.Location = p.UCLocation;

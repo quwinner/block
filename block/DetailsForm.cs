@@ -16,7 +16,8 @@ namespace block
         {
             InitializeComponent();
             this.Controls.Add(Details);
-            UCFunctions.read(this);
+            this.Controls.AddRange(UCFunctions.ReadFromDB(this.Name).ToArray());
+
         }
 
         private void DetailsForm_Load(object sender, EventArgs e)

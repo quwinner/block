@@ -29,7 +29,7 @@ namespace block
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             SQLClass.OpenConnection();
-            Application.Run(new BlockForm("form2"));
+            Application.Run(new BlockForm());
         }
     }
 }
