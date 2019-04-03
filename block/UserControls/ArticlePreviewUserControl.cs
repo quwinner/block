@@ -59,6 +59,7 @@ namespace block
                 return;
             }
             Article = Articles[0];
+            asd = Articles;
 
 
             List<String> url_pic = SQLClass.Select(string.Format("SELECT `Picture` FROM `Articles1` WHERE `Header`='{0}'", Article));
