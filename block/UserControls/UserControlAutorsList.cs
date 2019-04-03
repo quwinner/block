@@ -47,6 +47,11 @@ namespace block
         {
             List<String> authorsList = new List<string>{ "Жулик", "Вор", "Единорос" };
 
+            if (Program.ShowColor == true)
+            {
+                this.BackColor = SystemColors.ActiveBorder;
+                
+            }
             int authorsY = 75;
             for (int artIndex = 0; artIndex < authorsList.Count; artIndex += 1)
             {

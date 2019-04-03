@@ -64,5 +64,19 @@ namespace block
             }
             BlockForm.InsertBlockToDB(sender, a1, Buff);
         }
+
+        private void ArticleDetailsUserControl_Load(object sender, EventArgs e)
+        {
+            if (Program.ShowColor == true)
+            {
+                this.BackColor = SystemColors.ActiveBorder;
+
+            }
+        }
+
+        private void ArticleTextLabel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
