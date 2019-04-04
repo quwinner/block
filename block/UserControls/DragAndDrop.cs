@@ -35,11 +35,21 @@ namespace block
         public void FormTest_MouseUp(object sender, MouseEventArgs e)
         {
             IsDragging = false;
-            foreach (UserControl uc in /*Program.CONTROLY*/ ((Control)sender).FindForm().Controls)
+            foreach (Control uc in /*Program.CONTROLY*/ ((Control)sender).FindForm().Controls)
             {
-                if (sender.Equals(uc))
+                UserControl ActualUC;
+
+                try
                 {
-                    switch (uc.Name)
+                    ActualUC = (UserControl)uc;
+                } catch (Exception)
+                {
+                    continue;
+                }
+
+                if (sender.Equals(ActualUC))
+                {
+                    switch (ActualUC.Name)
                     {
                         case "AdsUserControl":
                             AdsUserControl NewPreview = (AdsUserControl)sender;
@@ -49,8 +59,8 @@ namespace block
                                 param += pr + ",";
                             }
                             SQLClass.Update("UPDATE block SET" +
-                            " Params = " + param +
-                        " WHERE id = '" + uc.Tag + "'");
+                            " Params = '" + param +
+                        "' WHERE id = '" + uc.Tag + "'");
                             break;
                         case "ArticleDetailsUserControl":
                             ArticleDetailsUserControl NewPreview2 = (ArticleDetailsUserControl)sender;
@@ -60,8 +70,8 @@ namespace block
                                 param2 += pr + ",";
                             }
                             SQLClass.Update("UPDATE block SET" +
-                            " Params = " + param2 +
-                        " WHERE id = '" + uc.Tag + "'");
+                            " Params = '" + param2 +
+                        "' WHERE id = '" + uc.Tag + "'");
                             break;
                         case "ArticlePreviewUserControl":
                             ArticlePreviewUserControl NewPreview3 = (ArticlePreviewUserControl)sender;
@@ -71,8 +81,8 @@ namespace block
                                 param3 += pr + ",";
                             }
                             SQLClass.Update("UPDATE block SET" +
-                            " Params = " + param3 +
-                        " WHERE id = '" + uc.Tag + "'");
+                            " Params = '" + param3 +
+                        "' WHERE id = '" + uc.Tag + "'");
                             break;
                         case "CategoriesUserControl":
                             CategoriesUserControl NewPreview4 = (CategoriesUserControl)sender;
@@ -82,8 +92,8 @@ namespace block
                                 param4 += pr + ",";
                             }
                             SQLClass.Update("UPDATE block SET" +
-                            " Params = " + param4 +
-                        " WHERE id = '" + uc.Tag + "'");
+                            " Params = '" + param4 +
+                        "' WHERE id = '" + uc.Tag + "'");
                             break;
                         case "UserControlAutorsList":
                             UserControlAutorsList NewPreview5 = (UserControlAutorsList)sender;
@@ -93,8 +103,8 @@ namespace block
                                 param5 += pr + ",";
                             }
                             SQLClass.Update("UPDATE block SET" +
-                            " Params = " + param5 +
-                        " WHERE id = '" + uc.Tag + "'");
+                            " Params = '" + param5 +
+                        "' WHERE id = '" + uc.Tag + "'");
                             break;
                         case "UserControlMainAuthor":
                             UserControlMainAuthor NewPreview6 = (UserControlMainAuthor)sender;
@@ -104,8 +114,8 @@ namespace block
                                 param6 += pr + ",";
                             }
                             SQLClass.Update("UPDATE block SET" +
-                            " Params = " + param6 +
-                        " WHERE id = '" + uc.Tag + "'");
+                            " Params = '" + param6 +
+                        "' WHERE id = '" + uc.Tag + "'");
                             break;
                         case "UserControlSearch":
                             UserControlMainAuthor NewPreview7 = (UserControlMainAuthor)sender;
@@ -115,8 +125,8 @@ namespace block
                                 param7 += pr + ",";
                             }
                             SQLClass.Update("UPDATE block SET" +
-                            " Params = " + param7 +
-                        " WHERE id = '" + uc.Tag + "'");
+                            " Params = '" + param7 +
+                        "' WHERE id = '" + uc.Tag + "'");
                             break;
                     }
                     SQLClass.Update("UPDATE block SET" +
