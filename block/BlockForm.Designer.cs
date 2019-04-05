@@ -54,7 +54,6 @@
             this.ArticlecontextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.ArticlecontextMenuStrip1.Name = "ArticlecontextMenuStrip1";
             this.ArticlecontextMenuStrip1.Size = new System.Drawing.Size(181, 26);
-            this.ArticlecontextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.ArticlecontextMenuStrip1_Opening);
             // 
             // label1
             // 
@@ -64,7 +63,6 @@
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // button1
             // 
@@ -113,7 +111,6 @@
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "label2";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label5
             // 
@@ -138,14 +135,14 @@
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
-            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteUserControl);
             // 
             // настроитьПараметрыToolStripMenuItem
             // 
             this.настроитьПараметрыToolStripMenuItem.Name = "настроитьПараметрыToolStripMenuItem";
             this.настроитьПараметрыToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.настроитьПараметрыToolStripMenuItem.Text = "Настроить параметры";
-            this.настроитьПараметрыToolStripMenuItem.Click += new System.EventHandler(this.setUCParams);
+            this.настроитьПараметрыToolStripMenuItem.Click += new System.EventHandler(this.SetUCParametersToCurrent);
             // 
             // contextMenuStrip1
             // 
@@ -160,7 +157,7 @@
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(130, 22);
             this.toolStripMenuItem2.Text = "сохранить";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.SaveUserControl);
             // 
             // button3
             // 

@@ -1,26 +1,15 @@
 
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-using MySql.Data;
-using MySql.Data.MySqlClient;
 using System.Reflection;
+using System.Windows.Forms;
 
 namespace block
 {
     public partial class BlockForm : Form
     {
-        const string FormName = "form2";
         public static int like = 89;
         public static int dislike = 89;
         public static ContextMenuStrip DeleteMenuStrip;
@@ -34,12 +23,6 @@ namespace block
             this.ContextMenuStrip = Program.AddNewUserControlCMS;
             DeleteMenuStrip = UCContextMenuStrip;
             this.Controls.AddRange(UCFunctions.ReadFromDB(this.Name).ToArray());
-        }
-
-        private string LoadFromDB(string block)
-        {
-            var aaa = SQLClass.Select(string.Format("SELECT `json` FROM `block_blocks` WHERE `block1`='{0}'", block));
-            return aaa[0];
         }
 
         public void BlockForm_Load(object sender, EventArgs e)
@@ -57,7 +40,7 @@ namespace block
             List<Type> forms = new List<Type>();
             foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
             {
-                forms.AddRange(from t in asm.GetTypes() where t.IsSubclassOf(typeof(UserControl)) select t);            
+                forms.AddRange(from t in asm.GetTypes() where t.IsSubclassOf(typeof(UserControl)) select t);
             }
 
             int i = 0;
@@ -105,23 +88,6 @@ namespace block
             ((UserControl)sender).ContextMenuStrip = BlockForm.DeleteMenuStrip;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-            /*var test_block = new BlockData() {
-                Location = new int[] { 0, 0 },
-                Name = "block2",
-                Distance = new int[] {0, 0},
-                Objects = new List<dynamic>() {
-                    new BlockObj(textBox1),
-                    new BlockObj(pictureBox1)
-                }
-            };
-            var test_block_json = JsonConvert.SerializeObject(test_block);
-            SQLClass.Insert(string.Format("INSERT INTO `block_blocks`(`name`, `json`) VALUES ('{0}','{1}')", "block2",
-                test_block_json));*/
-            MessageBox.Show("5");
-        }
-
         /// <summary>
         /// Открываем форму наперстков
         /// </summary>
@@ -131,20 +97,15 @@ namespace block
             df.ShowDialog();
         }
 
+        /// <summary>
+        /// Открываем форму "Обо мне"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AboutMeClick(object sender, EventArgs e)
         {
             AboutMeForm df = new AboutMeForm();
             df.ShowDialog();
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-            //SQLClass.Delete("DELETE FROM `block_blocks` WHERE 1");
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-            //SQLClass.Delete("DELETE FROM `block_blocks` WHERE 1");
         }
 
         /// <summary>
@@ -156,36 +117,36 @@ namespace block
             c.Controls.Add(a1);
             Program.CONTROLY.Add(a1);
             SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name,Params) VALUES ('" +
-                c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "','" + par +"')");
+                c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "','" + par + "')");
 
-            List < String > str  = SQLClass.Select("SELECT MAX(id) FROM block");
+            List<String> str = SQLClass.Select("SELECT MAX(id) FROM block");
             a1.Tag = str[0];
-        }       
+        }
 
-        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Функция сохранения юзерконтрола на форму и базу.
+        /// </summary>
+        private void SaveUserControl(object sender, EventArgs e)
         {
             UserControl pb = (UserControl)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             MessageBox.Show(pb.Location.X.ToString());
-            SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('"+this.Name+"','" + pb.Parent.Name + "'," + pb.Location.X + ", " + pb.Location.Y + ",'" + pb.Name + "')");
-
-
+            SQLClass.Insert("INSERT INTO `block`(`form`,`Parent`, `x`, `y`, `name`) VALUES ('" + this.Name + "','" + pb.Parent.Name + "'," + pb.Location.X + ", " + pb.Location.Y + ",'" + pb.Name + "')");
         }
 
-        public void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Функция удаления юзерконтрола из формы и базы.
+        /// </summary>
+        public void DeleteUserControl(object sender, EventArgs e)
         {
             UserControl pb = (UserControl)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             pb.Visible = false;
-            SQLClass.Delete("DELETE FROM `block` WHERE `name` = '"+ pb.Name +"' AND form = '"+ pb.FindForm().Name +"'");
+            SQLClass.Delete("DELETE FROM `block` WHERE `name` = '" + pb.Name + "' AND form = '" + pb.FindForm().Name + "'");
         }
 
-
-
-        private void BlockForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //SQLClass.Delete("DELETE FROM block WHERE  form = '" + this.Name + "'");
-        }
-
-        private void setUCParams(object sender, EventArgs e)
+        /// <summary>
+        /// Функция указания текущих параметров перед показом формы UCParameters.
+        /// </summary>
+        private void SetUCParametersToCurrent(object sender, EventArgs e)
         {
             UserControl pb = (UserControl)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             List<string> dnonil = new List<string>();
@@ -238,7 +199,7 @@ namespace block
 
                 pb2.Article = p.ParamsList[0];
                 pb2.linkLabel1.Text = pb2.Article;
-                List<string> kart = SQLClass.Select("SELECT `Picture` FROM `Articles1` WHERE `Header` = '"+ pb2.Article + "'");
+                List<string> kart = SQLClass.Select("SELECT `Picture` FROM `Articles1` WHERE `Header` = '" + pb2.Article + "'");
                 pb2.pictureBox1.Load(kart[0]);
 
                 List<string> likes = SQLClass.Select("SELECT `LikesCount`, `DisCount` FROM `Likes` WHERE `Article` = '" + pb2.Article + "'");
@@ -270,11 +231,6 @@ namespace block
         {
             ReadArticleForm rf = new ReadArticleForm();
             rf.ShowDialog();
-        }
-
-        private void ArticlecontextMenuStrip1_Opening(object sender, CancelEventArgs e)
-        {
-
         }
     }
 }
