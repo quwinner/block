@@ -88,8 +88,7 @@ namespace block
         public static void AddNewBlock(object sender, EventArgs e)
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            UCParameters p = new UCParameters("block.ArticlePreviewUserControl",
-                new Size(), new Point(), new List<string>() { "Война и мир","23"});
+            UCParameters p = new UCParameters("block.ArticlePreviewUserControl");
             p.ShowDialog();
             p.ParamsList.Add("Война и мир");
             ArticlePreviewUserControl a1 = new ArticlePreviewUserControl(p.ParamsList);

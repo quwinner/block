@@ -227,7 +227,7 @@ namespace block
 
             }
 
-            UCParameters p = new UCParameters(pb.GetType().ToString(), pb.Size, pb.Location, dnonil);
+            UCParameters p = new UCParameters(pb.GetType().ToString());
             p.ShowDialog();
             p.Size = p.UCSize;
             pb.Location = p.UCLocation;

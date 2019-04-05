@@ -53,8 +53,7 @@ namespace block
         {
             
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            UCParameters p = new UCParameters("block.UserControlMainAuthor",
-                new Size(), new Point(), new List<string>());
+            UCParameters p = new UCParameters("block.UserControlMainAuthor");
             p.ShowDialog();
             p.ParamsList.Add("Жуков");
             UserControlMainAuthor a1 = new UserControlMainAuthor(p.ParamsList);

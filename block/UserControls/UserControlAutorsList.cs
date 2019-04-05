@@ -29,8 +29,7 @@ namespace block
         public static void AddNewBlock(object sender, EventArgs e)
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            UCParameters p = new UCParameters("block.UserControlAutorsList",
-                new Size(), new Point(), new List<string>{"5", "По алфавиту", "5"});
+            UCParameters p = new UCParameters("block.UserControlAutorsList");
             p.ShowDialog();
             UserControlAutorsList a1 = new UserControlAutorsList(p.ParamsList);
             string shsvfhksv = "";

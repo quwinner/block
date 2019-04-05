@@ -28,8 +28,7 @@ namespace block
         public static void AddNewBlock(object sender, EventArgs e)
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            UCParameters p = new UCParameters("block.UserControlSearch",
-                new Size(), new Point(), new List<string> {"Введите запрос"});
+            UCParameters p = new UCParameters("block.UserControlSearch");
             p.ShowDialog();
             UserControlSearch a1 = new UserControlSearch(p.ParamsList);
             string shsvfhksv = "";
