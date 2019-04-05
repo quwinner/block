@@ -32,7 +32,7 @@ namespace block
         public CategoriesUserControl(List<string> CategoriesParams)
         {
             InitializeComponent();
-            BlockForm.AddDeleteMenu(this);
+            Menus.AddDeleteMenu(this);
             Drag.AddDNDFunctions(this);
 
             asd = CategoriesParams;
@@ -64,8 +64,7 @@ namespace block
         public static void AddNewBlock(object sender, EventArgs e)
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            UCParameters p = new UCParameters("block.CategoriesUserControl",
-                new Size(), new Point(), new List<string>() { "5", "По алфавиту" });
+            UCParameters p = new UCParameters("block.CategoriesUserControl");
             p.ShowDialog();
             if(p.ParamsList != new List<string>())
             {
@@ -75,7 +74,7 @@ namespace block
                 {
                     shsvfhksv += asd + ',';
                 }
-                BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
+                Menus.InsertBlockToDB(sender, a1, shsvfhksv);
             }
         }
 

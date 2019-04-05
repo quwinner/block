@@ -21,7 +21,7 @@ namespace block
         {
             InitializeComponent();
 
-            BlockForm.AddDeleteMenu(this);
+            Menus.AddDeleteMenu(this);
             Drag.AddDNDFunctions(this);
 
             progal = ParamsAds.Count;
@@ -61,14 +61,9 @@ namespace block
         public static void AddNewBlock(object sender, EventArgs e)
         {
             List<string> paramsArt = new List<string>();
-            /*{
-
-            };*/
-       
 
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            UCParameters p = new UCParameters("block.AdsUserControl",
-                new Size(), new Point(), new List<string>() { "0", "0" });
+            UCParameters p = new UCParameters("block.AdsUserControl");
 
             p.ShowDialog();
 
@@ -91,7 +86,7 @@ namespace block
                 {
                     shsvfhksv += asd + ',';
                 }
-                BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
+                Menus.InsertBlockToDB(sender, a1, shsvfhksv);
             }
         }
 

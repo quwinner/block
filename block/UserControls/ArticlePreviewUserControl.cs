@@ -50,7 +50,7 @@ namespace block
         {
             InitializeComponent();
             Drag.AddDNDFunctions(this);
-            BlockForm.AddDeleteMenu(this);
+            Menus.AddDeleteMenu(this);
 
             GC.Collect(2);
             
@@ -88,8 +88,7 @@ namespace block
         public static void AddNewBlock(object sender, EventArgs e)
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            UCParameters p = new UCParameters("block.ArticlePreviewUserControl",
-                new Size(), new Point(), new List<string>() { "Война и мир","23"});
+            UCParameters p = new UCParameters("block.ArticlePreviewUserControl");
             p.ShowDialog();
             p.ParamsList.Add("Война и мир");
             ArticlePreviewUserControl a1 = new ArticlePreviewUserControl(p.ParamsList);
@@ -98,7 +97,7 @@ namespace block
             {
                 shsvfhksv += asd + ',';
             }
-            BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
+            Menus.InsertBlockToDB(sender, a1, shsvfhksv);
         }
 
         /// <summary>

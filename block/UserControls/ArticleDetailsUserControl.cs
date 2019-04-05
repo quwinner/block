@@ -18,7 +18,7 @@ namespace block
         public ArticleDetailsUserControl(List<string> Articles)
         {
             InitializeComponent();
-            BlockForm.AddDeleteMenu(this);
+            Menus.AddDeleteMenu(this);
             Drag.AddDNDFunctions(this);
 
             ListOfArticles = Articles;
@@ -52,8 +52,7 @@ namespace block
         public static void AddNewBlock(object sender, EventArgs e)
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            UCParameters p = new UCParameters("block.ArticleDetailsUserControl", 
-                new Size(), new Point(), new List<string>());
+            UCParameters p = new UCParameters("block.ArticleDetailsUserControl");
             p.ParamsList.Add("Война и мир");
             p.ShowDialog();
             ArticleDetailsUserControl a1 = new ArticleDetailsUserControl(p.ParamsList);
@@ -62,7 +61,7 @@ namespace block
             {
                 Buff += Param + ',';
             }
-            BlockForm.InsertBlockToDB(sender, a1, Buff);
+            Menus.InsertBlockToDB(sender, a1, Buff);
         }
 
         private void ArticleDetailsUserControl_Load(object sender, EventArgs e)

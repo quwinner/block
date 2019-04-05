@@ -19,7 +19,7 @@ namespace block
         {
             InitializeComponent();
             asd = par;
-            BlockForm.AddDeleteMenu(this);
+            Menus.AddDeleteMenu(this);
             Drag.AddDNDFunctions(this);
         }
 
@@ -29,8 +29,7 @@ namespace block
         public static void AddNewBlock(object sender, EventArgs e)
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            UCParameters p = new UCParameters("block.UserControlAutorsList",
-                new Size(), new Point(), new List<string>{"5", "По алфавиту", "5"});
+            UCParameters p = new UCParameters("block.UserControlAutorsList");
             p.ShowDialog();
             UserControlAutorsList a1 = new UserControlAutorsList(p.ParamsList);
             string shsvfhksv = "";
@@ -38,7 +37,7 @@ namespace block
             {
                 shsvfhksv += asd + ',';
             }
-            BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
+            Menus.InsertBlockToDB(sender, a1, shsvfhksv);
         }
 
 

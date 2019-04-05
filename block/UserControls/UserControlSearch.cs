@@ -18,7 +18,7 @@ namespace block
         {
             InitializeComponent();
             Drag.AddDNDFunctions(this);
-            BlockForm.AddDeleteMenu(this);
+            Menus.AddDeleteMenu(this);
 
         }
 
@@ -28,8 +28,7 @@ namespace block
         public static void AddNewBlock(object sender, EventArgs e)
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            UCParameters p = new UCParameters("block.UserControlSearch",
-                new Size(), new Point(), new List<string> {"Введите запрос"});
+            UCParameters p = new UCParameters("block.UserControlSearch");
             p.ShowDialog();
             UserControlSearch a1 = new UserControlSearch(p.ParamsList);
             string shsvfhksv = "";
@@ -37,7 +36,7 @@ namespace block
             {
                 shsvfhksv += asd + ',';
             }
-            BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
+            Menus.InsertBlockToDB(sender, a1, shsvfhksv);
         }
 
         private void textBox_search_TextChanged(object sender, EventArgs e)
