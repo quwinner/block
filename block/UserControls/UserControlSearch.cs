@@ -18,7 +18,7 @@ namespace block
         {
             InitializeComponent();
             Drag.AddDNDFunctions(this);
-            BlockForm.AddDeleteMenu(this);
+            Menus.AddDeleteMenu(this);
 
         }
 
@@ -36,7 +36,7 @@ namespace block
             {
                 shsvfhksv += asd + ',';
             }
-            BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
+            Menus.InsertBlockToDB(sender, a1, shsvfhksv);
         }
 
         private void textBox_search_TextChanged(object sender, EventArgs e)

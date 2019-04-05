@@ -18,7 +18,7 @@ namespace block
         public ArticleDetailsUserControl(List<string> Articles)
         {
             InitializeComponent();
-            BlockForm.AddDeleteMenu(this);
+            Menus.AddDeleteMenu(this);
             Drag.AddDNDFunctions(this);
 
             ListOfArticles = Articles;
@@ -61,7 +61,7 @@ namespace block
             {
                 Buff += Param + ',';
             }
-            BlockForm.InsertBlockToDB(sender, a1, Buff);
+            Menus.InsertBlockToDB(sender, a1, Buff);
         }
 
         private void ArticleDetailsUserControl_Load(object sender, EventArgs e)

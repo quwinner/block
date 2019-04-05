@@ -78,6 +78,7 @@
     <Compile Include="AboutMeForm.Designer.cs">
       <DependentUpon>AboutMeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Menus.cs" />
     <Compile Include="UCParameters.cs">
       <SubType>Form</SubType>
     </Compile>

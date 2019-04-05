@@ -21,7 +21,7 @@ namespace block
         {
             InitializeComponent();
 
-            BlockForm.AddDeleteMenu(this);
+            Menus.AddDeleteMenu(this);
             Drag.AddDNDFunctions(this);
 
             progal = ParamsAds.Count;
@@ -86,7 +86,7 @@ namespace block
                 {
                     shsvfhksv += asd + ',';
                 }
-                BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
+                Menus.InsertBlockToDB(sender, a1, shsvfhksv);
             }
         }
 

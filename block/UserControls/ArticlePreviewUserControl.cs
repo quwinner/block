@@ -50,7 +50,7 @@ namespace block
         {
             InitializeComponent();
             Drag.AddDNDFunctions(this);
-            BlockForm.AddDeleteMenu(this);
+            Menus.AddDeleteMenu(this);
 
             GC.Collect(2);
             
@@ -97,7 +97,7 @@ namespace block
             {
                 shsvfhksv += asd + ',';
             }
-            BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
+            Menus.InsertBlockToDB(sender, a1, shsvfhksv);
         }
 
         /// <summary>

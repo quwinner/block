@@ -21,7 +21,7 @@ namespace block
         {
             InitializeComponent();
             Drag.AddDNDFunctions(this);
-            BlockForm.AddDeleteMenu(this);
+            Menus.AddDeleteMenu(this);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace block
             {
                 shsvfhksv += asd + ',';
             }
-            BlockForm.InsertBlockToDB(sender, a1, shsvfhksv);
+            Menus.InsertBlockToDB(sender, a1, shsvfhksv);
         }
 
         private void loginButton_Click(object sender, EventArgs e)

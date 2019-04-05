@@ -1,4 +1,6 @@
-﻿namespace block
+﻿using System;
+
+namespace block
 {
     partial class BlockForm
     {
@@ -135,14 +137,14 @@
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
-            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteUserControl);
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(DeleteUserControl);
             // 
             // настроитьПараметрыToolStripMenuItem
             // 
             this.настроитьПараметрыToolStripMenuItem.Name = "настроитьПараметрыToolStripMenuItem";
             this.настроитьПараметрыToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.настроитьПараметрыToolStripMenuItem.Text = "Настроить параметры";
-            this.настроитьПараметрыToolStripMenuItem.Click += new System.EventHandler(this.SetUCParametersToCurrent);
+            this.настроитьПараметрыToolStripMenuItem.Click += new System.EventHandler(SetUCParametersToCurrent);
             // 
             // contextMenuStrip1
             // 
@@ -157,7 +159,7 @@
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(130, 22);
             this.toolStripMenuItem2.Text = "сохранить";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.SaveUserControl);
+            this.toolStripMenuItem2.Click += new System.EventHandler(SaveUserControl);
             // 
             // button3
             // 
@@ -204,6 +206,21 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+        }
+
+        private void SetUCParametersToCurrent(object sender, EventArgs e)
+        {
+            Menus.SetUCParametersToCurrent(sender, e);
+        }
+
+        private void SaveUserControl(object sender, EventArgs e)
+        {
+            Menus.SaveUserControl(sender, e);
+        }
+
+        private void DeleteUserControl(object sender, EventArgs e)
+        {
+            Menus.DeleteUserControl(sender, e);
         }
 
         #endregion
