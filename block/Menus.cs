@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Windows.Forms;
 
 namespace block
@@ -18,43 +17,34 @@ namespace block
                 forms.AddRange(from t in asm.GetTypes() where t.IsSubclassOf(typeof(UserControl)) select t);
             }
 
-            int i = 0;
-            foreach (Type f in forms)
+            foreach (Type File in forms)
             {
-                menu.Items.Add(f.Name);
-                if (f.Name == "AdsUserControl")
+                menu.Items.Add(File.Name);
+                int ItemPos = menu.Items.Count - 1;
+                switch (File.Name)
                 {
-                    menu.Items[i].Click += AdsUserControl.AddNewBlock;
+                    case "AdsUserControl":
+                        menu.Items[ItemPos].Click += AdsUserControl.AddNewBlock;
+                        break;
+                    case "ArticlePreviewUserControl":
+                        menu.Items[ItemPos].Click += ArticlePreviewUserControl.AddNewBlock;
+                        break;
+                    case "AuthenticationUserControl":
+                        menu.Items[ItemPos].Click += AuthenticationUserControl.AddNewBlock;
+                        break;
+                    case "CategoriesUserControl":
+                        menu.Items[ItemPos].Click += CategoriesUserControl.AddNewBlock;
+                        break;
+                    case "UserControlAutorsList":
+                        menu.Items[ItemPos].Click += UserControlAutorsList.AddNewBlock;
+                        break;
+                    case "UserControlMainAuthor":
+                        menu.Items[ItemPos].Click += UserControlMainAuthor.AddNewBlock;
+                        break;
+                    case "UserControlSearch":
+                        menu.Items[ItemPos].Click += UserControlSearch.AddNewBlock;
+                        break;
                 }
-                else if (f.Name == "ArticleDetailsUserControl")
-                {
-                    menu.Items[i].Click += ArticleDetailsUserControl.AddNewBlock;
-                }
-                else if (f.Name == "ArticlePreviewUserControl")
-                {
-                    menu.Items[i].Click += ArticlePreviewUserControl.AddNewBlock;
-                }
-                else if (f.Name == "AuthenticationUserControl")
-                {
-                    menu.Items[i].Click += AuthenticationUserControl.AddNewBlock;
-                }
-                else if (f.Name == "CategoriesUserControl")
-                {
-                    menu.Items[i].Click += CategoriesUserControl.AddNewBlock;
-                }
-                else if (f.Name == "UserControlAutorsList")
-                {
-                    menu.Items[i].Click += UserControlAutorsList.AddNewBlock;
-                }
-                else if (f.Name == "UserControlMainAuthor")
-                {
-                    menu.Items[i].Click += UserControlMainAuthor.AddNewBlock;
-                }
-                else if (f.Name == "UserControlSearch")
-                {
-                    menu.Items[i].Click += UserControlSearch.AddNewBlock;
-                }
-                i++;
             }
         }
 
