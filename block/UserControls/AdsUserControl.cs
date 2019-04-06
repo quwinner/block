@@ -44,10 +44,10 @@ namespace block
                     };
                     try
                     {
-                        pic.Load(ParamsAds[rnd.Next(2, ParamsAds.Count)]);
+                        //pic.Load(ParamsAds[rnd.Next(2, ParamsAds.Count)]);
                     } catch (InvalidOperationException err)
                     {
-                        MessageBox.Show(err.Message);
+                        //MessageBox.Show(err.Message);
                     }
                     this.Controls.Add(pic);
                     y += progal + pic.Height;

@@ -14,6 +14,7 @@ namespace block
     {
         public const int LabelOffest = 30;
 
+        public String UCName = "";
         public Size UCSize = new Size(0, 0);
         public Point UCLocation = new Point(0, 0);
 
@@ -37,42 +38,46 @@ namespace block
         /// <param name="UCSize"></param>
         /// <param name="UCLocation"></param>
         /// <param name="par"></param>
-        public UCParameters(string UCName, List<String> par)
+        public UCParameters(string Name1, List<String> par)
         {
             InitializeComponent();
-
+            UCName = Name1;
             ParamsList = par;
+        }
+
+        private void parametri_Load(object sender, EventArgs e)
+        {
             switch (UCName)
             {
                 case "block.AdsUserControl":
-                    Amount = Convert.ToInt32(par[0]);
-                    DistanceBetween = Convert.ToInt32(par[1]);
+                    Amount = Convert.ToInt32(ParamsList[0]);
+                    DistanceBetween = Convert.ToInt32(ParamsList[1]);
                     break;
                 case "block.ArticleDetailsUserControl":
-                    Header = par[0];
+                    Header = ParamsList[0];
                     break;
                 case "block.ArticlePreviewUserControl":
-                    SerachQuery = par[0];
-                    Amount = Convert.ToInt32(par[1]);
+                    SerachQuery = ParamsList[0];
+                    Amount = Convert.ToInt32(ParamsList[1]);
                     break;
                 case "block.CategoriesUserControl":
-                    Amount = Convert.ToInt32(par[0]);
-                    SortOrder = par[1];
+                    Amount = Convert.ToInt32(ParamsList[0]);
+                    SortOrder = ParamsList[1];
                     break;
                 case "block.UserControlAutorsList":
-                    if (par.Count < 3)
+                    if (ParamsList.Count < 3)
                     {
                         break;
                     }
-                    Amount = Convert.ToInt32(par[0]);
-                    SortOrder = par[1];
-                    DistanceBetween = Convert.ToInt32(par[2]);
+                    Amount = Convert.ToInt32(ParamsList[0]);
+                    SortOrder = ParamsList[1];
+                    DistanceBetween = Convert.ToInt32(ParamsList[2]);
                     break;
                 case "block.UserControlMainAuthor":
-                    UserName = par[0];
+                    UserName = ParamsList[0];
                     break;
                 case "block.UserControlSearch":
-                    SerachQuery = par[0];
+                    SerachQuery = ParamsList[0];
                     break;
                 default:
                     throw new Exception("Неправильный UCName " + UCName);
@@ -147,13 +152,9 @@ namespace block
             }
         }
 
-        private void parametri_Load(object sender, EventArgs e)
-        {
-        }
-
         private void SaveButtonClick(object sender, EventArgs e)
         {
-            
+            ParamsList.Clear();
             foreach (Control contr in this.Controls)
             {
                 if (contr.GetType().Name == "TextBox")
@@ -200,6 +201,11 @@ namespace block
                 }
             }
             this.Close();
+        }
+
+        private void UCParameters_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //SaveButtonClick(sender, null);
         }
     }
 }

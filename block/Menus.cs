@@ -95,8 +95,11 @@ namespace block
             }
 
             UCParameters p = new UCParameters(pb.GetType().ToString(), dnonil);
+            p.UCSize = pb.Size;
+            p.UCLocation = pb.Location;
+
             p.ShowDialog();
-            p.Size = p.UCSize;
+            pb.Size = p.UCSize;
             pb.Location = p.UCLocation;
             if (pb.Name == "ArticlePreviewUserControl")
             {
@@ -105,14 +108,43 @@ namespace block
 
                 pb2.Article = p.ParamsList[0];
                 pb2.linkLabel1.Text = pb2.Article;
-                List<string> kart = SQLClass.Select("SELECT `Picture` FROM `Articles1` WHERE `Header` = '" + pb2.Article + "'");
-                pb2.pictureBox1.Load(kart[0]);
+                pb2.asd.Clear();
+                pb2.asd.Add(pb2.Article);
+                pb2.asd.Add(pb2.Size.Width.ToString());
+                pb2.asd.Add(pb2.Size.Height.ToString());
+                pb2.asd.Add(pb2.Location.X.ToString());
+                pb2.asd.Add(pb2.Location.Y.ToString());
 
-                List<string> likes = SQLClass.Select("SELECT `LikesCount`, `DisCount` FROM `Likes` WHERE `Article` = '" + pb2.Article + "'");
-                pb2.LikeCount.Text = likes[0];
-                pb2.DisLikeCount.Text = likes[1];
-                pb2.like = Convert.ToInt32(likes[0]);
-                pb2.dislike = Convert.ToInt32(likes[1]);
+                string param3 = "";
+                foreach (string pr in pb2.asd)
+                {
+                    param3 += pr + ",";
+                }
+                SQLClass.Update("UPDATE block SET" +
+                    " Params = '" + param3 +
+                    "' WHERE id = '" + pb2.Tag + "'");
+                SQLClass.Update("UPDATE block SET" +
+                    " x = " + pb2.Location.X.ToString() + "," +
+                    " y = " + pb2.Location.Y.ToString() +
+                    " WHERE id = '" + pb2.Tag + "'");
+
+                try
+                {
+                    List<string> kart = SQLClass.Select("SELECT `Picture` FROM `Articles1` WHERE `Header` = '" + pb2.Article + "'");
+                    pb2.pictureBox1.Load(kart[0]);
+
+                    List<string> likes = SQLClass.Select("SELECT `LikesCount`, `DisCount` FROM `Likes` WHERE `Article` = '" + pb2.Article + "'");
+                    pb2.LikeCount.Text = likes[0];
+                    pb2.DisLikeCount.Text = likes[1];
+                    pb2.like = Convert.ToInt32(likes[0]);
+                    pb2.dislike = Convert.ToInt32(likes[1]);
+                }
+                catch
+                {
+                    pb2.pictureBox1.Image = null;
+                }
+
+                
 
             }
             else if (pb.Name == "ArticleDetailsUserControl")
@@ -120,11 +152,34 @@ namespace block
                 ArticleDetailsUserControl pb2 = (ArticleDetailsUserControl)pb;
                 pb2.ListOfArticles = p.ParamsList;
                 pb2.ArticleLabel.Text = p.ParamsList[0];
+                pb2.ListOfArticles.Clear();
                 List<string> kart = SQLClass.Select("SELECT Picture, Text, Author  FROM Articles1 WHERE Header = '" + pb2.ArticleLabel.Text + "'");
-                pb2.ArticlePicture.Load(kart[0]);
+                try
+                {
+                    pb2.ArticlePicture.Load(kart[0]);
+                }
+                catch
+                {
+                    pb2.ArticlePicture.Image = null;
+                }
+               
                 pb2.ArticleTextLabel.Text = kart[1];
                 pb2.AuthorsNameLabel.Text = kart[2];
-                
+
+                //не работает
+                /*string param3 = "";
+                foreach (string pr in pb2.ListOfArticles)
+                {
+                    param3 += pr + ",";
+                }
+                SQLClass.Update("UPDATE block SET" +
+                    " Params = '" + param3 +
+                    "' WHERE id = '" + pb2.Tag + "'");
+                SQLClass.Update("UPDATE block SET" +
+                    " x = " + pb2.Location.X.ToString() + "," +
+                    " y = " + pb2.Location.Y.ToString() +
+                    " WHERE id = '" + pb2.Tag + "'");*/
+
             }
         }
 
