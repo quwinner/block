@@ -74,6 +74,10 @@ namespace block
                 case "block.UserControlSearch":
                     SerachQuery = par[0];
                     break;
+                case "block.AuthenticationUserControl":
+                    
+
+                    break;
                 default:
                     throw new Exception("Неправильный UCName " + UCName);
             }
