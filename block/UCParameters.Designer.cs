@@ -49,6 +49,7 @@
             this.Controls.Add(this.SaveButton);
             this.Name = "UCParameters";
             this.Text = "parametri";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UCParameters_FormClosing);
             this.Load += new System.EventHandler(this.parametri_Load);
             this.ResumeLayout(false);
 
