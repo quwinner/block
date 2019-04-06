@@ -44,10 +44,13 @@ namespace block
                     };
                     try
                     {
-                        pic.Load(ParamsAds[rnd.Next(2, ParamsAds.Count)]);
-                    } catch (InvalidOperationException err)
+                        pic.Load(ParamsAds[
+                            rnd.Next(2, Convert.ToInt32(ParamsAds[0]) + 2)]
+                            );
+                    } catch (Exception err)
                     {
-                        MessageBox.Show(err.Message);
+                        i--;
+                        continue;
                     }
                     this.Controls.Add(pic);
                     y += progal + pic.Height;
@@ -60,14 +63,13 @@ namespace block
         /// </summary>
         public static void AddNewBlock(object sender, EventArgs e)
         {
-            List<string> paramsArt = new List<string>();
-
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            UCParameters p = new UCParameters("block.AdsUserControl", new List<string>());
 
-            p.ShowDialog();
 
-            paramsArt.Add(p.Amount.ToString());
+
+            List<string> paramsArt = new List<string>();
+            paramsArt.Add("5");
+            paramsArt.Add("5");
             paramsArt.AddRange(new List<string>()
             {
                 "http://rustrade.org.uk/rus/wp-content/uploads/dodo-pizza.jpg",
@@ -78,9 +80,12 @@ namespace block
                 "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg"
             });
 
+            UCParameters p = new UCParameters("block.AdsUserControl", paramsArt);
+            p.ShowDialog();
+
             if (p.ParamsList != new List<string>())
             {
-                AdsUserControl a1 = new AdsUserControl(paramsArt);
+                AdsUserControl a1 = new AdsUserControl(p.ParamsList);
                 string shsvfhksv = "";
                 foreach (string asd in paramsArt)
                 {
