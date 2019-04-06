@@ -91,7 +91,10 @@ namespace block
                     UserControlSearch pb7 = (UserControlSearch)pb;
                     dnonil.Add(" ");
                     break;
-
+                case "AuthenticationUserControl":
+                    AuthenticationUserControl pb8 = (AuthenticationUserControl)pb;
+                    dnonil.Add("");
+                    break;
             }
 
             UCParameters p = new UCParameters(pb.GetType().ToString(), dnonil);
