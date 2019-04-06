@@ -30,7 +30,7 @@ namespace block
         public static void AddNewBlock(object sender, EventArgs e)
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            UCParameters p = new UCParameters("block.AuthenticationUserControl");
+            UCParameters p = new UCParameters("block.AuthenticationUserControl", new List<string>());
             p.ShowDialog();
             AuthenticationUserControl a1 = new AuthenticationUserControl(p.ParamsList);
             a1.Location = p.UCLocation;

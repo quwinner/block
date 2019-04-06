@@ -64,7 +64,7 @@ namespace block
         public static void AddNewBlock(object sender, EventArgs e)
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            UCParameters p = new UCParameters("block.CategoriesUserControl");
+            UCParameters p = new UCParameters("block.CategoriesUserControl", new List<string>());
             p.ShowDialog();
             if(p.ParamsList != new List<string>())
             {

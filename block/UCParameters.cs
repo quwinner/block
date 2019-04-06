@@ -37,9 +37,47 @@ namespace block
         /// <param name="UCSize"></param>
         /// <param name="UCLocation"></param>
         /// <param name="par"></param>
-        public UCParameters(string UCName)
+        public UCParameters(string UCName, List<String> par)
         {
             InitializeComponent();
+
+            ParamsList = par;
+            switch (UCName)
+            {
+                case "block.AdsUserControl":
+                    Amount = Convert.ToInt32(par[0]);
+                    DistanceBetween = Convert.ToInt32(par[1]);
+                    break;
+                case "block.ArticleDetailsUserControl":
+                    Header = par[0];
+                    break;
+                case "block.ArticlePreviewUserControl":
+                    SerachQuery = par[0];
+                    Amount = Convert.ToInt32(par[1]);
+                    break;
+                case "block.CategoriesUserControl":
+                    Amount = Convert.ToInt32(par[0]);
+                    SortOrder = par[1];
+                    break;
+                case "block.UserControlAutorsList":
+                    if (par.Count < 3)
+                    {
+                        break;
+                    }
+                    Amount = Convert.ToInt32(par[0]);
+                    SortOrder = par[1];
+                    DistanceBetween = Convert.ToInt32(par[2]);
+                    break;
+                case "block.UserControlMainAuthor":
+                    UserName = par[0];
+                    break;
+                case "block.UserControlSearch":
+                    SerachQuery = par[0];
+                    break;
+                default:
+                    throw new Exception("Неправильный UCName " + UCName);
+            }
+
 
             List<string> ParamsStr = SQLClass.Select("SELECT params FROM block_blocks WHERE name ='" + UCName + "'");
             if (ParamsStr.Count == 0)
