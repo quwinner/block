@@ -94,7 +94,7 @@ namespace block
 
             }
 
-            UCParameters p = new UCParameters(pb.GetType().ToString());
+            UCParameters p = new UCParameters(pb.GetType().ToString(), dnonil);
             p.ShowDialog();
             p.Size = p.UCSize;
             pb.Location = p.UCLocation;
@@ -124,6 +124,7 @@ namespace block
                 pb2.ArticlePicture.Load(kart[0]);
                 pb2.ArticleTextLabel.Text = kart[1];
                 pb2.AuthorsNameLabel.Text = kart[2];
+                
             }
         }
 

@@ -63,7 +63,7 @@ namespace block
             List<string> paramsArt = new List<string>();
 
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            UCParameters p = new UCParameters("block.AdsUserControl");
+            UCParameters p = new UCParameters("block.AdsUserControl", new List<string>());
 
             p.ShowDialog();
 

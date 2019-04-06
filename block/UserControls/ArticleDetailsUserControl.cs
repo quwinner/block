@@ -52,7 +52,7 @@ namespace block
         public static void AddNewBlock(object sender, EventArgs e)
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            UCParameters p = new UCParameters("block.ArticleDetailsUserControl");
+            UCParameters p = new UCParameters("block.ArticleDetailsUserControl", new List<string>());
             p.ParamsList.Add("Война и мир");
             p.ShowDialog();
             ArticleDetailsUserControl a1 = new ArticleDetailsUserControl(p.ParamsList);
