@@ -36,7 +36,8 @@ namespace block
             Drag.AddDNDFunctions(this);
 
             asd = CategoriesParams;
-            if (CategoriesParams.Count < 2)
+            int result;
+            if (CategoriesParams.Count < 2 || !Int32.TryParse(CategoriesParams[0], out result))
             {
                 return;
             }

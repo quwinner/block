@@ -42,13 +42,42 @@ namespace block
 
             foreach (List<string> Row in Split(ListDB, 6))
             {
-                // Вспомогательные переменные для того чтобы не писать Row[...]
-                string form = Row[0] ?? throw new NullReferenceException("form = null");
                 int x = Convert.ToInt32(Row[1]);
                 int y = Convert.ToInt32(Row[2]);
-                string name = Row[3] ?? throw new NullReferenceException("name = null");
-                List<string> Params = Row[4].Split(',').ToList() ?? throw new NullReferenceException("Params = null");
                 string id = Row[5];
+
+                #region Вспомогательные переменные для того чтобы не писать Row[...]
+                string form = "";
+                try
+                {
+                    form = Row[0];
+                }
+                catch (Exception)
+                {
+                    throw new NullReferenceException("form = null");
+                }
+                
+                string name = "";
+                try
+                {
+                    name = Row[3];
+                }
+                catch (Exception)
+                {
+                    throw new NullReferenceException("name = null");
+                }
+
+                List<string> Params = new List<string>();
+                try
+                {
+                    Params = Row[4].Split(',').ToList();
+                }
+                catch (Exception)
+                {
+                    throw new NullReferenceException("Params = null");
+                }
+                #endregion
+
 
                 switch (name)
                 {
@@ -101,7 +130,7 @@ namespace block
                         ListOfControls.Add(NewMainAuthor);
                         break;
                     case "UserControlSearch":
-                        CategoriesUserControl NewSearch = new CategoriesUserControl(Params)
+                        UserControlSearch NewSearch = new UserControlSearch(Params)
                         {
                             Location = new Point(x, y),
                             Tag = id

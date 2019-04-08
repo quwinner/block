@@ -108,7 +108,6 @@ namespace block
             {
                 ArticlePreviewUserControl pb2 = (ArticlePreviewUserControl)pb;
 
-
                 pb2.Article = p.ParamsList[0];
                 pb2.linkLabel1.Text = pb2.Article;
                 pb2.asd.Clear();
