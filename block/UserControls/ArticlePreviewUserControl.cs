@@ -89,8 +89,9 @@ namespace block
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             UCParameters p = new UCParameters("block.ArticlePreviewUserControl", new List<string>());
-            p.ShowDialog();
             p.ParamsList.Add("Война и мир");
+            p.ParamsList.Add("5");
+            p.ShowDialog();
             ArticlePreviewUserControl a1 = new ArticlePreviewUserControl(p.ParamsList);
             string shsvfhksv = "";
             foreach (string asd in p.ParamsList)

@@ -77,5 +77,10 @@ namespace block
         {
 
         }
+
+        private void ArticleLabel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

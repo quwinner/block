@@ -44,6 +44,7 @@
             this.ArticleLabel.Size = new System.Drawing.Size(221, 23);
             this.ArticleLabel.TabIndex = 0;
             this.ArticleLabel.Text = "Заголовок";
+            this.ArticleLabel.Click += new System.EventHandler(this.ArticleLabel_Click);
             // 
             // ArticleTextLabel
             // 

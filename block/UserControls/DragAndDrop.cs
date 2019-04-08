@@ -42,97 +42,80 @@ namespace block
                 try
                 {
                     ActualUC = (UserControl)uc;
-                } catch (Exception)
+                } 
+                catch (Exception)
                 {
                     continue;
                 }
 
                 if (sender.Equals(ActualUC))
                 {
+                    string paramsAsString = "";
+
                     switch (ActualUC.Name)
                     {
                         case "AdsUserControl":
                             AdsUserControl NewPreview = (AdsUserControl)sender;
-                            string param = "";
                             foreach (string pr in NewPreview.ParamsAds)
                             {
-                                param += pr + ",";
+                                paramsAsString += pr + ",";
                             }
-                            SQLClass.Update("UPDATE block SET" +
-                            " Params = '" + param +
-                        "' WHERE id = '" + uc.Tag + "'");
                             break;
                         case "ArticleDetailsUserControl":
                             ArticleDetailsUserControl NewPreview2 = (ArticleDetailsUserControl)sender;
-                            string param2 = "";
                             foreach (string pr in NewPreview2.ListOfArticles)
                             {
-                                param2 += pr + ",";
+                                paramsAsString += pr + ",";
                             }
-                            SQLClass.Update("UPDATE block SET" +
-                            " Params = '" + param2 +
-                        "' WHERE id = '" + uc.Tag + "'");
                             break;
                         case "ArticlePreviewUserControl":
                             ArticlePreviewUserControl NewPreview3 = (ArticlePreviewUserControl)sender;
-                            string param3 = "";
                             foreach (string pr in NewPreview3.asd)
                             {
-                                param3 += pr + ",";
+                                paramsAsString += pr + ",";
                             }
-                            SQLClass.Update("UPDATE block SET" +
-                            " Params = '" + param3 +
-                        "' WHERE id = '" + uc.Tag + "'");
                             break;
                         case "CategoriesUserControl":
                             CategoriesUserControl NewPreview4 = (CategoriesUserControl)sender;
-                            string param4 = "";
                             foreach (string pr in NewPreview4.asd)
                             {
-                                param4 += pr + ",";
+                                paramsAsString += pr + ",";
                             }
-                            SQLClass.Update("UPDATE block SET" +
-                            " Params = '" + param4 +
-                        "' WHERE id = '" + uc.Tag + "'");
                             break;
                         case "UserControlAutorsList":
                             UserControlAutorsList NewPreview5 = (UserControlAutorsList)sender;
-                            string param5 = "";
                             foreach (string pr in NewPreview5.asd)
                             {
-                                param5 += pr + ",";
+                                paramsAsString += pr + ",";
                             }
-                            SQLClass.Update("UPDATE block SET" +
-                            " Params = '" + param5 +
-                        "' WHERE id = '" + uc.Tag + "'");
                             break;
                         case "UserControlMainAuthor":
                             UserControlMainAuthor NewPreview6 = (UserControlMainAuthor)sender;
-                            string param6 = "";
                             foreach (string pr in NewPreview6.par)
                             {
-                                param6 += pr + ",";
+                                paramsAsString += pr + ",";
                             }
-                            SQLClass.Update("UPDATE block SET" +
-                            " Params = '" + param6 +
-                        "' WHERE id = '" + uc.Tag + "'");
                             break;
                         case "UserControlSearch":
-                            UserControlMainAuthor NewPreview7 = (UserControlMainAuthor)sender;
-                            string param7 = "";
-                            foreach (string pr in NewPreview7.par)
+                            UserControlSearch NewPreview7 = (UserControlSearch)sender;
+                            /*foreach (string pr in NewPreview7.as)
                             {
                                 param7 += pr + ",";
-                            }
-                            SQLClass.Update("UPDATE block SET" +
-                            " Params = '" + param7 +
-                        "' WHERE id = '" + uc.Tag + "'");
+                            }*/
                             break;
                     }
+
                     SQLClass.Update("UPDATE block SET" +
                         " x = " + ((UserControl) sender).Location.X.ToString() + "," +
                         " y = " + ((UserControl) sender).Location.Y.ToString() +
                     " WHERE id = '" + uc.Tag + "'");
+
+                    if (paramsAsString.Length > 0)
+                    {
+                        SQLClass.Update("UPDATE block SET" +
+                            " Params = '" + paramsAsString +
+                            "' WHERE id = '" + uc.Tag + "'");
+                    }
                 }
             }
         }
