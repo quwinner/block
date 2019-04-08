@@ -12,13 +12,22 @@ namespace block
 {
     public static class SQLClass
     {
-        public static string CONNECTION_STRING =
+        public static string db4free_server =
             "SslMode=none;" +
             "Server=db4free.net;" +
             "database=ingenerka;" +
             "port=3306;" +
             "uid=ingenerka;" +
             "pwd=Beavis1989;" +
+            "old guids=true;";
+
+        public static string new_server =
+            "SslMode=none;" +
+            "Server=37.230.116.173;" +
+            "database=ingenerka;" +
+            "port=3306;" +
+            "uid=program;" +
+            "pwd=ingenerka;" +
             "old guids=true;";
 
         public static MySqlConnection CONN;
@@ -28,7 +37,7 @@ namespace block
         /// </summary>
         public static void OpenConnection()
         {
-            CONN = new MySqlConnection(CONNECTION_STRING);
+            CONN = new MySqlConnection(new_server);
             try
             {
                 CONN.Open();
@@ -47,13 +56,17 @@ namespace block
 
         public static void Insert(string cmdText)
         {
-            MySqlCommand cmd = new MySqlCommand(cmdText, CONN);
-            if (CONN.State != ConnectionState.Open)
+            using (MySqlCommand cmd = new MySqlCommand(cmdText, CONN))
             {
-                CONN.Open();
+                if (CONN.State != ConnectionState.Open)
+                {
+                    CONN.Open();
+                }
+                using (MySqlDataReader rdr = cmd.ExecuteReader())
+                {
+                    rdr.Close();
+                }
             }
-            MySqlDataReader rdr = cmd.ExecuteReader();
-            rdr.Close();
         }
 
         /// <summary>
@@ -74,27 +87,28 @@ namespace block
         /// </summary>
         /// <param name="query">Запрос</param>
         /// <returns>Результат в виде списка строк</returns>
-        public static List<String> Select(string query)
+        public static List<string> Select(string query)
         {
-            GC.Collect();
-            List<String> res = new List<String>();
-            MySqlCommand q = new MySqlCommand(query, CONN);
-            if (CONN.State != ConnectionState.Open)
+            List<string> res = new List<string>();
+            using (MySqlCommand q = new MySqlCommand(query, CONN))
             {
-                CONN.Open();
-            }
-            MySqlDataReader r = q.ExecuteReader();
-
-            while (r.Read())
-            {
-                for (int inc = 0; inc < r.FieldCount; inc++)
+                if (CONN.State != ConnectionState.Open)
                 {
-                    res.Add(r[inc].ToString());
+                    CONN.Open();
                 }
+                using (MySqlDataReader r = q.ExecuteReader())
+                {
+                    while (r.Read())
+                    {
+                        for (int inc = 0; inc < r.FieldCount; inc++)
+                        {
+                            res.Add(r[inc].ToString());
+                        }
+                    }
+                    r.Close();
+                }
+                return res;
             }
-            r.Close();
-            GC.Collect();
-            return res;
         }
 
         public static List<String> Select(string query, Dictionary<String, String> ParamsDict)
