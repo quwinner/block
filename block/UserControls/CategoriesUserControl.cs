@@ -18,6 +18,7 @@ namespace block
     {
         public List<string> asd;
         public DragAndDrop Drag = new DragAndDrop();
+        public static Label label = new Label();
 
         /// <summary>
         /// Конструктор который заполняет <see cref="tableLayoutPanel1"/> 
@@ -34,6 +35,7 @@ namespace block
             InitializeComponent();
             Menus.AddDeleteMenu(this);
             Drag.AddDNDFunctions(this);
+            label = label1;
 
             asd = CategoriesParams;
             int result;
@@ -56,6 +58,29 @@ namespace block
                 
                 this.Controls.Add(label);
             }
+        }
+
+        public static void RefreshUC(Control th, int Kolich)
+        {
+            th.Controls.Clear();
+           
+            th.Controls.Add(CategoriesUserControl.label);
+            //Сюда бы значение по умолчанию
+            List<string> Categories = SQLClass.Select("SELECT Name FROM Categories ORDER BY Name LIMIT 0," +
+                Kolich);
+
+            for (int i = 0; i < Categories.Count; i++)
+            {
+                Label label = new Label
+                {
+                    Size = new Size(100, 30),
+                    Location = new Point(0, i * 30 + 30),
+                    Text = Categories[i].ToString()
+                };
+                label.Click += new EventHandler(lable_cat_Click);
+
+                th.Controls.Add(label);
+            }
 
         }
 
@@ -65,7 +90,7 @@ namespace block
         public static void AddNewBlock(object sender, EventArgs e)
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            UCParameters p = new UCParameters("block.CategoriesUserControl", new List<string>());
+            UCParameters p = new UCParameters("block.CategoriesUserControl", new List<string>() {"2", "2" });
             p.ShowDialog();
             if(p.ParamsList != new List<string>())
             {
@@ -79,7 +104,7 @@ namespace block
             }
         }
 
-        public void lable_cat_Click(object sender, EventArgs e)
+        public static void lable_cat_Click(object sender, EventArgs e)
         {
             MessageBox.Show(((Label)sender).Text);
         }
