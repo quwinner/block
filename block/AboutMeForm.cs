@@ -16,6 +16,16 @@ namespace block
         {
             InitializeComponent();
             this.ContextMenuStrip = Program.AddNewUserControlCMS;
+            
+            foreach (Control Ctrl in this.Controls)
+            {
+                if(Ctrl.GetType().ToString() == "System.Windows.Forms.Panel")
+                {
+                    Ctrl.ContextMenuStrip = Program.AddNewUserControlCMS;
+
+                }
+
+            }
             this.Controls.AddRange(UCFunctions.ReadFromDB(this.Name).ToArray());
         }
                 
@@ -38,7 +48,7 @@ namespace block
         private void collect_Gc(object sender, FormClosedEventArgs e)
         {
             this.Controls.Clear();
-            GC.Collect();
+            //GC.Collect();
         }
     }
 }
