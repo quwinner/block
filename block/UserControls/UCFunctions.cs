@@ -137,6 +137,14 @@ namespace block
                         };
                         ListOfControls.Add(NewSearch);
                         break;
+                    case "ArticleDetailsUserControl":
+                        ArticleDetailsUserControl asdasd = new ArticleDetailsUserControl(Params)
+                        {
+                            Location = new Point(x, y),
+                            Tag = id
+                        };
+                        ListOfControls.Add(asdasd);
+                        break;
                     default:
                         throw new Exception(string.Format("'{0}' это неправильное название блока", name));
                 }

@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace block
@@ -17,21 +12,26 @@ namespace block
 
         public DragAndDrop Drag = new DragAndDrop();
 
-        public UserControlMainAuthor(List <string> parametries)
+        public UserControlMainAuthor(List<string> parametries)
         {
             InitializeComponent();
+            Init(parametries);
+        }
+
+        public void Init(List<string> param)
+        {
             Drag.AddDNDFunctions(this);
             Menus.AddDeleteMenu(this);
 
-            par = parametries;
-            if (parametries.Count == 0)
+            par = param;
+            if (param.Count == 0)
             {
                 throw new Exception("Нету параметров");
             }
 
 
             List<string> author = SQLClass.Select("SELECT UserName, `Likes`, `Dislikes`, " +
-                "`Information_about_author`, `Pic` FROM `Authors` WHERE UserName = '" + parametries[0] + "'");
+                "`Information_about_author`, `Pic` FROM `Authors` WHERE UserName = '" + param[0] + "'");
 
             label1.Text = author[0];
             label3.Text = author[1];
@@ -51,9 +51,9 @@ namespace block
         /// </summary>
         public static void AddNewBlock(object sender, EventArgs e)
         {
-            
+
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            UCParameters p = new UCParameters("block.UserControlMainAuthor", new List<string>());
+            UCParameters p = new UCParameters("block.UserControlMainAuthor", new List<string>() { "ПрПрПр" });
             p.ShowDialog();
             p.ParamsList.Add("Жуков");
             UserControlMainAuthor a1 = new UserControlMainAuthor(p.ParamsList);
