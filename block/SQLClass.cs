@@ -12,7 +12,7 @@ namespace block
 {
     public static class SQLClass
     {
-        public static string db4free_server =
+        public static string new_server =
             "SslMode=none;" +
             "Server=db4free.net;" +
             "database=ingenerka;" +
@@ -21,7 +21,7 @@ namespace block
             "pwd=Beavis1989;" +
             "old guids=true;";
 
-        public static string new_server =
+        public static string db4free_server =
             "SslMode=none;" +
             "Server=37.230.116.173;" +
             "database=ingenerka;" +

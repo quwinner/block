@@ -89,6 +89,14 @@ namespace block
                         };
                         ListOfControls.Add(NewAds);
                         break;
+                    case "ArticleDetailsUserControl":
+                        ArticleDetailsUserControl NewDetails = new ArticleDetailsUserControl(Params)
+                        {
+                            Location = new Point(x, y),
+                            Tag = id
+                        };
+                        ListOfControls.Add(NewDetails);
+                        break;
                     case "ArticlePreviewUserControl":
                         ArticlePreviewUserControl NewPreview = new ArticlePreviewUserControl(Params)
                         {

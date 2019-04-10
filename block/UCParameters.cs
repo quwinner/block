@@ -56,6 +56,7 @@ namespace block
                     break;
                 case "block.ArticleDetailsUserControl":
                     Header = ParamsList[0];
+                    Header = ParamsList[0];
                     break;
                 case "block.ArticlePreviewUserControl":
                     SerachQuery = ParamsList[0];

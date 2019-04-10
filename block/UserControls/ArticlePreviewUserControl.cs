@@ -69,9 +69,9 @@ namespace block
                 {
                     pictureBox1.Load(url_pic[0]);
                 }
-                catch(Exception)
+                catch
                 {
-
+                    pictureBox1.Image = null;
                 }
             }
             
