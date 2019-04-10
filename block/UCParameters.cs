@@ -17,6 +17,7 @@ namespace block
         public String UCName = "";
         public Size UCSize = new Size(0, 0);
         public Point UCLocation = new Point(0, 0);
+        
 
         #region Параметры
 
@@ -205,6 +206,7 @@ namespace block
                         break;
                 }
             }
+            
             this.Close();
         }
 

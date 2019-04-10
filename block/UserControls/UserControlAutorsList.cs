@@ -12,6 +12,8 @@ namespace block
 {
     public partial class UserControlAutorsList : UserControl
     {
+        List<String> authorsList = new List<string> { "Жулик", "Вор", "Единорос" };
+        int prog = 5;
         public List<string> asd;
         public DragAndDrop Drag = new DragAndDrop();
 
@@ -19,6 +21,12 @@ namespace block
         {
             InitializeComponent();
             asd = par;
+            if(asd.Count >= 1)
+            authorsList = SQLClass.Select("SELECT `UserName` FROM `Authors` LIMIT 0," + asd[0]);
+            //if(asd.Count >= 2)
+            if (asd.Count >= 3)
+            prog = Convert.ToInt32(asd[2]);
+
             Menus.AddDeleteMenu(this);
             Drag.AddDNDFunctions(this);
         }
@@ -29,11 +37,11 @@ namespace block
         public static void AddNewBlock(object sender, EventArgs e)
         {
             Control c = ((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
-            UCParameters p = new UCParameters("block.UserControlAutorsList", new List<string>());
+            UCParameters p = new UCParameters("block.UserControlAutorsList", new List<string>() { });
             p.ShowDialog();
-            UserControlAutorsList a1 = new UserControlAutorsList(p.ParamsList);
+            UserControlAutorsList a1 = new UserControlAutorsList(new List<string> {p.Amount.ToString(), p.SortOrder, p.DistanceBetween.ToString() });
             string shsvfhksv = "";
-            foreach (string asd in p.ParamsList)
+            foreach (string asd in new List<string> { p.Amount.ToString(), p.SortOrder, p.DistanceBetween.ToString()})
             {
                 shsvfhksv += asd + ',';
             }
@@ -44,15 +52,15 @@ namespace block
 
         private void UserControlAutorsList_Load(object sender, EventArgs e)
         {
-            List<String> authorsList = new List<string>{ "Жулик", "Вор", "Единорос" };
+
+            
 
             if (Program.ShowColor == true)
             {
                 this.BackColor = SystemColors.ActiveBorder;
-                
             }
-            int authorsY = 75;
-            for (int artIndex = 0; artIndex < authorsList.Count; artIndex += 1)
+            int authorsY = 50;
+            for (int artIndex = 0; artIndex < authorsList.Count; artIndex++)
             {
                 Label label1 = new Label();
                 label1.Location = new Point(0, authorsY);
@@ -60,7 +68,7 @@ namespace block
                 label1.Text = authorsList[artIndex].ToString();
                 //label1.Click += new System.EventHandler(Search_CLick);
                 this.Controls.Add(label1);
-                authorsY += 25;
+                authorsY += prog + 20;
            
             }
         }

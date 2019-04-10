@@ -87,8 +87,9 @@ namespace block
                     break;
                 case "UserControlAutorsList":
                     UserControlAutorsList pb5 = (UserControlAutorsList)pb;
-                    dnonil.Add("1");
-                    dnonil.Add(" ");
+                    dnonil.Add(pb5.asd[0]);
+                    dnonil.Add(pb5.asd[1]);
+                    dnonil.Add(pb5.asd[2]);
                     break;
                 case "UserControlMainAuthor":
                     UserControlMainAuthor pb6 = (UserControlMainAuthor)pb;
@@ -207,6 +208,17 @@ namespace block
                     " y = " + pb2.Location.Y.ToString() +
                     " WHERE id = '" + pb2.Tag + "'");
 
+            }else if (pb.Name == "UserControlAutorsList")
+            {
+                UserControlAutorsList pb2 = (UserControlAutorsList)pb;
+                string param3 = "";
+                foreach (string pr in pb2.asd)
+                {
+                    param3 += pr + ",";
+                }
+                SQLClass.Update("UPDATE block SET" +
+                    " Params = '" + param3 +
+                    "' WHERE id = '" + pb.Tag + "'");
             }
         }
 

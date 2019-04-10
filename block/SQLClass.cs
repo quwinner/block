@@ -37,7 +37,7 @@ namespace block
         /// </summary>
         public static void OpenConnection()
         {
-            CONN = new MySqlConnection(new_server);
+            CONN = new MySqlConnection(db4free_server);
             try
             {
                 CONN.Open();
