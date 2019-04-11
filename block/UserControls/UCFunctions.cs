@@ -89,6 +89,14 @@ namespace block
                         };
                         ListOfControls.Add(NewAds);
                         break;
+                    case "ArticleDetailsUserControl":
+                        ArticleDetailsUserControl NewDetails = new ArticleDetailsUserControl(Params)
+                        {
+                            Location = new Point(x, y),
+                            Tag = id
+                        };
+                        ListOfControls.Add(NewDetails);
+                        break;
                     case "ArticlePreviewUserControl":
                         ArticlePreviewUserControl NewPreview = new ArticlePreviewUserControl(Params)
                         {
@@ -136,14 +144,6 @@ namespace block
                             Tag = id
                         };
                         ListOfControls.Add(NewSearch);
-                        break;
-                    case "ArticleDetailsUserControl":
-                        ArticleDetailsUserControl asdasd = new ArticleDetailsUserControl(Params)
-                        {
-                            Location = new Point(x, y),
-                            Tag = id
-                        };
-                        ListOfControls.Add(asdasd);
                         break;
                     default:
                         throw new Exception(string.Format("'{0}' это неправильное название блока", name));

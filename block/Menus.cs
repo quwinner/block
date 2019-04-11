@@ -29,6 +29,9 @@ namespace block
                     case "ArticlePreviewUserControl":
                         menu.Items[ItemPos].Click += ArticlePreviewUserControl.AddNewBlock;
                         break;
+                    case "ArticleDetailsUserControl":
+                        menu.Items[ItemPos].Click += ArticleDetailsUserControl.AddNewBlock;
+                        break;
                     case "AuthenticationUserControl":
                         menu.Items[ItemPos].Click += AuthenticationUserControl.AddNewBlock;
                         break;
@@ -75,13 +78,18 @@ namespace block
                     break;
                 case "CategoriesUserControl":
                     CategoriesUserControl pb4 = (CategoriesUserControl)pb;
-                    dnonil.Add("1");
+                    if(pb4.asd.Count>2)
+                    {
+                        dnonil.Add(pb4.asd[0]);
+                        dnonil.Add(pb4.asd[1]);
+                    }
                     dnonil.Add(pb4.asd[0]);
                     break;
                 case "UserControlAutorsList":
                     UserControlAutorsList pb5 = (UserControlAutorsList)pb;
-                    dnonil.Add("1");
-                    dnonil.Add(" ");
+                    dnonil.Add(pb5.asd[0]);
+                    dnonil.Add(pb5.asd[1]);
+                    dnonil.Add(pb5.asd[2]);
                     break;
                 case "UserControlMainAuthor":
                     UserControlMainAuthor pb6 = (UserControlMainAuthor)pb;
@@ -121,6 +129,22 @@ namespace block
                     " y = " + pb33.Location.Y.ToString() +
                     " WHERE id = '" + pb33.Tag + "'");
                 pb33.Init(pb33.par);
+            }
+            else if (pb.Name == "CategoriesUserControl")
+            {
+                CategoriesUserControl pb2 = (CategoriesUserControl)pb;
+                pb2.asd.Clear();
+                pb2.asd = p.ParamsList;
+                CategoriesUserControl.RefreshUC(pb2, Convert.ToInt32(pb2.asd[0]));
+
+                SQLClass.Update("UPDATE block SET" +
+                    " Params = '" + pb2.asd[0] + "," + pb2.asd[1] +
+                    "' WHERE id = '" + pb2.Tag + "'");
+                SQLClass.Update("UPDATE block SET" +
+                    " x = " + pb2.Location.X.ToString() + "," +
+                    " y = " + pb2.Location.Y.ToString() +
+                    " WHERE id = '" + pb2.Tag + "'");
+
             }
             else if (pb.Name == "ArticlePreviewUserControl")
             {
@@ -170,10 +194,11 @@ namespace block
             else if (pb.Name == "ArticleDetailsUserControl")
             {
                 ArticleDetailsUserControl pb2 = (ArticleDetailsUserControl)pb;
+                pb2.ListOfArticles.Clear();
+
                 pb2.ListOfArticles = p.ParamsList;
                 pb2.ArticleLabel.Text = p.ParamsList[0];
-                pb2.ListOfArticles.Clear();
-                List<string> kart = SQLClass.Select("SELECT Picture, Text, Author  FROM Articles1 WHERE Header = '" + pb2.ArticleLabel.Text + "'");
+                               List<string> kart = SQLClass.Select("SELECT Picture, Text, Author  FROM Articles1 WHERE Header = '" + pb2.ArticleLabel.Text + "'");
                 try
                 {
                     pb2.ArticlePicture.Load(kart[0]);
@@ -186,8 +211,7 @@ namespace block
                 pb2.ArticleTextLabel.Text = kart[1];
                 pb2.AuthorsNameLabel.Text = kart[2];
 
-                //не работает
-                /*string param3 = "";
+                string param3 = "";
                 foreach (string pr in pb2.ListOfArticles)
                 {
                     param3 += pr + ",";
@@ -198,9 +222,9 @@ namespace block
                 SQLClass.Update("UPDATE block SET" +
                     " x = " + pb2.Location.X.ToString() + "," +
                     " y = " + pb2.Location.Y.ToString() +
-                    " WHERE id = '" + pb2.Tag + "'");*/
-
-            } else if (pb.Name == "block.AdsUserControl")
+                    " WHERE id = '" + pb2.Tag + "'");
+            } 
+            else if (pb.Name == "block.AdsUserControl")
             {
                 ArticlePreviewUserControl pb2 = (ArticlePreviewUserControl)pb;
 
@@ -212,6 +236,10 @@ namespace block
                 pb2.asd.Add(pb2.Size.Height.ToString());
                 pb2.asd.Add(pb2.Location.X.ToString());
                 pb2.asd.Add(pb2.Location.Y.ToString());
+            }
+            else if (pb.Name == "UserControlAutorsList")
+            {
+                UserControlAutorsList pb2 = (UserControlAutorsList)pb;
 
                 string param3 = "";
                 foreach (string pr in pb2.asd)

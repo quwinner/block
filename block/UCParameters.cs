@@ -17,6 +17,7 @@ namespace block
         public String UCName = "";
         public Size UCSize = new Size(0, 0);
         public Point UCLocation = new Point(0, 0);
+        
 
         #region Параметры
 
@@ -54,6 +55,7 @@ namespace block
                     DistanceBetween = Convert.ToInt32(ParamsList[1]);
                     break;
                 case "block.ArticleDetailsUserControl":
+                    Header = ParamsList[0];
                     Header = ParamsList[0];
                     break;
                 case "block.ArticlePreviewUserControl":
@@ -204,6 +206,7 @@ namespace block
                         break;
                 }
             }
+            
             this.Close();
         }
 
