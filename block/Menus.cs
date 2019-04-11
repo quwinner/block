@@ -93,7 +93,7 @@ namespace block
                     break;
                 case "UserControlMainAuthor":
                     UserControlMainAuthor pb6 = (UserControlMainAuthor)pb;
-                    dnonil.Add(pb6.par[0]);
+                    dnonil.AddRange(pb6.par);
                     break;
                 case "UserControlSearch":
                     UserControlSearch pb7 = (UserControlSearch)pb;
@@ -112,8 +112,25 @@ namespace block
             p.ShowDialog();
             pb.Size = p.UCSize;
             pb.Location = p.UCLocation;
-
-            if (pb.Name == "CategoriesUserControl")
+            if (pb.Name == "UserControlMainAuthor")
+            {
+                UserControlMainAuthor pb33 = (UserControlMainAuthor)pb;
+                pb33.par = new List<string>() { p.UserName };
+                string param3 = "";
+                foreach (string pr in pb33.par)
+                {
+                    param3 += pr + ",";
+                }
+                SQLClass.Update("UPDATE block SET" +
+                    " Params = '" + param3 +
+                    "' WHERE id = '" + pb33.Tag + "'");
+                SQLClass.Update("UPDATE block SET" +
+                    " x = " + pb33.Location.X.ToString() + "," +
+                    " y = " + pb33.Location.Y.ToString() +
+                    " WHERE id = '" + pb33.Tag + "'");
+                pb33.Init(pb33.par);
+            }
+            else if (pb.Name == "CategoriesUserControl")
             {
                 CategoriesUserControl pb2 = (CategoriesUserControl)pb;
                 pb2.asd.Clear();
@@ -129,8 +146,7 @@ namespace block
                     " WHERE id = '" + pb2.Tag + "'");
 
             }
-
-            if (pb.Name == "ArticlePreviewUserControl")
+            else if (pb.Name == "ArticlePreviewUserControl")
             {
                 ArticlePreviewUserControl pb2 = (ArticlePreviewUserControl)pb;
 
@@ -207,10 +223,24 @@ namespace block
                     " x = " + pb2.Location.X.ToString() + "," +
                     " y = " + pb2.Location.Y.ToString() +
                     " WHERE id = '" + pb2.Tag + "'");
+            } 
+            else if (pb.Name == "block.AdsUserControl")
+            {
+                ArticlePreviewUserControl pb2 = (ArticlePreviewUserControl)pb;
 
-            }else if (pb.Name == "UserControlAutorsList")
+                pb2.Article = p.ParamsList[0];
+                pb2.linkLabel1.Text = pb2.Article;
+                pb2.asd.Clear();
+                pb2.asd.Add(pb2.Article);
+                pb2.asd.Add(pb2.Size.Width.ToString());
+                pb2.asd.Add(pb2.Size.Height.ToString());
+                pb2.asd.Add(pb2.Location.X.ToString());
+                pb2.asd.Add(pb2.Location.Y.ToString());
+            }
+            else if (pb.Name == "UserControlAutorsList")
             {
                 UserControlAutorsList pb2 = (UserControlAutorsList)pb;
+
                 string param3 = "";
                 foreach (string pr in pb2.asd)
                 {
@@ -218,7 +248,27 @@ namespace block
                 }
                 SQLClass.Update("UPDATE block SET" +
                     " Params = '" + param3 +
-                    "' WHERE id = '" + pb.Tag + "'");
+                    "' WHERE id = '" + pb2.Tag + "'");
+                SQLClass.Update("UPDATE block SET" +
+                    " x = " + pb2.Location.X.ToString() + "," +
+                    " y = " + pb2.Location.Y.ToString() +
+                    " WHERE id = '" + pb2.Tag + "'");
+
+                try
+                {
+                    List<string> kart = SQLClass.Select("SELECT `Picture` FROM `Articles1` WHERE `Header` = '" + pb2.Article + "'");
+                    pb2.pictureBox1.Load(kart[0]);
+
+                    List<string> likes = SQLClass.Select("SELECT `LikesCount`, `DisCount` FROM `Likes` WHERE `Article` = '" + pb2.Article + "'");
+                    pb2.LikeCount.Text = likes[0];
+                    pb2.DisLikeCount.Text = likes[1];
+                    pb2.like = Convert.ToInt32(likes[0]);
+                    pb2.dislike = Convert.ToInt32(likes[1]);
+                }
+                catch
+                {
+                    pb2.pictureBox1.Image = null;
+                }
             }
         }
 

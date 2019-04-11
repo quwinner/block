@@ -17,8 +17,20 @@ namespace block
         public DragAndDrop Drag = new DragAndDrop();
         public List<string> ParamsAds;
 
+        public static List<string> URLs = new List<string>()
+        {
+            "http://rustrade.org.uk/rus/wp-content/uploads/dodo-pizza.jpg",
+            "https://i.simpalsmedia.com/joblist.md/360x200/f0eeb7ea787a8cc8370e29638d582f31.png",
+            "https://www.sostav.ru/images/news/2018/02/21/13349a407abf5ee3d8c795fc78694299.jpg",
+            "https://static.tildacdn.com/tild6533-3365-4438-a364-613965626338/cover-6.jpg",
+            "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg",
+            "https://ksonline.ru/wp-content/uploads/2017/03/DODO-2.jpg",
+            "https://habrastorage.org/webt/xx/lz/vh/xxlzvhhsgwbifo9tl1lpjsuwooa.png"
+        };
+
         public AdsUserControl(List<string> ParamsAds)
         {
+            
             InitializeComponent();
 
             Menus.AddDeleteMenu(this);
@@ -27,11 +39,13 @@ namespace block
             progal = ParamsAds.Count;
             amount = Math.Min(Convert.ToInt32(ParamsAds[0]), ParamsAds.Count - 1);
 
+
             this.ParamsAds = ParamsAds;
 
             int x = 0;
             int y = 0;
             Random rnd = new Random();
+            
 
             for (int i = 0; i < amount; i++)
             {
@@ -44,12 +58,12 @@ namespace block
                     };
                     try
                     {
-                        pic.Load(ParamsAds[
-                            rnd.Next(2, Convert.ToInt32(ParamsAds[0]) + 2)]
-                            );
-                    } catch (Exception err)
+                        pic.Load(URLs[rnd.Next(0, Convert.ToInt32(Math.Min(
+                            amount, URLs.Count
+                            )))]);
+                    } catch (Exception)
                     {
-                        i--;
+                        i++;
                         continue;
                     }
                     this.Controls.Add(pic);
@@ -69,16 +83,8 @@ namespace block
 
             List<string> paramsArt = new List<string>();
             paramsArt.Add("5");
-            paramsArt.Add("5");
-            paramsArt.AddRange(new List<string>()
-            {
-                "http://rustrade.org.uk/rus/wp-content/uploads/dodo-pizza.jpg",
-                "https://i.simpalsmedia.com/joblist.md/360x200/f0eeb7ea787a8cc8370e29638d582f31.png",
-                "https://www.sostav.ru/images/news/2018/02/21/13349a407abf5ee3d8c795fc78694299.jpg",
-                "https://static.tildacdn.com/tild6533-3365-4438-a364-613965626338/cover-6.jpg",
-                "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg",
-                "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/8e66cfee-bd1c-493d-aa25-0b23639901ec.jpg"
-            });
+            //paramsArt.Add("5");
+            paramsArt.AddRange(URLs);
 
             UCParameters p = new UCParameters("block.AdsUserControl", paramsArt);
             p.ShowDialog();
