@@ -48,15 +48,15 @@ namespace block
             
             for (int i = 0; i < Categories.Count; i++)
             {
-                Label label = new Label
+                Label label2 = new Label
                 {
                     Size = new Size(100, 30),
                     Location = new Point(0, i * 30 + 30),
                     Text = Categories[i].ToString()
                 };
-                label.Click += new EventHandler(lable_cat_Click);
+                label2.Click += new EventHandler(lable_cat_Click);
                 
-                this.Controls.Add(label);
+                this.Controls.Add(label2);
             }
         }
 

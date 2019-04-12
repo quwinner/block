@@ -253,22 +253,6 @@ namespace block
                     " x = " + pb2.Location.X.ToString() + "," +
                     " y = " + pb2.Location.Y.ToString() +
                     " WHERE id = '" + pb2.Tag + "'");
-
-                try
-                {
-                    List<string> kart = SQLClass.Select("SELECT `Picture` FROM `Articles1` WHERE `Header` = '" + pb2.Article + "'");
-                    pb2.pictureBox1.Load(kart[0]);
-
-                    List<string> likes = SQLClass.Select("SELECT `LikesCount`, `DisCount` FROM `Likes` WHERE `Article` = '" + pb2.Article + "'");
-                    pb2.LikeCount.Text = likes[0];
-                    pb2.DisLikeCount.Text = likes[1];
-                    pb2.like = Convert.ToInt32(likes[0]);
-                    pb2.dislike = Convert.ToInt32(likes[1]);
-                }
-                catch
-                {
-                    pb2.pictureBox1.Image = null;
-                }
             }
         }
 
