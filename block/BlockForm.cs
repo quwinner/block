@@ -22,7 +22,27 @@ namespace block
             Program.AddNewUserControlCMS = ArticlecontextMenuStrip1;
             this.ContextMenuStrip = Program.AddNewUserControlCMS;
             DeleteMenuStrip = UCContextMenuStrip;
+
+            List<UserControl> listControlov = UCFunctions.ReadFromDB(this.Name);
+           // Ctrl.ContextMenuStrip = Program.AddNewUserControlCMS;
+           // Ctrl.Controls.AddRange(UCFunctions.ReadFromDB(this.Name).ToArray());
             this.Controls.AddRange(UCFunctions.ReadFromDB(this.Name).ToArray());
+
+
+            /*foreach (Control Ctrl in this.Controls)
+            {
+                if (Ctrl.GetType().ToString() == "System.Windows.Forms.Panel")
+                {
+                    if (Ctrl.Name == "panel1")
+                    {
+                        Ctrl.ContextMenuStrip = Program.AddNewUserControlCMS;
+                        Ctrl.Controls.AddRange(UCFunctions.ReadFromDB(this.Name).ToArray());
+                      //  this.Controls.AddRange(UCFunctions.ReadFromDB(this.Name).ToArray());
+                    }
+
+                }
+            }*/
+           
         }
 
         public void BlockForm_Load(object sender, EventArgs e)
@@ -31,10 +51,10 @@ namespace block
             //label1.Text = (LoadFromDB("block1"));
             //Panel panel1 = CreateStatPanel();
 
-            List<string> paramsArt = new List<string>();
+           /* List<string> paramsArt = new List<string>();
             paramsArt.Add("Война и мир");
             ArticleDetailsUserControl test = new ArticleDetailsUserControl(paramsArt);
-            this.Controls.Add(test);
+            this.Controls.Add(test);*/
             Menus.InitAddUserControls(ref ArticlecontextMenuStrip1);
         }
 

@@ -33,13 +33,23 @@ namespace block
             List<string> author = SQLClass.Select("SELECT UserName, `Likes`, `Dislikes`, " +
                 "`Information_about_author`, `Pic` FROM `Authors` WHERE UserName = '" + param[0] + "'");
 
-            label1.Text = author[0];
-            label3.Text = author[1];
-            label5.Text = author[2];
-            label6.Text = author[3];
+            if (author.Count > 3)
+            {
+                label1.Text = author[0];
+                label3.Text = author[1];
+                label5.Text = author[2];
+                label6.Text = author[3];
+            }
 
             PictureBox b = new PictureBox();
-            b.Load(author[4]);
+            try
+            {
+                b.Load(author[4]);
+            }
+            catch
+            {
+                b.Image = null;
+            }
 
             pictureBox1.Image = b.Image;
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;

@@ -146,6 +146,28 @@ namespace block
                     " WHERE id = '" + pb2.Tag + "'");
 
             }
+
+            else if (pb.Name == "UserControlAutorsList")
+            {
+                UserControlAutorsList pb2 = (UserControlAutorsList)pb;
+                pb2.asd.Clear();
+                pb2.asd = p.ParamsList;
+                pb2.authorsList = SQLClass.Select("SELECT `UserName` FROM `Authors` LIMIT 0," + p.Amount);
+                pb2.UserControlAutorsList_Load(null, null);
+                if (pb2.asd[2] == "")
+                {
+                    pb2.asd[2] = "0";
+                }
+                SQLClass.Update("UPDATE block SET" +
+                    " Params = '" + pb2.asd[0] + "," + pb2.asd[1] + "," + pb2.asd[2] +
+                    "' WHERE id = '" + pb2.Tag + "'");
+                SQLClass.Update("UPDATE block SET" +
+                    " x = " + pb2.Location.X.ToString() + "," +
+                    " y = " + pb2.Location.Y.ToString() +
+                    " WHERE id = '" + pb2.Tag + "'");
+
+            }
+
             else if (pb.Name == "ArticlePreviewUserControl")
             {
                 ArticlePreviewUserControl pb2 = (ArticlePreviewUserControl)pb;
@@ -198,18 +220,22 @@ namespace block
 
                 pb2.ListOfArticles = p.ParamsList;
                 pb2.ArticleLabel.Text = p.ParamsList[0];
-                               List<string> kart = SQLClass.Select("SELECT Picture, Text, Author  FROM Articles1 WHERE Header = '" + pb2.ArticleLabel.Text + "'");
-                try
+                List<string> kart = SQLClass.Select("SELECT Picture, IFNULL(Text,'Ничего'), IFNULL(Author,'Никто')  FROM Articles1 WHERE Header = '" + pb2.ArticleLabel.Text + "'");
+                if (kart.Count > 2)
                 {
-                    pb2.ArticlePicture.Load(kart[0]);
+                    try
+                    {
+                        pb2.ArticlePicture.Load(kart[0]);
+                    }
+                    catch
+                    {
+                        pb2.ArticlePicture.Image = null;
+                    }
+
+                    pb2.ArticleTextLabel.Text = kart[1];
+                    pb2.AuthorsNameLabel.Text = kart[2];                    
                 }
-                catch
-                {
-                    pb2.ArticlePicture.Image = null;
-                }
-               
-                pb2.ArticleTextLabel.Text = kart[1];
-                pb2.AuthorsNameLabel.Text = kart[2];
+
 
                 string param3 = "";
                 foreach (string pr in pb2.ListOfArticles)

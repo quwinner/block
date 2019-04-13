@@ -113,7 +113,14 @@ namespace block
         /// </summary>
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            new DetailsForm(new ArticleDetailsUserControl(new List<string> { Article })).ShowDialog();
+            try
+            {
+                new DetailsForm(new ArticleDetailsUserControl(new List<string> { Article })).ShowDialog();
+            }
+           catch
+            {
+                MessageBox.Show("Такой статьи нет!");
+            }
         }
 
         #region Логика лайков (не работает пока)
