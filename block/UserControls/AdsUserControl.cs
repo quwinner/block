@@ -83,7 +83,7 @@ namespace block
 
             List<string> paramsArt = new List<string>();
             paramsArt.Add("5");
-            //paramsArt.Add("5");
+            paramsArt.Add("5");
             paramsArt.AddRange(URLs);
 
             UCParameters p = new UCParameters("block.AdsUserControl", paramsArt);
