@@ -40,10 +40,13 @@ namespace block
             
             List<string> result = SQLClass.Select("SELECT Author, Category, Text, Picture FROM " + "Articles1" + " WHERE `Header` = '" + Articles[0] + "'");
 
-            AuthorsNameLabel.Text = result[0];
-            ArticleLabel.Text = Articles[0];
-            ArticleTextLabel.Text = result[2];
-            ArticlePicture.Load(result[3]);
+            if (result.Count > 3)
+            {
+                AuthorsNameLabel.Text = result[0];
+                ArticleLabel.Text = Articles[0];
+                ArticleTextLabel.Text = result[2];
+                ArticlePicture.Load(result[3]);
+            }
         }
 
         /// <summary>

@@ -32,24 +32,29 @@ namespace block
         {
             
             InitializeComponent();
+            this.ParamsAds = ParamsAds;
 
             Menus.AddDeleteMenu(this);
             Drag.AddDNDFunctions(this);
 
-            progal = ParamsAds.Count;
-            amount = Math.Min(Convert.ToInt32(ParamsAds[0]), ParamsAds.Count - 1);
+            progal = Convert.ToInt32(ParamsAds[1]);// this.ParamsAds.Count;
+            amount = Convert.ToInt32(ParamsAds[0]);
+
+            refreshADS();
+        }
 
 
-            this.ParamsAds = ParamsAds;
-
+        public void refreshADS()
+        {
+            this.Controls.Clear();
             int x = 0;
             int y = 0;
             Random rnd = new Random();
-            
+
 
             for (int i = 0; i < amount; i++)
             {
-                if (ParamsAds.Count > 0)
+                if (this.ParamsAds.Count > 0)
                 {
                     PictureBox pic = new PictureBox
                     {
@@ -61,7 +66,8 @@ namespace block
                         pic.Load(URLs[rnd.Next(0, Convert.ToInt32(Math.Min(
                             amount, URLs.Count
                             )))]);
-                    } catch (Exception)
+                    }
+                    catch (Exception)
                     {
                         i++;
                         continue;
@@ -71,6 +77,7 @@ namespace block
                 }
             }
         }
+
 
         /// <summary>
         /// Добавление UserControl с рекламой
