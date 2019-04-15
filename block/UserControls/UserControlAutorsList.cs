@@ -12,8 +12,8 @@ namespace block
 {
     public partial class UserControlAutorsList : UserControl
     {
-        List<String> authorsList = new List<string> { "Жулик", "Вор", "Единорос" };
-        int prog = 5;
+        public List<String> authorsList = new List<string> { "Жулик", "Вор", "Единорос" };
+        public int prog = 5;
         public List<string> asd;
         public DragAndDrop Drag = new DragAndDrop();
 
@@ -46,15 +46,13 @@ namespace block
                 shsvfhksv += asd + ',';
             }
             Menus.InsertBlockToDB(sender, a1, shsvfhksv);
-        }
+        }        
 
-
-
-        private void UserControlAutorsList_Load(object sender, EventArgs e)
+        public void UserControlAutorsList_Load(object sender, EventArgs e)
         {
-
-            
-
+            this.Controls.Clear();
+            this.Controls.Add(labelPopular);
+            this.Controls.Add(labelAll);
             if (Program.ShowColor == true)
             {
                 this.BackColor = SystemColors.ActiveBorder;
@@ -66,10 +64,9 @@ namespace block
                 label1.Location = new Point(0, authorsY);
                 label1.Size = new Size(100, 20);
                 label1.Text = authorsList[artIndex].ToString();
-                //label1.Click += new System.EventHandler(Search_CLick);
+                label1.Click += new System.EventHandler(Search_CLick);
                 this.Controls.Add(label1);
-                authorsY += prog + 20;
-           
+                authorsY += prog + 20;           
             }
         }
 
@@ -80,13 +77,18 @@ namespace block
         
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void Search_CLick(object sender, EventArgs e)
         {
-           //MessageBox.Show();
-           
+            MessageBox.Show(((Label)sender).Text);
+
         }
 
         private void labelPopular_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelAll_Click(object sender, EventArgs e)
         {
 
         }

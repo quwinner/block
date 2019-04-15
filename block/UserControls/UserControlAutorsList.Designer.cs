@@ -50,6 +50,7 @@
             this.labelAll.Size = new System.Drawing.Size(65, 13);
             this.labelAll.TabIndex = 14;
             this.labelAll.Text = "все авторы";
+            this.labelAll.Click += new System.EventHandler(this.labelAll_Click);
             // 
             // UserControlAutorsList
             // 

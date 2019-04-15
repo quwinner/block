@@ -34,10 +34,10 @@ namespace block
             {
                 // Используем тандартный размер
             }
-            
+
 
             this.Size = new Size(x, y);
-            
+
             List<string> result = SQLClass.Select("SELECT Author, Category, Text, Picture FROM " + "Articles1" + " WHERE `Header` = '" + Articles[0] + "'");
 
             if (result.Count > 3)
@@ -45,7 +45,15 @@ namespace block
                 AuthorsNameLabel.Text = result[0];
                 ArticleLabel.Text = Articles[0];
                 ArticleTextLabel.Text = result[2];
+            } 
+            
+            try
+            {
                 ArticlePicture.Load(result[3]);
+            }
+            catch
+            {
+                ArticlePicture.Image = null;
             }
         }
 
