@@ -65,7 +65,7 @@ namespace block
                 case "AdsUserControl":
                     AdsUserControl pb1 = (AdsUserControl)pb;
                     dnonil.Add(pb1.amount.ToString());
-                    dnonil.Add(pb1.ParamsAds.Count.ToString());
+                    dnonil.Add(pb1.progal.ToString());
                     break;
                 case "ArticleDetailsUserControl":
                     ArticleDetailsUserControl pb2 = (ArticleDetailsUserControl)pb;
@@ -78,12 +78,11 @@ namespace block
                     break;
                 case "CategoriesUserControl":
                     CategoriesUserControl pb4 = (CategoriesUserControl)pb;
-                    if(pb4.asd.Count>2)
+                    if (pb4.asd.Count>2)
                     {
                         dnonil.Add(pb4.asd[0]);
                         dnonil.Add(pb4.asd[1]);
                     }
-                    dnonil.Add(pb4.asd[0]);
                     break;
                 case "UserControlAutorsList":
                     UserControlAutorsList pb5 = (UserControlAutorsList)pb;
@@ -116,61 +115,39 @@ namespace block
             {
                 UserControlMainAuthor pb33 = (UserControlMainAuthor)pb;
                 pb33.par = new List<string>() { p.UserName };
-                string param3 = "";
-                foreach (string pr in pb33.par)
-                {
-                    param3 += pr + ",";
-                }
-                SQLClass.Update("UPDATE block SET" +
-                    " Params = '" + param3 +
-                    "' WHERE id = '" + pb33.Tag + "'");
-                SQLClass.Update("UPDATE block SET" +
-                    " x = " + pb33.Location.X.ToString() + "," +
-                    " y = " + pb33.Location.Y.ToString() +
-                    " WHERE id = '" + pb33.Tag + "'");
+                dnonil = pb33.par;
                 pb33.Init(pb33.par);
             }
             else if (pb.Name == "CategoriesUserControl")
             {
                 CategoriesUserControl pb2 = (CategoriesUserControl)pb;
+                pb2.asd = p.ParamsList;
+                dnonil = p.ParamsList;
+                CategoriesUserControl.RefreshUC(pb2, Convert.ToInt32(pb2.asd[0]));
+            }
+
+            else if (pb.Name == "UserControlAutorsList")
+            {
+                UserControlAutorsList pb2 = (UserControlAutorsList)pb;
                 pb2.asd.Clear();
                 pb2.asd = p.ParamsList;
-                CategoriesUserControl.RefreshUC(pb2, Convert.ToInt32(pb2.asd[0]));
-
-                SQLClass.Update("UPDATE block SET" +
-                    " Params = '" + pb2.asd[0] + "," + pb2.asd[1] +
-                    "' WHERE id = '" + pb2.Tag + "'");
-                SQLClass.Update("UPDATE block SET" +
-                    " x = " + pb2.Location.X.ToString() + "," +
-                    " y = " + pb2.Location.Y.ToString() +
-                    " WHERE id = '" + pb2.Tag + "'");
-
+                pb2.authorsList = SQLClass.Select("SELECT `UserName` FROM `Authors` LIMIT 0," + p.Amount);
+                pb2.UserControlAutorsList_Load(null, null);
+                if (pb2.asd[2] == "")
+                {
+                    pb2.asd[2] = "0";
+                }
+                dnonil = pb2.asd;
             }
+
             else if (pb.Name == "ArticlePreviewUserControl")
             {
                 ArticlePreviewUserControl pb2 = (ArticlePreviewUserControl)pb;
 
                 pb2.Article = p.ParamsList[0];
                 pb2.linkLabel1.Text = pb2.Article;
-                pb2.asd.Clear();
-                pb2.asd.Add(pb2.Article);
-                pb2.asd.Add(pb2.Size.Width.ToString());
-                pb2.asd.Add(pb2.Size.Height.ToString());
-                pb2.asd.Add(pb2.Location.X.ToString());
-                pb2.asd.Add(pb2.Location.Y.ToString());
-
-                string param3 = "";
-                foreach (string pr in pb2.asd)
-                {
-                    param3 += pr + ",";
-                }
-                SQLClass.Update("UPDATE block SET" +
-                    " Params = '" + param3 +
-                    "' WHERE id = '" + pb2.Tag + "'");
-                SQLClass.Update("UPDATE block SET" +
-                    " x = " + pb2.Location.X.ToString() + "," +
-                    " y = " + pb2.Location.Y.ToString() +
-                    " WHERE id = '" + pb2.Tag + "'");
+                pb2.asd = p.ParamsList;
+                dnonil = pb2.asd;               
 
                 try
                 {
@@ -187,9 +164,6 @@ namespace block
                 {
                     pb2.pictureBox1.Image = null;
                 }
-
-                
-
             }
             else if (pb.Name == "ArticleDetailsUserControl")
             {
@@ -198,62 +172,54 @@ namespace block
 
                 pb2.ListOfArticles = p.ParamsList;
                 pb2.ArticleLabel.Text = p.ParamsList[0];
-                               List<string> kart = SQLClass.Select("SELECT Picture, Text, Author  FROM Articles1 WHERE Header = '" + pb2.ArticleLabel.Text + "'");
-                try
+                List<string> kart = SQLClass.Select("SELECT Picture, IFNULL(Text,'Ничего'), IFNULL(Author,'Никто')  FROM Articles1 WHERE Header = '" + pb2.ArticleLabel.Text + "'");
+                if (kart.Count > 2)
                 {
-                    pb2.ArticlePicture.Load(kart[0]);
-                }
-                catch
-                {
-                    pb2.ArticlePicture.Image = null;
-                }
-               
-                pb2.ArticleTextLabel.Text = kart[1];
-                pb2.AuthorsNameLabel.Text = kart[2];
+                    try
+                    {
+                        pb2.ArticlePicture.Load(kart[0]);
+                    }
+                    catch
+                    {
+                        pb2.ArticlePicture.Image = null;
+                    }
 
-                string param3 = "";
-                foreach (string pr in pb2.ListOfArticles)
-                {
-                    param3 += pr + ",";
+                    pb2.ArticleTextLabel.Text = kart[1];
+                    pb2.AuthorsNameLabel.Text = kart[2];                    
                 }
-                SQLClass.Update("UPDATE block SET" +
-                    " Params = '" + param3 +
-                    "' WHERE id = '" + pb2.Tag + "'");
-                SQLClass.Update("UPDATE block SET" +
-                    " x = " + pb2.Location.X.ToString() + "," +
-                    " y = " + pb2.Location.Y.ToString() +
-                    " WHERE id = '" + pb2.Tag + "'");
+
+                dnonil = pb2.ListOfArticles;
             } 
-            else if (pb.Name == "block.AdsUserControl")
+            else if (pb.Name == "AdsUserControl")
             {
-                ArticlePreviewUserControl pb2 = (ArticlePreviewUserControl)pb;
-
-                pb2.Article = p.ParamsList[0];
-                pb2.linkLabel1.Text = pb2.Article;
-                pb2.asd.Clear();
-                pb2.asd.Add(pb2.Article);
-                pb2.asd.Add(pb2.Size.Width.ToString());
-                pb2.asd.Add(pb2.Size.Height.ToString());
-                pb2.asd.Add(pb2.Location.X.ToString());
-                pb2.asd.Add(pb2.Location.Y.ToString());
+                AdsUserControl pb2 = (AdsUserControl)pb;
+                pb2.ParamsAds = p.ParamsList;
+                pb2.amount = p.Amount;
+                pb2.progal = p.DistanceBetween;
+                pb2.refreshADS();
+                dnonil = pb2.ParamsAds;
             }
             else if (pb.Name == "UserControlAutorsList")
             {
                 UserControlAutorsList pb2 = (UserControlAutorsList)pb;
-
-                string param3 = "";
-                foreach (string pr in pb2.asd)
-                {
-                    param3 += pr + ",";
-                }
-                SQLClass.Update("UPDATE block SET" +
-                    " Params = '" + param3 +
-                    "' WHERE id = '" + pb2.Tag + "'");
-                SQLClass.Update("UPDATE block SET" +
-                    " x = " + pb2.Location.X.ToString() + "," +
-                    " y = " + pb2.Location.Y.ToString() +
-                    " WHERE id = '" + pb2.Tag + "'");
+                pb2.asd = p.ParamsList;
+                dnonil = p.ParamsList;
             }
+
+            #region Сохранение в БД
+            string param3 = "";
+            foreach (string pr in dnonil)
+            {
+                param3 += pr + ",";
+            }
+            SQLClass.Update("UPDATE block SET" +
+                " Params = '" + param3 +
+                "' WHERE id = '" + pb.Tag + "'");
+            SQLClass.Update("UPDATE block SET" +
+                " x = " + pb.Location.X.ToString() + "," +
+                " y = " + pb.Location.Y.ToString() +
+                " WHERE id = '" + pb.Tag + "'");
+            #endregion
         }
 
 
