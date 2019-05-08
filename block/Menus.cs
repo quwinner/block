@@ -60,7 +60,7 @@ namespace block
             UserControl pb = (UserControl)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             List<string> dnonil = new List<string>();
 
-            switch (pb.Name)
+            switch (pb.GetType().Name)
             {
                 case "AdsUserControl":
                     AdsUserControl pb1 = (AdsUserControl)pb;
@@ -111,14 +111,14 @@ namespace block
             p.ShowDialog();
             pb.Size = p.UCSize;
             pb.Location = p.UCLocation;
-            if (pb.Name == "UserControlMainAuthor")
+            if (pb.GetType().Name == "UserControlMainAuthor")
             {
                 UserControlMainAuthor pb33 = (UserControlMainAuthor)pb;
                 pb33.par = new List<string>() { p.UserName };
                 dnonil = pb33.par;
                 pb33.Init(pb33.par);
             }
-            else if (pb.Name == "CategoriesUserControl")
+            else if (pb.GetType().Name == "CategoriesUserControl")
             {
                 CategoriesUserControl pb2 = (CategoriesUserControl)pb;
                 pb2.asd = p.ParamsList;
@@ -126,7 +126,7 @@ namespace block
                 CategoriesUserControl.RefreshUC(pb2, Convert.ToInt32(pb2.asd[0]));
             }
 
-            else if (pb.Name == "UserControlAutorsList")
+            else if (pb.GetType().Name == "UserControlAutorsList")
             {
                 UserControlAutorsList pb2 = (UserControlAutorsList)pb;
                 pb2.asd.Clear();
@@ -140,7 +140,7 @@ namespace block
                 dnonil = pb2.asd;
             }
 
-            else if (pb.Name == "ArticlePreviewUserControl")
+            else if (pb.GetType().Name == "ArticlePreviewUserControl")
             {
                 ArticlePreviewUserControl pb2 = (ArticlePreviewUserControl)pb;
 
@@ -165,7 +165,7 @@ namespace block
                     pb2.pictureBox1.Image = null;
                 }
             }
-            else if (pb.Name == "ArticleDetailsUserControl")
+            else if (pb.GetType().Name == "ArticleDetailsUserControl")
             {
                 ArticleDetailsUserControl pb2 = (ArticleDetailsUserControl)pb;
                 pb2.ListOfArticles.Clear();
@@ -190,7 +190,7 @@ namespace block
 
                 dnonil = pb2.ListOfArticles;
             } 
-            else if (pb.Name == "AdsUserControl")
+            else if (pb.GetType().Name == "AdsUserControl")
             {
                 AdsUserControl pb2 = (AdsUserControl)pb;
                 pb2.ParamsAds = p.ParamsList;
@@ -199,7 +199,7 @@ namespace block
                 pb2.refreshADS();
                 dnonil = pb2.ParamsAds;
             }
-            else if (pb.Name == "UserControlAutorsList")
+            else if (pb.GetType().Name == "UserControlAutorsList")
             {
                 UserControlAutorsList pb2 = (UserControlAutorsList)pb;
                 pb2.asd = p.ParamsList;
@@ -249,7 +249,7 @@ namespace block
             c.Controls.Add(a1);
             Program.CONTROLY.Add(a1);
             SQLClass.Insert("INSERT INTO block(form,Parent,x,y,name,Params) VALUES ('" +
-                c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.Name + "','" + par + "')");
+                c.FindForm().Name + "', '" + c.Name + "', '" + a1.Location.X + "','" + a1.Location.Y + "','" + a1.GetType().Name + "','" + par + "')");
 
             List<String> str = SQLClass.Select("SELECT MAX(id) FROM block");
             a1.Tag = str[0];
@@ -262,7 +262,7 @@ namespace block
         {
             UserControl pb = (UserControl)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             pb.Visible = false;
-            SQLClass.Delete("DELETE FROM `block` WHERE `name` = '" + pb.Name + "' AND form = '" + pb.FindForm().Name + "'");
+            SQLClass.Delete("DELETE FROM `block` WHERE `name` = '" + pb.GetType().Name + "' AND form = '" + pb.FindForm().Name + "'");
         }
     }
 }

@@ -52,7 +52,7 @@ namespace block
                 {
                     string paramsAsString = "";
 
-                    switch (ActualUC.Name)
+                    switch (ActualUC.GetType().Name)
                     {
                         case "AdsUserControl":
                             AdsUserControl NewPreview = (AdsUserControl)sender;
